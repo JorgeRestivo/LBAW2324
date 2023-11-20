@@ -1,0 +1,167 @@
+openapi: 3.0.0
+
+info: 
+  version: '1.0'
+  title: 'LBAW  GetTogether API'
+  description: 'Web Resources Specification (A7) for GetTogether'
+
+servers:
+  - url: http://lbaw.fe.up.pt
+    description: Production server
+
+
+externalDocs:
+  description: Find more info here.
+  url: https://web.fe.up.pt/~ssn/wiki/teach/lbaw/medialib/a07
+
+tags:
+  - name: 'M01: Authentication'
+  - name: 'M02: Users'
+  - name: 'M03: Events'
+  - name: 'M04: Search'
+  - name: 'M05: Administration'
+  - name: 'M06: Comments'
+
+paths:
+
+  /login:
+    get:
+      operationId: R101
+      summary: 'R101: Login Form'
+      description: 'Provide login form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show log-in UI'
+    post:
+      operationId: R102
+      summary: 'R102: Login Action'
+      description: 'Processes the login form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication '
+ 
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+ 
+      responses:
+        '302':
+          description: 'Redirect after processing the login credentials.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Error:
+                  description: 'Failed authentication. Redirect to login form.'
+                  value: '/login'
+ 
+  /logout:
+
+    post:
+      operationId: R103
+      summary: 'R103: Logout Action'
+      description: 'Logout the current authenticated used. Access: USR, ADM'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '302':
+          description: 'Redirect after processing logout.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful logout. Redirect to login form.'
+                  value: '/login'
+
+  /register:
+    get:
+      operationId: R104
+      summary: 'R104: Register Form'
+      description: 'Provide new user registration form. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+      responses:
+        '200':
+          description: 'Ok. Show sign-up UI'
+
+    post:
+      operationId: R105
+      summary: 'R105: Register Action'
+      description: 'Processes the new user registration form submission. Access: PUB'
+      tags:
+        - 'M01: Authentication'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - name
+                - username
+                - email
+                - password
+
+      responses:
+        '302':
+          description: 'Redirect after processing the new user information.'
+          headers:
+            Location:
+              schema:
+                type: string
+              examples:
+                302Success:
+                  description: 'Successful authentication. Redirect to user profile.'
+                  value: '/users/{id}'
+                302Failure:
+                  description: 'Failed authentication. Redirect to login form.'
+                  value: '/login'
+
+  /users/{id}:
+    get:
+      operationId: R106
+      summary: 'R106: View user profile'
+      description: 'Show the individual user profile. Access: USR'
+      tags:
+        - 'M01: Authentication' 
+
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+
+      responses:
+        '200':
+          description: 'Ok. Show view profile UI'
+ 
+
