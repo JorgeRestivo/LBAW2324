@@ -39,7 +39,7 @@ paths:
       summary: 'R102: Login Action'
       description: 'Processes the login form submission. Access: PUB'
       tags:
-        - 'M01: Authentication '
+        - 'M01: Authentication'
  
       requestBody:
         required: true
