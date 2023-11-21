@@ -112,7 +112,7 @@ CREATE TABLE attendance (
 /* temos de ver como fica PK quando a notificação é do tipo comment/event porque tem de ter o ID respetivo*/
 CREATE TABLE notification (
   id SERIAL PRIMARY KEY,
-  dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now()),
+  dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now()),  
   notified_user INTEGER NOT NULL REFERENCES usuario
  (id) ON UPDATE CASCADE,
   type notification_type NOT NULL
