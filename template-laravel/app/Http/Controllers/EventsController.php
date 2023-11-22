@@ -11,10 +11,9 @@ class EventsController extends Controller
     /**
      * Display the events.begin view.
      */
-    public function showEvent()
+    public function showEvents()
     {
         $events = DB::table('events')->get()->toArray();
-        //dd($events); //debug
         return view('begin', ['events' => $events]);
     }
 }
