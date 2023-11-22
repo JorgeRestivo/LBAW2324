@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 use App\Models\User;
+use App\Http\Controllers\EventsController;
 
 class RegisterController extends Controller
 {
@@ -45,7 +46,7 @@ class RegisterController extends Controller
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
         $request->session()->regenerate();
-        return redirect()->route('home')
+        return redirect()->route('events.begin')
             ->withSuccess('You have successfully registered & logged in!');
     }
 }

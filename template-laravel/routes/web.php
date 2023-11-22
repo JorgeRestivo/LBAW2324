@@ -8,6 +8,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
+use App\Http\Controllers\EventsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,9 +54,11 @@ Route::controller(LoginController::class)->group(function () {
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
+    Route::get('/events-begin', [EventsController::class, 'begin'])->name('events.begin');
+
 });
 
-// Rota para a homepage
-Route::get('/home', function () {
-    return view('welcome'); // Substitua 'welcome' pelo nome da sua view ou pela lógica da sua homepage
-})->name('home');
+
+
+
+//Route::get('/events-begin', [EventsController::class, 'begin'])->name('events.begin');
