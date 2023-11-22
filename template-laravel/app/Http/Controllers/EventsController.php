@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EventsController extends Controller
 {
@@ -12,6 +13,7 @@ class EventsController extends Controller
      */
     public function showEvent()
     {
+        $events = DB::table('events')->get();
         return view('begin');
     }
 }
