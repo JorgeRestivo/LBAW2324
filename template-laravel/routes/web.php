@@ -48,7 +48,7 @@ Route::controller(UserController::class)->group(function () {
 
 // Events
 Route::controller(EventsController::class)->group(function () {
-    Route::get('/event', 'showEvent');
+    Route::get('/event', 'showEvent')->name('events.begin');
     Route::get('/event/edit','editEvent');
     Route::post('/event/create', 'createEvent');
     Route::post('/event/delete', 'deleteEvent');
