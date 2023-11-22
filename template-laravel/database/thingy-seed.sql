@@ -66,9 +66,9 @@ CREATE TABLE events (
   capacity INTEGER NOT NULL CHECK (capacity>0),
   isPublic BOOLEAN NOT NULL DEFAULT TRUE,
   status event_status_types NOT NULL,
-  owner_id INTEGER NOT NULL REFERENCES users
- (id) ON UPDATE CASCADE,
-  tag_id INTEGER NOT NULL REFERENCES tag (id) ON UPDATE CASCADE
+  owner_id INTEGER NOT NULL REFERENCES users (id) ON UPDATE CASCADE,
+  tag_id INTEGER NOT NULL REFERENCES tag (id) ON UPDATE CASCADE,
+  photo VARCHAR(255)
 );
 
 CREATE TABLE eventInvitation (
@@ -151,18 +151,18 @@ INSERT INTO tag (name) VALUES
   ('Fashion');
 
 
-INSERT INTO events (eventName, startDateTime, endDateTime, registrationEndTime, local, description, capacity, isPublic, status, owner_id, tag_id)
+INSERT INTO events (eventName, startDateTime, endDateTime, registrationEndTime, local, description, capacity, isPublic, status, owner_id, tag_id, photo)
 VALUES 
-  ('Concert Night', '2023-09-10 19:00:00', '2023-09-10 23:00:00', '2023-09-05 23:59:59', 'Music Hall', 'Live music and entertainment', 100, true, 'Active', 3, 1),
-  ('Tech Workshop', '2023-10-15 10:00:00', '2023-10-15 16:00:00', '2023-10-10 23:59:59', 'Tech Hub', 'Hands-on coding experience', 50, true, 'Active', 4, 2),
-  ('Fitness Challenge', '2023-11-05 08:00:00', '2023-11-05 12:00:00', '2023-11-01 23:59:59', 'Fitness Center', 'Join us for a morning workout', 30, true, 'Active', 5, 3),
-  ('Science Fair', '2023-12-01 13:00:00', '2023-12-01 17:00:00', '2023-11-25 23:59:59', 'Science Museum', 'Discover the wonders of science', 80, true, 'Active', 6, 6),
-  ('Art Exhibition', '2024-01-20 11:00:00', '2024-01-20 18:00:00', '2024-01-15 23:59:59', 'Art Gallery', 'Showcasing local artists', 120, true, 'Active', 7, 5),
-  ('Cooking Class', '2024-02-08 17:30:00', '2024-02-08 20:30:00', '2024-02-01 23:59:59', 'Culinary School', 'Learn to cook delicious dishes', 25, true, 'Active', 8, 7),
-  ('Travel Talk', '2024-03-12 15:00:00', '2024-03-12 17:00:00', '2024-03-07 23:59:59', 'Community Center', 'Share travel stories and tips', 40, true, 'Active', 9, 8),
-  ('Gaming Tournament', '2024-04-05 18:00:00', '2024-04-05 22:00:00', '2024-04-01 23:59:59', 'Gaming Arena', 'Compete in various gaming challenges', 60, true, 'Active', 10, 9),
-  ('Fashion Show', '2024-05-22 14:00:00', '2024-05-22 17:00:00', '2024-05-17 23:59:59', 'Fashion Mall', 'Showcasing the latest trends', 75, true, 'Active', 1, 10),
-  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4);
+  ('Concert Night', '2023-09-10 19:00:00', '2023-09-10 23:00:00', '2023-09-05 23:59:59', 'Music Hall', 'Live music and entertainment', 100, true, 'Active', 3, 1, 'concertnight.webp'),
+  ('Tech Workshop', '2023-10-15 10:00:00', '2023-10-15 16:00:00', '2023-10-10 23:59:59', 'Tech Hub', 'Hands-on coding experience', 50, true, 'Active', 4, 2, 'techworkshop.jpeg'),
+  ('Fitness Challenge', '2023-11-05 08:00:00', '2023-11-05 12:00:00', '2023-11-01 23:59:59', 'Fitness Center', 'Join us for a morning workout', 30, true, 'Active', 5, 3, 'fitnesschallenge.webp'),
+  ('Science Fair', '2023-12-01 13:00:00', '2023-12-01 17:00:00', '2023-11-25 23:59:59', 'Science Museum', 'Discover the wonders of science', 80, true, 'Active', 6, 6, 'sciencefair.jpeg'),
+  ('Art Exhibition', '2024-01-20 11:00:00', '2024-01-20 18:00:00', '2024-01-15 23:59:59', 'Art Gallery', 'Showcasing local artists', 120, true, 'Active', 7, 5, 'artgallery.webp'),
+  ('Cooking Class', '2024-02-08 17:30:00', '2024-02-08 20:30:00', '2024-02-01 23:59:59', 'Culinary School', 'Learn to cook delicious dishes', 25, true, 'Active', 8, 7, 'cookingclass.jpeg'),
+  ('Travel Talk', '2024-03-12 15:00:00', '2024-03-12 17:00:00', '2024-03-07 23:59:59', 'Community Center', 'Share travel stories and tips', 40, true, 'Active', 9, 8, 'traveltalk.jpeg'),
+  ('Gaming Tournament', '2024-04-05 18:00:00', '2024-04-05 22:00:00', '2024-04-01 23:59:59', 'Gaming Arena', 'Compete in various gaming challenges', 60, true, 'Active', 10, 9, 'gamingtournament.webp'),
+  ('Fashion Show', '2024-05-22 14:00:00', '2024-05-22 17:00:00', '2024-05-17 23:59:59', 'Fashion Mall', 'Showcasing the latest trends', 75, true, 'Active', 1, 10, 'fashionshow.jpeg'),
+  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4, 'communitycleanup.jpeg');
 
 
 INSERT INTO eventInvitation (sentDate, event_id, user_invited_id, user_host_id, decision)

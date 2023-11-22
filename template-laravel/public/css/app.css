@@ -161,15 +161,40 @@ body {
   }
   
 
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.event-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .event-box {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  background-color: red;
-  color: white;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
 }
 
-.event-box:nth-child(even) {
-  background-color: darkred;
+.event-photo {
+    height: 150px;
+    border-bottom: 2px solid black;
+    overflow: hidden;
 }
 
+.event-photo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.event-details {
+    padding: 10px;
+}
