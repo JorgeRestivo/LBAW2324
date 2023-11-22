@@ -10,7 +10,7 @@ class EventsController extends Controller
     /**
      * Display the events.begin view.
      */
-    public function begin()
+    public function showEvent()
     {
         return view('begin');
     }
