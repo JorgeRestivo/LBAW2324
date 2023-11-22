@@ -74,3 +74,8 @@ Route::controller(ItemController::class)->group(function () {
 
 
 
+// procurar eventos search bar
+
+Route::get('/events/search', [EventsController::class, 'search'])->name('events.search');
+
+
