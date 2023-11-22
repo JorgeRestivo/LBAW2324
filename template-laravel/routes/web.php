@@ -48,12 +48,12 @@ Route::controller(UserController::class)->group(function () {
 
 // Events
 Route::controller(EventsController::class)->group(function () {
-    Route::get('/event', 'showEvent')->name('events.begin');
+    Route::get('/event/{id}','showEvent')->where('id','[0-9]+')->name('eventPage');
     Route::get('/event/edit','editEvent');
     Route::post('/event/create', 'createEvent');
     Route::post('/event/delete', 'deleteEvent');
     Route::post('/event/addtowishlist', 'addToWishlist');
-    Route::post('/event/removefromwishlist', 'addToWishlist');
+    Route::post('/event/removefromwishlist', 'removeFromWishlist');
 
 
 });
