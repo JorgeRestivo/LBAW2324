@@ -9,7 +9,7 @@ SET DateStyle TO European;
 --
 -- Drop any existing tables.
 --
-DROP TABLE IF EXISTS usuario CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS eventInvitation CASCADE;
 DROP TABLE IF EXISTS eventTicket CASCADE;
@@ -41,7 +41,7 @@ CREATE TYPE notification_type AS ENUM ('event_notification','comment_notificatio
 -- Create tables.
 --
 
-CREATE TABLE usuario (
+CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(256) UNIQUE NOT NULL,
   name VARCHAR(256) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE events (
   capacity INTEGER NOT NULL CHECK (capacity>0),
   isPublic BOOLEAN NOT NULL DEFAULT TRUE,
   status event_status_types NOT NULL,
-  owner_id INTEGER NOT NULL REFERENCES usuario
+  owner_id INTEGER NOT NULL REFERENCES users
  (id) ON UPDATE CASCADE,
   tag_id INTEGER NOT NULL REFERENCES tag (id) ON UPDATE CASCADE
 );
@@ -75,9 +75,9 @@ CREATE TABLE eventInvitation (
   id SERIAL PRIMARY KEY,
   sentDate TIMESTAMP NOT NULL CHECK (sentDate <= now()),
   event_id INTEGER NOT NULL REFERENCES events (id) ON UPDATE CASCADE,
-  user_invited_id INTEGER NOT NULL REFERENCES usuario
+  user_invited_id INTEGER NOT NULL REFERENCES users
  (id) ON UPDATE CASCADE,
-  user_host_id INTEGER NOT NULL REFERENCES usuario
+  user_host_id INTEGER NOT NULL REFERENCES users
  (id) ON UPDATE CASCADE,
   decision participation_type
 );
@@ -92,7 +92,7 @@ CREATE TABLE eventTicket (
 CREATE TABLE comments(
   id SERIAL PRIMARY KEY,
   content VARCHAR(512) NOT NULL,
-  owner_id INTEGER NOT NULL REFERENCES usuario
+  owner_id INTEGER NOT NULL REFERENCES users
  (id) ON UPDATE CASCADE,
   event_id INTEGER NOT NULL REFERENCES events (id) ON UPDATE CASCADE,
   dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now())
@@ -104,7 +104,7 @@ CREATE TABLE attendance (
   participation participation_type,
   wishlist BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (user_id, event_id),
-  FOREIGN KEY (user_id) REFERENCES usuario(id) ON UPDATE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE,
   FOREIGN KEY (event_id) REFERENCES events(id) ON UPDATE CASCADE
 );
 
@@ -113,7 +113,7 @@ CREATE TABLE attendance (
 CREATE TABLE notification (
   id SERIAL PRIMARY KEY,
   dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now()),  
-  notified_user INTEGER NOT NULL REFERENCES usuario
+  notified_user INTEGER NOT NULL REFERENCES users
  (id) ON UPDATE CASCADE,
   type notification_type NOT NULL
 );
@@ -124,7 +124,7 @@ CREATE TABLE notification (
 --
 
 
-INSERT INTO usuario (username, name, email, password, userStatus) 
+INSERT INTO users (username, name, email, password, userStatus) 
 VALUES 
   ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', 'alicepass', 'Active'),
   ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active'),

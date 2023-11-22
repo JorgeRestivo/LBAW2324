@@ -4,11 +4,11 @@
 <form method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
 
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
-    @if ($errors->has('username'))
+    <label for="email">E-mail</label>
+    <input id="email" type="text" name="email" value="{{ old('email') }}" required autofocus>
+    @if ($errors->has('email'))
         <span class="error">
-          {{ $errors->first('username') }}
+          {{ $errors->first('email') }}
         </span>
     @endif
 
