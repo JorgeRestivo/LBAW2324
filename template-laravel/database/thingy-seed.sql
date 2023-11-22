@@ -126,7 +126,7 @@ CREATE TABLE notification (
 
 INSERT INTO users (username, name, email, password, userStatus) 
 VALUES 
-  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', 'alicepass', 'Active'),
+  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active'), -- password 1234
   ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active'),
   ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active'),
   ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active'),
