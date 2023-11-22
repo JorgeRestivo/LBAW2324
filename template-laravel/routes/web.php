@@ -53,3 +53,8 @@ Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'showRegistrationForm')->name('register');
     Route::post('/register', 'register');
 });
+
+// Rota para a homepage
+Route::get('/home', function () {
+    return view('welcome'); // Substitua 'welcome' pelo nome da sua view ou pela lógica da sua homepage
+})->name('home');
