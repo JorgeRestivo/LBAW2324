@@ -19,13 +19,41 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-// Home
+//Start
 Route::redirect('/', '/login');
 
-// Cards
-Route::controller(CardController::class)->group(function () {
-    Route::get('/cards', 'list')->name('cards');
-    Route::get('/cards/{id}', 'show');
+// Authentication
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'showLog')->name('login');
+    Route::post('/login', 'authenticate');
+    Route::get('/logout', 'logout')->name('logout');
+});
+
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'showReg')->name('register');
+    Route::post('/register', 'register');
+});
+
+// Home
+Route::controller(HomeController::class)->group(function () { 
+    Route::get('/home','showHome');
+});
+
+//User
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user/{id}', 'showUser')->where('id','[0-9]+')->name('profile');
+});
+
+// Events
+Route::controller(EventsController::class)->group(function () {
+    Route::get('/event', 'showEvent');
+    Route::get('/event/edit','editEvent');
+    Route::post('/event/create', 'createEvent');
+    Route::post('/event/delete', 'deleteEvent');
+    Route::post('/event/addtowishlist', 'addToWishlist');
+    Route::post('/event/removefromwishlist', 'addToWishlist');
+
+
 });
 
 
@@ -42,14 +70,4 @@ Route::controller(ItemController::class)->group(function () {
 });
 
 
-// Authentication
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/login', 'showLoginForm')->name('login');
-    Route::post('/login', 'authenticate');
-    Route::get('/logout', 'logout')->name('logout');
-});
 
-Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'showRegistrationForm')->name('register');
-    Route::post('/register', 'register');
-});

@@ -16,10 +16,10 @@ class LoginController extends Controller
     /**
      * Display a login form.
      */
-    public function showLoginForm()
+    public function showLog()
     {
         if (Auth::check()) {
-            return redirect('/cards');
+            return redirect('/events');
         } else {
             return view('auth.login');
         }
