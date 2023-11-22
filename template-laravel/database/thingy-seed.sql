@@ -47,7 +47,7 @@ CREATE TABLE users (
   name VARCHAR(256) NOT NULL,
   email VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
-  userStatus user_status_types NOT NULL
+  userStatus user_status_types NOT NULL DEFAULT 'Active'
 );
 
 CREATE TABLE tag (
