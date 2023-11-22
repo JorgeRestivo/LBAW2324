@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\View\View;
+use App\Http\Controllers\EventsController;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,7 @@ class LoginController extends Controller
     public function showLog()
     {
         if (Auth::check()) {
-            return redirect('/events');
+            return redirect()->route('events.begin');
         } else {
             return view('auth.login');
         }
@@ -38,7 +39,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
  
-            return redirect()->intended('events.begin');
+            return redirect()->route('events.begin')->withSuccess('Login successful!');
         }
  
         return back()->withErrors([
