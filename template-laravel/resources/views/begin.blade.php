@@ -1,24 +1,32 @@
-<!-- resources/views/events.begin.blade.php -->
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events List</title>
-</head>
-<body>
-    <div style="text-align: center; padding: 50px;">
-        <h1>Events List</h1>
-        <ul>
-            @foreach ($events as $event)
-                <li>
-                    <strong>{{ $event->eventName }}</strong><br>
-                    Start Date: {{ $event->startDateTime }}<br>
-                    End Date: {{ $event->endDateTime }}<br>
-                </li>
-            @endforeach
-        </ul>
+@section('content')
+    <div class="event-container">
+        @foreach ($events as $event)
+            <div class="event-box">
+                <h2>{{ $event->eventname }}</h2>
+                <p>Start Date: {{ $event->startdatetime }}</p>
+                <p>End Date: {{ $event->enddatetime }}</p>
+            </div>
+        @endforeach
     </div>
-</body>
-</html>
+@endsection
+
+@section('styles')
+    <style>
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .event-box {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+@endsection

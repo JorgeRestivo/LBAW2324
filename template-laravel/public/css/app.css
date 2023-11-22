@@ -160,3 +160,16 @@ body {
     border-color: #9b4dca;
   }
   
+
+.event-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  background-color: red;
+  color: white;
+}
+
+.event-box:nth-child(even) {
+  background-color: darkred;
+}
+
