@@ -84,4 +84,17 @@ class EventsController extends Controller
         return view('formsevent'); // Assuming 'events.formsevent' is your new blade view
     }
 
+    public function show($id)
+    {
+        $event = Event::find($id);
+
+        if (!$event) {
+            // Handle the case where the event with the given ID is not found.
+            abort(404);
+        }
+
+        return view('events.show', ['event' => $event]);
+    }
 }
+
+

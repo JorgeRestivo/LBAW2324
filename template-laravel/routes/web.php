@@ -52,6 +52,8 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(EventsController::class)->group(function () {
 
     Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
+    Route::get('/event/{id}', 'show')->where('id', '[0-9]+')->name('event.show');
+
     Route::get('/event/edit', 'editEvent');
     Route::post('/events/create', [EventsController::class, 'createEvent'])->name('events.createEvent');
     Route::get('/events/create', [EventsController::class, 'showCreateForm'])->name('events.create');
