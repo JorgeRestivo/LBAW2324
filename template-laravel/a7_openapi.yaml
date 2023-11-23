@@ -150,7 +150,7 @@ paths:
                   description: 'Failed authentication. Redirect to login form.'
                   value: '/login'
 
-  /user/{id}:
+  /profile:
 
     get:
       operationId: R201
@@ -179,7 +179,7 @@ paths:
                 302Failure:
                   description: 'Failure.'
 
-  /home:
+  /events-begin:
 
     get:
       operationId: R202
@@ -204,7 +204,7 @@ paths:
 
 ######### EDIT PROFILE #########
 
-  /user/edit:
+  /profile/edit-photo:
 
     get:
       operationId: R203
