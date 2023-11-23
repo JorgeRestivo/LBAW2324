@@ -25,7 +25,8 @@
             <header>
                 <h1><a href="{{ url('/events-begin') }}">GetTogether</a></h1>
                 @if (Auth::check())
-                <a href="{{ route('profile') }}">{{ Auth::user()->name }}</a>
+                <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
+                <a href="{{ route('profile.editPhotoForm') }}">Editar Foto</a> <!-- Novo link para edição da foto -->
                 <a class="button" href="{{ url('/logout') }}">Logout</a>
                     <!-- Search Bar -->
                 <form action="{{ route('events.search') }}" method="GET">
