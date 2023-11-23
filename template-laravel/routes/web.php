@@ -49,13 +49,22 @@ Route::controller(UserController::class)->group(function () {
 // Events
 Route::controller(EventsController::class)->group(function () {
     //Route::get('/event/{id}','showEvent')->where('id','[0-9]+')->name('eventPage');
-    Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
+    /*Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
     Route::get('/event/edit','editEvent');
     Route::post('/event/create', 'createEvent');
     Route::post('/event/delete', 'deleteEvent');
     Route::post('/event/addtowishlist', 'addToWishlist');
     Route::post('/event/removefromwishlist', 'removeFromWishlist');
+    Route::get('/events/create', [EventsController::class, 'createEvent'])->name('events.create');*/
 
+    Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
+    Route::get('/event/edit', 'editEvent');
+    Route::post('/events/create', 'createEvent')->name('events.createEvent');
+    //Route::post('/events/create', 'createEvent');
+    Route::get('/events/create', [EventsController::class, 'showCreateForm'])->name('events.create');
+    Route::post('/event/delete', 'deleteEvent');
+    Route::post('/event/addtowishlist', 'addToWishlist');
+    Route::post('/event/removefromwishlist', 'removeFromWishlist');
 
 });
 

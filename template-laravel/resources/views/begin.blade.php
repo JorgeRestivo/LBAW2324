@@ -14,5 +14,13 @@
                 </div>
             </div>
         @endforeach
+
+        @if(isset($newEvent))
+        <div class="alert alert-success">
+            New Event Created: {{ $newEvent->eventName }}
+            <!-- Display other information about the new event as needed -->
+        </div>
+        @endif
+
     </div>
 @endsection

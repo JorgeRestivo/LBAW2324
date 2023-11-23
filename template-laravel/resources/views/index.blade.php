@@ -24,6 +24,3 @@
     @endif
 @endsection
 
-@section('styles')
-    <!-- Add any additional styles for this view if needed -->
-@endsection
