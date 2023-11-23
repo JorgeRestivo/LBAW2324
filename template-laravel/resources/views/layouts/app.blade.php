@@ -36,6 +36,10 @@
                 <!-- Create Event Button -->
 
                 <a href="{{ route('events.create') }}">Create Event</a>
+
+                <!-- Create MyEvents Button -->
+
+                <a href="{{ route('events.myevents') }}">My Events</a>
                 @endif
 
             </header>

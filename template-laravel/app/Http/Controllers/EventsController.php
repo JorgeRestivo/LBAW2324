@@ -95,6 +95,16 @@ class EventsController extends Controller
 
         return view('events.show', ['event' => $event]);
     }
+
+    public function showMyEvents(){
+    $ownerId = auth()->id();
+
+    // Retrieve events where the owner_id is the currently authenticated user's ID
+    $myEvents = Event::where('owner_id', $ownerId)->get();
+
+    return view('myevents', ['myEvents' => $myEvents]);
+}
+
 }
 
 

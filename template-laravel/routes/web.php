@@ -61,6 +61,8 @@ Route::controller(EventsController::class)->group(function () {
     Route::post('/event/addtowishlist', 'addToWishlist');
     Route::post('/event/removefromwishlist', 'removeFromWishlist');
     Route::get('/events/search', [EventsController::class, 'search'])->name('events.search');
+    Route::get('/events/myevents', [EventsController::class, 'showMyEvents'])->name('events.myevents');
+
 
 });
 
