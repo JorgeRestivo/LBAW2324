@@ -16,5 +16,20 @@ class Event extends Model
     public $timestamps  = false;
 
     protected $table = 'events';
+
+    protected $fillable = [
+        'eventname',
+        'startdatetime',
+        'enddatetime',
+        'registrationendtime',
+        'local',
+        'description',
+        'capacity',
+        'ispublic',
+        'status',
+        'tag_id',
+        'photo',
+        'owner_id',
+    ];
 }
 
