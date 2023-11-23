@@ -13,13 +13,16 @@ class EventsController extends Controller
 
     // EventsController.php
 
-public function search(Request $request)
-{
-    $query = $request->input('query');
-    $events = Event::where('eventname', 'like', '%' . $query . '%')->get();
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
 
-    return view('index', ['events' => $events, 'query' => $query]);
-}
+        // Execute a consulta para encontrar eventos com base no nome
+        $events = Event::where('eventname', 'like', '%' . $query . '%')->get();
+
+        // Retorna a visão com os resultados da pesquisa
+        return view('events.search', ['events' => $events, 'query' => $query]);
+    }
 
     /**
      * Display the events.begin view.

@@ -25,8 +25,8 @@
             <header>
                 <h1><a href="{{ url('/events-begin') }}">GetTogether</a></h1>
                 @if (Auth::check())
-                    <a class="button" href="{{ url('/logout') }}"> Logout </a> <span>{{ Auth::user()->name }}</span>
-
+                <a href="{{ route('profile') }}">{{ Auth::user()->name }}</a>
+                <a class="button" href="{{ url('/logout') }}">Logout</a>
                     <!-- Search Bar -->
                 <form action="{{ route('events.search') }}" method="GET">
                     <input type="text" name="query" placeholder="Search Events">

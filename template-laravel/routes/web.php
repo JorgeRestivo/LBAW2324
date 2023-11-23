@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\EventsController;
 
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,3 +81,6 @@ Route::controller(ItemController::class)->group(function () {
 Route::get('/events/search', [EventsController::class, 'search'])->name('events.search');
 
 
+// profile page
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
