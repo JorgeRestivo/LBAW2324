@@ -15,6 +15,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
     // Don't add create and update timestamps in database.
     public $timestamps  = false;
 
@@ -28,6 +29,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'profile_photo',
     ];
 
     /**

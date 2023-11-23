@@ -190,3 +190,18 @@ body {
 .event-details {
     padding: 10px;
 }
+
+/* Adicione isso ao seu arquivo de estilo CSS (por exemplo, app.css) */
+.profile-container {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+}
+
+.profile-container img {
+  margin-right: 10px; /* Espaçamento à direita da imagem */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}

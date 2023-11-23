@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\EventsController;
 
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,3 +90,12 @@ Route::controller(ItemController::class)->group(function () {
 Route::get('/events/search', [EventsController::class, 'search'])->name('events.search');
 
 
+// profile page
+
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit-photo', [ProfileController::class, 'editProfilePhotoForm'])->name('profile.editPhotoForm');
+    Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.updatePhoto');
+});
