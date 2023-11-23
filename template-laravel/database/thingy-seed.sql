@@ -68,7 +68,7 @@ CREATE TABLE events (
   isPublic BOOLEAN NOT NULL DEFAULT TRUE,
   status event_status_types NOT NULL,
   owner_id INTEGER NOT NULL REFERENCES users (id) ON UPDATE CASCADE,
-  tag_id INTEGER NOT NULL REFERENCES tag (id) ON UPDATE CASCADE,
+  tag_id INTEGER REFERENCES tag (id) ON UPDATE CASCADE,
   photo VARCHAR(255)
 );
 

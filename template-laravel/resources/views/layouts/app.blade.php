@@ -33,6 +33,9 @@
                     <button type="submit">Search</button>
                 </form>
 
+                <!-- Create Event Button -->
+
+                <a href="{{ route('events.create') }}">Create Event</a>
                 @endif
 
             </header>
