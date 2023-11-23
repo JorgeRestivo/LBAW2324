@@ -421,6 +421,81 @@ paths:
 ############################################ EVENTS ############################################
 
 ######### CREATE EVENT #########
+  /event/{id}:
+
+    event:
+      operationId: R304
+      summary: 'R304: View event page'
+      description: 'View event. Access: USR , ADM ,OWN'
+      tags:
+        - 'M03: Events'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                eventName:
+                  type: string
+                description:
+                  type: string
+                registrationEndTime:
+                  type: 
+                startDateTime:
+                  type:
+                endDateTime:
+                  type:
+                isPublic:
+                  type: boolean
+                capacity:
+                  type: integer
+                status: 
+                  type: tag
+                local:
+                  type: string
+                tag:
+                  type: string
+
+  /event/myevents:
+
+    event:
+      operationId: R305
+      summary: 'R305: View my own event'
+      description: 'Create event. Access: OWN'
+      tags:
+        - 'M03: Events'
+
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                eventName:
+                  type: string
+                description:
+                  type: string
+                registrationEndTime:
+                  type: 
+                startDateTime:
+                  type:
+                endDateTime:
+                  type:
+                isPublic:
+                  type: boolean
+                capacity:
+                  type: integer
+                status: 
+                  type: tag
+                local:
+                  type: string
+                tag:
+                  type: string
+                
+                
 
   /event/create:
 
