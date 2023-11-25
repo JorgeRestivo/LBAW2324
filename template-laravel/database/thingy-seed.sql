@@ -76,10 +76,8 @@ CREATE TABLE eventInvitation (
   id SERIAL PRIMARY KEY,
   sentDate TIMESTAMP NOT NULL CHECK (sentDate <= now()),
   event_id INTEGER NOT NULL REFERENCES events (id) ON UPDATE CASCADE,
-  user_invited_id INTEGER NOT NULL REFERENCES users
- (id) ON UPDATE CASCADE,
-  user_host_id INTEGER NOT NULL REFERENCES users
- (id) ON UPDATE CASCADE,
+  user_invited_id INTEGER NOT NULL REFERENCES users (id) ON UPDATE CASCADE,
+  user_host_id INTEGER NOT NULL REFERENCES users (id) ON UPDATE CASCADE,
   decision participation_type
 );
 

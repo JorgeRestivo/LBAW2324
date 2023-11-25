@@ -8,14 +8,14 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Invitation;
 
 
-use App\Models\Event; 
+use App\Models\Event;
+use App\Models\User; 
 
 class EventsController extends Controller
 {
-
-    // EventsController.php
 
     public function search(Request $request)
     {
@@ -27,13 +27,13 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents()
-    {
+    public function showEvents() {
         $events = DB::table('events')->get()->toArray();
         return view('begin', ['events' => $events]);
     }
-    public function createEvent(Request $request)
-    {
+
+
+    public function createEvent(Request $request) {
         try {
             Log::info('createEvent method called');
     
@@ -79,13 +79,13 @@ class EventsController extends Controller
         }
     }
 
-    public function showCreateForm()
-    {
-        return view('formsevent'); // Assuming 'events.formsevent' is your new blade view
+
+    public function showCreateForm() {
+        return view('formsevent');
     }
 
-    public function show($id)
-    {
+
+    public function show($id) {
         $event = Event::find($id);
 
         if (!$event) {
@@ -97,13 +97,43 @@ class EventsController extends Controller
     }
 
     public function showMyEvents(){
-    $ownerId = auth()->id();
+        $ownerId = auth()->id();
 
-    // Retrieve events where the owner_id is the currently authenticated user's ID
-    $myEvents = Event::where('owner_id', $ownerId)->get();
+        $myEvents = Event::where('owner_id', $ownerId)->get();
 
-    return view('myevents', ['myEvents' => $myEvents]);
-}
+        return view('myevents', ['myEvents' => $myEvents]);
+    }
+
+    public function sendInvitation(Request $request, $eventId)
+    {
+        // Validate the request and send the invitation
+        // You'll need to implement this logic based on your requirements
+        // For simplicity, I'll assume you have a pivot table named eventInvitation
+
+        $request->validate([
+            'inviteeId' => 'required|exists:users,id',
+            // Add any other validation rules you need
+        ]);
+
+        $event = Event::find($eventId);
+
+        // uasr para as notificações
+        //$event->invitedUsers()->attach($request->input('inviteeId'));
+
+        return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
+    }
+
+    public function showInviteForm($eventId)
+    {
+        $users = User::all(); // Fetch all users, adjust as needed
+        $event = Event::find($eventId);
+
+        return view('form', ['users' => $users, 'event' => $event]);
+    }
+
+
+
+
 
 }
 
