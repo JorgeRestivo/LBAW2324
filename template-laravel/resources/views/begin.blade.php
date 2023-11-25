@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="event-container">
+    <div class="event-gallery">
         @foreach ($events as $event)
             <div class="event-box">
                 <a href="{{ route('event.show', ['id' => $event->id]) }}">
@@ -18,11 +18,10 @@
         @endforeach
 
         @if(isset($newEvent))
-        <div class="alert alert-success">
-            New Event Created: {{ $newEvent->eventName }}
-            <!-- Display other information about the new event as needed -->
-        </div>
+            <div class="alert alert-success">
+                New Event Created: {{ $newEvent->eventName }}
+                <!-- Display other information about the new event as needed -->
+            </div>
         @endif
-
     </div>
 @endsection

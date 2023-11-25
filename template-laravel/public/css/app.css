@@ -161,9 +161,10 @@ body {
   }
   
 
-  .event-container {
-    display: flex;
-    flex-direction: column; /* Display events in a single column */
+  .event-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    gap: 20px; /* Adjust the gap between items */
 }
 
 .event-box {
