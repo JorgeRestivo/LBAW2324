@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invitation extends Model
 {
+    protected $table = 'eventinvitation';
     protected $fillable = [
         'sentDate', 'event_id', 'user_invited_id', 'user_host_id', 'decision', 'participation_type'
     ];

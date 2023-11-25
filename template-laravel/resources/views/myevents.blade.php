@@ -19,6 +19,8 @@
                             <!-- Link to Event Details -->
                             <a href="{{ route('event.show', ['id' => $event->id]) }}">View Details</a>
 
+                            <br>
+
                             <!-- Link to Invite Someone -->
                             <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">Invite someone</a>
                         </div>

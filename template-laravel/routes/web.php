@@ -64,6 +64,8 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/myevents', [EventsController::class, 'showMyEvents'])->name('events.myevents');
     Route::post('/events/send-invitation/{eventId}', [EventsController::class, 'sendInvitation'])->name('event.sendInvitation');
     Route::get('/events/invite/{eventId}', [EventsController::class, 'showInviteForm'])->name('event.invite');
+    //Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent.invitations')->middleware('auth');
+    Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent_invitations.index');
 
 });
 

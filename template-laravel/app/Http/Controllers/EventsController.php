@@ -131,8 +131,13 @@ class EventsController extends Controller
         return view('form', ['users' => $users, 'event' => $event]);
     }
 
+    public function showSentInvitations()
+    {
+        $userId = Auth::id();
+        $sentInvitations = Invitation::where('user_host_id', $userId)->get();
 
-
+        return view('sent_invitations', ['sentInvitations' => $sentInvitations]);
+    }
 
 
 }

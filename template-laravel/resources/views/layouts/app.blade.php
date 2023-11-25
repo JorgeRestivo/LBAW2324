@@ -40,6 +40,11 @@
                 <!-- Create MyEvents Button -->
 
                 <a href="{{ route('events.myevents') }}">My Events</a>
+
+                <!-- Sent Invitations Button -->
+
+                <a href="{{ route('sent_invitations.index') }}">Sent Invitations</a>
+
                 @endif
 
             </header>
