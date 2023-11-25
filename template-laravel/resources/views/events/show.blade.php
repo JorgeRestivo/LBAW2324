@@ -24,21 +24,14 @@
             <h3>Comments</h3>
             
             @if(count($comments) > 0)
-                <ul>
-                    @foreach($comments as $comment)
-                        <li>
-                            <p>Content: {{ $comment->content }}</p>
-                            <p>Owner: {{ $comment->owner->name }}</p>
-                            <p>Date and Time: {{ $comment->dateTime }}</p>
-                        </li>
-                    @endforeach
-                </ul>
+                @foreach($comments as $comment)
+                    <div class="comment-box">
+                        <p>{{ $comment->owner->name }} : {{ $comment->content }}</p>
+                    </div>
+                @endforeach
             @else
                 <p>No comments found.</p>
             @endif
         </div>
-
-
-
     </div>
 @endsection

@@ -203,7 +203,17 @@ VALUES
   ('Share your travel adventures!', 9, 9, '2021-03-13 16:20:00'),
   ('Gaming enthusiasts, unite!', 10, 10, '2022-04-06 19:30:00'),
   ('Fashion forward!', 1, 1, '2021-05-23 15:30:00'),
-  ('Let us make our community better!', 2, 2, '2023-06-05 10:30:00');
+  ('Let us make our community better!', 2, 2, '2023-06-05 10:30:00'),
+  ('Looking forward to the music festival!', 5, 3, '2023-09-03 18:45:00'),
+  ('Great learning experience at the coding bootcamp!', 7, 4, '2023-10-15 14:00:00'),
+  ('Exploring new technologies at the tech conference!', 8, 5, '2023-11-10 11:30:00'),
+  ('Attending a workshop on space exploration!', 1, 6, '2023-11-05 13:45:00'),
+  ('Excited for the upcoming art exhibition!', 2, 7, '2022-02-18 16:20:00'),
+  ('Mastering new recipes at the cooking class!', 4, 8, '2022-03-15 19:00:00'),
+  ('Capturing beautiful moments during travel!', 6, 9, '2021-04-20 09:45:00'),
+  ('Gaming night with friends!', 3, 10, '2022-05-10 20:15:00'),
+  ('Showcasing the latest fashion trends!', 10, 1, '2021-06-30 17:00:00'),
+  ('Community cleanup initiative – join us!', 6, 2, '2023-07-15 08:30:00');
 
 
 INSERT INTO attendance (user_id, event_id, participation, wishlist)
