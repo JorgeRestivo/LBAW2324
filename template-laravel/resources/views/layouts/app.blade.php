@@ -45,6 +45,10 @@
 
                 <a href="{{ route('sent_invitations.index') }}">Sent Invitations</a>
 
+                <!-- Received Invitations Button -->
+
+                <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
+
                 @endif
 
             </header>

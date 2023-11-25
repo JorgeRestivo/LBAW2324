@@ -206,3 +206,15 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.invitation-container { /* editar sent invitations */
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.invitation-box { /* editar sent invitations */
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 0;
+}

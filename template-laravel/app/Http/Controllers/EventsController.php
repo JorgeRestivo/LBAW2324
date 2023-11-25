@@ -139,6 +139,14 @@ class EventsController extends Controller
         return view('sent_invitations', ['sentInvitations' => $sentInvitations]);
     }
 
+    public function showReceivedInvitations()
+    {
+        $userId = Auth::id();
+        $receivedInvitations = Invitation::where('user_invited_id', $userId)->get();
+
+        return view('received_invitations', ['receivedInvitations' => $receivedInvitations]);
+    }
+
 
 }
 

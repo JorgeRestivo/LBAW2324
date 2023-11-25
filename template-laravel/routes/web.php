@@ -66,6 +66,7 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/invite/{eventId}', [EventsController::class, 'showInviteForm'])->name('event.invite');
     //Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent.invitations')->middleware('auth');
     Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent_invitations.index');
+    Route::get('/received-invitations', [EventsController::class, 'showReceivedInvitations'])->name('received_invitations.index');
 
 });
 
