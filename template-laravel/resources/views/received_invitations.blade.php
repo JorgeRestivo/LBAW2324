@@ -14,6 +14,7 @@
                             <p>Event Name: {{ $invitation->event->eventname }}</p>
                             <p>Receipt Date: {{ $invitation->sentdate }}</p>
                             <p>User Who Invited Me: {{ $invitation->hostUser->name }}</p>
+                            <p>My decision: {{ $invitation->decision}}</p>
                         </div>
                     </div>
                 @endforeach

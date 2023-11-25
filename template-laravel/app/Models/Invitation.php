@@ -8,7 +8,7 @@ class Invitation extends Model
 {
     protected $table = 'eventinvitation';
     protected $fillable = [
-        'sentDate', 'event_id', 'user_invited_id', 'user_host_id', 'decision', 'participation_type'
+        'sentDate', 'event_id', 'user_invited_id', 'user_host_id', 'decision'
     ];
 
     public function event()
@@ -25,4 +25,5 @@ class Invitation extends Model
     {
         return $this->belongsTo(User::class, 'user_host_id');
     }
+
 }
