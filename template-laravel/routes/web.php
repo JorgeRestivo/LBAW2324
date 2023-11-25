@@ -2,15 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\CardController;
-use App\Http\Controllers\ItemController;
-
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\EventsController;
-
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +50,6 @@ Route::controller(EventsController::class)->group(function () {
 
     Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
     Route::get('/event/{id}', 'show')->where('id', '[0-9]+')->name('event.show');
-
     Route::get('/event/edit', 'editEvent');
     Route::post('/events/create', [EventsController::class, 'createEvent'])->name('events.createEvent');
     Route::get('/events/create', [EventsController::class, 'showCreateForm'])->name('events.create');
@@ -64,12 +60,15 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/myevents', [EventsController::class, 'showMyEvents'])->name('events.myevents');
     Route::post('/events/send-invitation/{eventId}', [EventsController::class, 'sendInvitation'])->name('event.sendInvitation');
     Route::get('/events/invite/{eventId}', [EventsController::class, 'showInviteForm'])->name('event.invite');
-    //Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent.invitations')->middleware('auth');
     Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent_invitations.index');
     Route::get('/received-invitations', [EventsController::class, 'showReceivedInvitations'])->name('received_invitations.index');
 
 });
 
+//Comments
+Route::controller(CommentsController::class)->group(function () {
+    Route::get('/comments', [CommentsController::class, 'index'])->name('comments.index');
+});
 
 // API
 Route::controller(CardController::class)->group(function () {

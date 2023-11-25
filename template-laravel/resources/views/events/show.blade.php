@@ -19,5 +19,26 @@
                 <p><strong>Description:</strong> {{ $event->description }}</p>
             </div>
         </div>
+
+        <div class="comments-container">
+            <h3>Comments</h3>
+            
+            @if(count($comments) > 0)
+                <ul>
+                    @foreach($comments as $comment)
+                        <li>
+                            <p>Content: {{ $comment->content }}</p>
+                            <p>Owner: {{ $comment->owner->name }}</p>
+                            <p>Date and Time: {{ $comment->dateTime }}</p>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p>No comments found.</p>
+            @endif
+        </div>
+
+
+
     </div>
 @endsection

@@ -31,5 +31,10 @@ class Event extends Model
         'photo',
         'owner_id',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
 

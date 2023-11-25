@@ -8,9 +8,9 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 use App\Models\Invitation;
-
-
+use App\Models\Comment;
 use App\Models\Event;
 use App\Models\User; 
 
@@ -93,7 +93,9 @@ class EventsController extends Controller
             abort(404);
         }
 
-        return view('events.show', ['event' => $event]);
+        $comments = Comment::where('event_id', $event->id)->get();
+
+        return view('events.show', ['event' => $event, 'comments' => $comments]);
     }
 
     public function showMyEvents(){
