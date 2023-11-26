@@ -49,6 +49,10 @@
 
                 <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
 
+                <!-- My schedule Button -->
+
+                <a href="{{ route('events.going') }}">My Schedule</a>
+
                 @endif
 
             </header>

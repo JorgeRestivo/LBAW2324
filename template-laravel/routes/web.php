@@ -62,6 +62,8 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/invite/{eventId}', [EventsController::class, 'showInviteForm'])->name('event.invite');
     Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent_invitations.index');
     Route::get('/received-invitations', [EventsController::class, 'showReceivedInvitations'])->name('received_invitations.index');
+    Route::get('/events/going', [EventsController::class, 'showEventsImGoing'])->name('events.going');
+
 
 });
 
@@ -69,19 +71,6 @@ Route::controller(EventsController::class)->group(function () {
 Route::controller(CommentsController::class)->group(function () {
     Route::get('/comments', [CommentsController::class, 'index'])->name('comments.index');
 });
-
-// API
-Route::controller(CardController::class)->group(function () {
-    Route::put('/api/cards', 'create');
-    Route::delete('/api/cards/{card_id}', 'delete');
-});
-
-Route::controller(ItemController::class)->group(function () {
-    Route::put('/api/cards/{card_id}', 'create');
-    Route::post('/api/item/{id}', 'update');
-    Route::delete('/api/item/{id}', 'delete');
-});
-
 
 // profile page
 

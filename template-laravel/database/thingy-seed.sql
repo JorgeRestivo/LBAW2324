@@ -219,6 +219,7 @@ VALUES
 INSERT INTO attendance (user_id, event_id, participation, wishlist)
 VALUES 
   (1, 3, 'Going', false),
+  (1, 7, 'Going', false),
   (2, 4, 'Maybe', true),
   (3, 5, 'Going', false),
   (4, 6, 'Not Going', false),
@@ -227,7 +228,17 @@ VALUES
   (7, 9, 'Not Going', true),
   (8, 10, 'Going', false),
   (9, 1, 'Going', false),
-  (10, 2, 'Maybe', false);
+  (10, 2, 'Maybe', false),
+  (1, 10, 'Not Going', true),
+  (2, 9, 'Going', false),
+  (3, 8, 'Maybe', false),
+  (4, 7, 'Going', false),
+  (5, 6, 'Not Going', true),
+  (6, 5, 'Going', false),
+  (7, 4, 'Maybe', false),
+  (8, 3, 'Going', false),
+  (9, 2, 'Going', false),
+  (10, 1, 'Not Going', false);
 
 
 INSERT INTO notification (dateTime, notified_user, type) 

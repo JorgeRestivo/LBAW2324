@@ -108,18 +108,14 @@ class EventsController extends Controller
 
     public function sendInvitation(Request $request, $eventId)
     {
-        // Validate the request and send the invitation
-        // You'll need to implement this logic based on your requirements
-        // For simplicity, I'll assume you have a pivot table named eventInvitation
 
         $request->validate([
             'inviteeId' => 'required|exists:users,id',
-            // Add any other validation rules you need
         ]);
 
         $event = Event::find($eventId);
 
-        // uasr para as notificações
+        // usar para as notificações
         //$event->invitedUsers()->attach($request->input('inviteeId'));
 
         return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
@@ -127,7 +123,7 @@ class EventsController extends Controller
 
     public function showInviteForm($eventId)
     {
-        $users = User::all(); // Fetch all users, adjust as needed
+        $users = User::all();
         $event = Event::find($eventId);
 
         return view('form', ['users' => $users, 'event' => $event]);
@@ -147,6 +143,27 @@ class EventsController extends Controller
         $receivedInvitations = Invitation::where('user_invited_id', $userId)->get();
 
         return view('received_invitations', ['receivedInvitations' => $receivedInvitations]);
+    }
+
+    public function showEventsImGoing()
+    {
+        $userId = Auth::id();
+
+        $goingEvents = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.participation', '=', 'Going')
+            ->select('events.*')
+            ->get();
+        
+        $notgoingEvents = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.participation', '=', 'Not Going')
+            ->select('events.*')
+            ->get();
+
+        return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents]);
     }
 
 
