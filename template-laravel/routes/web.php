@@ -63,7 +63,7 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/sent-invitations', [EventsController::class, 'showSentInvitations'])->name('sent_invitations.index');
     Route::get('/received-invitations', [EventsController::class, 'showReceivedInvitations'])->name('received_invitations.index');
     Route::get('/events/going', [EventsController::class, 'showEventsImGoing'])->name('events.going');
-
+    // teste por causa do css
 
 });
 
