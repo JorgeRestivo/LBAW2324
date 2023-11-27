@@ -29,8 +29,19 @@ class EventsController extends Controller
     
     public function showEvents() {
         $events = DB::table('events')->get()->toArray();
-        return view('begin', ['events' => $events]);
+        $wishlist = $this->checkWishlist();
+    
+        // Add an 'inWishlist' property to each event
+        foreach ($events as $event) {
+            $event->inWishlist = in_array($event->id, $wishlist);
+        }
+    
+        return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
     }
+    
+    
+    
+    
 
 
     public function createEvent(Request $request) {
@@ -180,6 +191,23 @@ class EventsController extends Controller
 
         return view('events.wishlist', ['wishlist' => $wishlist]);
     }
+
+    public function checkWishlist()
+{
+    $userId = Auth::id();
+    
+    $wishlistEvents = DB::table('attendance')
+        ->join('events', 'attendance.event_id', '=', 'events.id')
+        ->where('attendance.user_id', '=', $userId)
+        ->where('attendance.wishlist', '=', true)
+        ->pluck('events.id')
+        ->toArray();
+
+    return $wishlistEvents;
+}
+
+
+
 
 }
 
