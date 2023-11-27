@@ -53,6 +53,10 @@
 
                 <a href="{{ route('events.going') }}">My Schedule</a>
 
+                <!-- My Wishlist Button -->
+
+                <a href="{{ route('events.wishlist') }}">My Wishlist</a>
+
                 @endif
 
             </header>

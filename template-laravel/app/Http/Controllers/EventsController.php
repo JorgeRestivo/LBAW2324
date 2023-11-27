@@ -167,6 +167,20 @@ class EventsController extends Controller
     }
 
 
+    public function showWishlist()
+    {
+        $userId = Auth::id();
+        
+        $wishlist = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.wishlist', '=', true)
+            ->select('events.*')
+            ->get();
+
+        return view('events.wishlist', ['wishlist' => $wishlist]);
+    }
+
 }
 
 
