@@ -12,6 +12,9 @@
                         <h2>{{ $event->eventname }}</h2>
                         <p>Start Date: {{ $event->startdatetime }}</p>
                         <p>End Date: {{ $event->enddatetime }}</p>
+                        <div class="wishlist">
+                            <img src="{{ asset('photos/star.png') }}" alt="Ev Photo">
+                        </div>
                     </div>
                 </a>
             </div>
