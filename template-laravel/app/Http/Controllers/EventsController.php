@@ -38,10 +38,6 @@ class EventsController extends Controller
     
         return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
     }
-    
-    
-    
-    
 
 
     public function createEvent(Request $request) {
@@ -174,7 +170,14 @@ class EventsController extends Controller
             ->select('events.*')
             ->get();
 
-        return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents]);
+        $maybegoingEvents = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.participation', '=', 'Maybe')
+            ->select('events.*')
+            ->get();
+
+        return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents, 'maybegoingEvents' => $maybegoingEvents]);
     }
 
 
@@ -192,8 +195,7 @@ class EventsController extends Controller
         return view('events.wishlist', ['wishlist' => $wishlist]);
     }
 
-    public function checkWishlist()
-{
+    public function checkWishlist(){
     $userId = Auth::id();
     
     $wishlistEvents = DB::table('attendance')
