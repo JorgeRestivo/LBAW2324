@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,10 +72,9 @@ Route::controller(EventsController::class)->group(function () {
 
 });
 
-//Comments
-Route::controller(CommentsController::class)->group(function () {
-    Route::get('/comments', [CommentsController::class, 'index'])->name('comments.index');
-});
+// Comments
+Route::resource('comments', CommentController::class)->only(['index']);
+
 
 // profile page
 
@@ -86,3 +85,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit-photo', [ProfileController::class, 'editProfilePhotoForm'])->name('profile.editPhotoForm');
     Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.updatePhoto');
 });
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');

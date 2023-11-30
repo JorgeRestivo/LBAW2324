@@ -23,6 +23,10 @@
 
                             <!-- Link to Invite Someone -->
                             <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">Invite someone</a>
+
+                            <br>
+
+
                         </div>
                     </div>
                 @endforeach
@@ -30,5 +34,18 @@
         @else
             <p>No events found.</p>
         @endif
+
+<!-- Display "Going" Attendees -->
+<h3>Going Attendees:</h3>
+@if(count($event->attendances) > 0)
+    <ul>
+        @foreach($event->attendances->where('participation', 'Going') as $attendance)
+            <li>{{ $attendance->user->name }} - {{ $attendance->participation }}</li>
+        @endforeach
+    </ul>
+@else
+    <p>No "Going" attendees yet.</p>
+@endif
+
     </div>
 @endsection

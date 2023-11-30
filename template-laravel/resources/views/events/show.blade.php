@@ -32,6 +32,19 @@
             @else
                 <p>No comments found.</p>
             @endif
+
+            <!-- New Comment Form -->
+            <form method="post" action="{{ route('comments.store') }}">
+                @csrf
+                <input type="hidden" name="event_id" value="{{ $event->id }}">
+                
+                <div class="form-group">
+                    <label for="comment_content">Write a comment:</label>
+                    <textarea name="content" id="comment_content" class="form-control" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit Comment</button>
+            </form>
         </div>
     </div>
 @endsection
