@@ -249,6 +249,15 @@ public function changeDecision(Request $request, $id)
     }
 }
 
+public function removeAttendee($eventId, $userId)
+    {
+        // Add logic to remove the attendee with the given $userId from the event with $eventId
+        // For example:
+        Attendance::where('event_id', $eventId)->where('user_id', $userId)->delete();
+
+        return redirect()->back()->with('success', 'Attendee removed successfully.');
+    }
+
 
 
 

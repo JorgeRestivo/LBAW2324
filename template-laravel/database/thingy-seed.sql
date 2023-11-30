@@ -126,7 +126,7 @@ CREATE TABLE notification (
 INSERT INTO users (username, name, email, password, userStatus) 
 VALUES 
   ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active'), -- password 1234
-  ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active'),
+  ('bob_marley', 'Bob Marley', 'bob@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active'),
   ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active'),
   ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active'),
   ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended'),
@@ -134,7 +134,23 @@ VALUES
   ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active'),
   ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active'),
   ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active'),
-  ('jason_jones', 'Jason Jones', 'jason@example.com', 'jasonpass', 'Active');
+  ('jason_jones', 'Jason Jones', 'jason@example.com', 'jasonpass', 'Active'),
+  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active'),
+  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active'),
+  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active'),
+  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active'),
+  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active'),
+  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active'),
+  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active'),
+  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active'),
+  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active'),
+  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active'),
+  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Active'),
+  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Active'),
+  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active'),
+  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active'),
+  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active'),
+  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active');
 
 
 INSERT INTO tag (name) VALUES 
@@ -238,7 +254,23 @@ VALUES
   (7, 4, 'Maybe', false),
   (8, 3, 'Going', false),
   (9, 2, 'Going', false),
-  (10, 1, 'Not Going', false);
+  (11, 1, 'Not Going', false),
+  (14, 8, 'Going', false),
+  (20, 7, 'Maybe', true),
+  (19, 6, 'Going', false),
+  (15, 5, 'Not Going', false),
+  (23, 4, 'Going', false),
+  (12, 3, 'Maybe', false),
+  (17, 2, 'Not Going', true),
+  (18, 1, 'Going', false),
+  (19, 10, 'Going', false),
+  (20, 9, 'Maybe', false),
+  (21, 6, 'Not Going', true),
+  (22, 5, 'Going', false),
+  (13, 4, 'Maybe', false),
+  (16, 9, 'Going', false),
+  (19, 9, 'Going', false),
+  (24, 1, 'Not Going', false);
 
 
 INSERT INTO notification (dateTime, notified_user, type) 

@@ -65,6 +65,7 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/going', [EventsController::class, 'showEventsImGoing'])->name('events.going');
     Route::get('/events/wishlist', [EventsController::class, 'showWishlist'])->name('events.wishlist');
     Route::put('/event/changeDecision/{id}', [EventsController::class, 'changeDecision'])->name('event.changeDecision');
+    Route::get('/event/{eventId}/remove-attendee/{userId}', [EventsController::class, 'removeAttendee'])->name('remove.attendee');
     
 
 
