@@ -28,17 +28,33 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents() {
-        $events = DB::table('events')->get()->toArray();
-        $wishlist = $this->checkWishlist();
-    
-        // Add an 'inWishlist' property to each event
-        foreach ($events as $event) {
-            $event->inWishlist = in_array($event->id, $wishlist);
+    public function showEvents()
+{
+    // Get all public events
+    $publicEvents = Event::where('ispublic', true)->get()->toArray();
+
+    // Get private events user was invited to
+    $userId = auth()->id();
+    $privateEvents = Event::whereIn(
+        'id',
+        function ($query) use ($userId) {
+            $query->select('event_id')
+                ->from('eventinvitation') // Adjust the case here
+                ->where('user_invited_id', $userId);
         }
-    
-        return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
+    )->where('ispublic', false)->get()->toArray();
+
+    // Merge public and private events
+    $events = array_merge($publicEvents, $privateEvents);
+
+    // Add an 'inWishlist' property to each event
+    $wishlist = $this->checkWishlist();
+    foreach ($events as &$event) {
+        $event['inWishlist'] = in_array($event['id'], $wishlist);
     }
+
+    return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
+}
 
 
     public function createEvent(Request $request) {

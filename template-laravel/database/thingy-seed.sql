@@ -177,7 +177,17 @@ VALUES
   ('Travel Talk', '2024-03-12 15:00:00', '2024-03-12 17:00:00', '2024-03-07 23:59:59', 'Community Center', 'Share travel stories and tips', 40, true, 'Active', 9, 8, 'traveltalk.jpeg'),
   ('Gaming Tournament', '2024-04-05 18:00:00', '2024-04-05 22:00:00', '2024-04-01 23:59:59', 'Gaming Arena', 'Compete in various gaming challenges', 60, true, 'Active', 10, 9, 'gamingtournament.webp'),
   ('Fashion Show', '2024-05-22 14:00:00', '2024-05-22 17:00:00', '2024-05-17 23:59:59', 'Fashion Mall', 'Showcasing the latest trends', 75, true, 'Active', 1, 10, 'fashionshow.jpeg'),
-  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4, 'communitycleanup.jpeg');
+  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4, 'communitycleanup.jpeg'),
+  ('Private Meeting', '2023-09-20 14:00:00', '2023-09-20 16:00:00', '2023-09-15 23:59:59', 'Corporate Office', 'Internal team discussions', 20, false, 'Active', 3, 10, 'privatemeeting.jpeg'),
+  ('VIP Networking Dinner', '2023-10-25 19:30:00', '2023-10-25 22:30:00', '2023-10-20 23:59:59', 'Exclusive Venue', 'Exclusive networking event', 30, false, 'Active', 4, 1, 'vipmeeting.jpeg'),
+  ('Executive Retreat', '2023-11-15 08:00:00', '2023-11-17 17:00:00', '2023-11-10 23:59:59', 'Luxury Resort', 'Strategic planning retreat', 15, false, 'Active', 5, 3, 'executiveretreat.jpeg'),
+  ('Confidential Product Launch', '2023-12-05 15:00:00', '2023-12-05 18:00:00', '2023-11-30 23:59:59', 'Top-Secret Location', 'Unveiling a groundbreaking product', 40, false, 'Active', 6, 4, 'productlaunch.png'),
+  ('Board of Directors Meeting', '2024-01-30 10:00:00', '2024-01-30 12:00:00', '2024-01-25 23:59:59', 'Corporate Headquarters', 'High-level strategic discussions', 10, false, 'Active', 7, 5, 'boardmeeting.jpeg'),
+  ('VIP Art Preview', '2024-02-15 18:00:00', '2024-02-15 21:00:00', '2024-02-10 23:59:59', 'Private Gallery', 'Exclusive preview for VIP guests', 25, false, 'Active', 8, 6, 'vipartpreview.webp'),
+  ('Leadership Seminar', '2024-03-20 09:30:00', '2024-03-20 16:30:00', '2024-03-15 23:59:59', 'Conference Center', 'Development for organizational leaders', 50, false, 'Active', 9, 7, 'leadershipseminar.jpeg'),
+  ('Private Concert', '2024-04-10 20:00:00', '2024-04-10 22:30:00', '2024-04-05 23:59:59', 'Exclusive Venue', 'Intimate concert experience', 15, false, 'Active', 10, 8, 'privateconcert.webp'),
+  ('Corporate Wellness Retreat', '2024-05-28 08:00:00', '2024-05-30 17:00:00', '2024-05-23 23:59:59', 'Wellness Resort', 'Promoting employee well-being', 20, false, 'Active', 1, 9, 'wellnessretreat.jpeg'),
+  ('Exclusive Product Demo', '2024-06-15 14:00:00', '2024-06-15 16:30:00', '2024-06-10 23:59:59', 'Product Showroom', 'Invite-only product demonstration', 30, false, 'Active', 2, 2, 'productdemo.webp');
 
 
 INSERT INTO eventInvitation (sentDate, event_id, user_invited_id, user_host_id, decision)
@@ -191,7 +201,9 @@ VALUES
   ('2023-03-01 13:10:00', 9, 10, 9, 'Not Going'),
   ('2023-04-01 17:45:00', 10, 9, 10, 'Going'),
   ('2023-05-01 12:30:00', 1, 2, 1, 'Going'),
-  ('2023-06-01 10:15:00', 2, 1, 2, 'Maybe');
+  ('2023-06-01 10:15:00', 2, 1, 2, 'Maybe'),
+  ('2023-05-01 12:30:00', 11, 1, 13, 'Going'),
+  ('2023-06-01 10:15:00', 12, 1, 19, 'Maybe');
 
 
 INSERT INTO eventTicket (price, event_id, eventTicketNumber) 
