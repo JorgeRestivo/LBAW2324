@@ -106,13 +106,16 @@ class EventsController extends Controller
         return view('events.show', ['event' => $event, 'comments' => $comments]);
     }
 
-    public function showMyEvents(){
-        $ownerId = auth()->id();
+    public function showMyEvents()
+{
+    $ownerId = auth()->id();
 
-        $myEvents = Event::where('owner_id', $ownerId)->get();
+    $myEvents = Event::where('owner_id', $ownerId)->with('attendances.user')->get();
 
-        return view('myevents', ['myEvents' => $myEvents]);
-    }
+    return view('myevents', ['myEvents' => $myEvents]);
+}
+
+
 
     public function sendInvitation(Request $request, $eventId)
     {
