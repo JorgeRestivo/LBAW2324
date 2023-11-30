@@ -64,6 +64,10 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/received-invitations', [EventsController::class, 'showReceivedInvitations'])->name('received_invitations.index');
     Route::get('/events/going', [EventsController::class, 'showEventsImGoing'])->name('events.going');
     Route::get('/events/wishlist', [EventsController::class, 'showWishlist'])->name('events.wishlist');
+    Route::put('/event/changeDecision/{id}', [EventsController::class, 'changeDecision'])->name('event.changeDecision');
+    
+
+
     // teste por causa do css
 
 });

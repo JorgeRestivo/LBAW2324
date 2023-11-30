@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Invitation;
 use App\Models\Comment;
 use App\Models\Event;
-use App\Models\User; 
+use App\Models\User;
+use App\Models\Attendance; 
 
 class EventsController extends Controller
 {
@@ -160,7 +161,7 @@ class EventsController extends Controller
             ->join('events', 'attendance.event_id', '=', 'events.id')
             ->where('attendance.user_id', '=', $userId)
             ->where('attendance.participation', '=', 'Going')
-            ->select('events.*')
+            ->select('events.*','attendance.participation')
             ->get();
         
         $notgoingEvents = DB::table('attendance')
@@ -207,6 +208,44 @@ class EventsController extends Controller
 
     return $wishlistEvents;
 }
+
+public function changeDecision(Request $request, $id)
+{
+    // Add a debug statement for entering the method
+    Log::debug("Entering changeDecision method. Event ID: $id");
+
+    try {
+        // Validate the form data
+        $request->validate([
+            'decision' => 'required|in:Going,Maybe,Not Going',
+        ]);
+
+        // Find the Attendance record by event ID and user ID
+        $userId = Auth::id();
+
+        // Update the decision
+        Attendance::where('user_id', $userId)
+            ->where('event_id', $id)
+            ->update([
+                'participation' => $request->input('decision'),
+            ]);
+
+        // Add a debug statement for successful update
+        Log::debug("Decision updated successfully.");
+
+        return redirect()->back()->with('success', 'Decision updated successfully.');
+    } catch (\Exception $e) {
+        // Add a debug statement for catching exceptions
+        Log::error("Error in changeDecision method: " . $e->getMessage());
+
+        // Handle the exception (e.g., return an error response)
+        return redirect()->back()->with('error', 'Error updating decision.');
+    } finally {
+        // Add a debug statement for exiting the method (whether successful or with an error)
+        Log::debug("Exiting changeDecision method");
+    }
+}
+
 
 
 
