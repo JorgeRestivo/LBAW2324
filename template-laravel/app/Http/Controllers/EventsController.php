@@ -251,13 +251,18 @@ public function changeDecision(Request $request, $id)
 
 public function removeAttendee($eventId, $userId)
     {
-        // Add logic to remove the attendee with the given $userId from the event with $eventId
-        // For example:
-        Attendance::where('event_id', $eventId)->where('user_id', $userId)->delete();
+        try {
+            // Find the attendance record and update the participation status to 'Not Going'
+            Attendance::where('event_id', $eventId)
+                ->where('user_id', $userId)
+                ->update(['participation' => 'Not Going']);
 
-        return redirect()->back()->with('success', 'Attendee removed successfully.');
+            return redirect()->back()->with('success', 'Attendee removed successfully.');
+        } catch (\Exception $e) {
+            // Handle the exception (e.g., return an error response)
+            return redirect()->back()->with('error', 'Error removing attendee.');
+        }
     }
-
 
 
 
