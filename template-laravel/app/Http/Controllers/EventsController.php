@@ -13,7 +13,9 @@ use App\Models\Invitation;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\User;
-use App\Models\Attendance; 
+use App\Models\Attendance;
+use App\Models\Tag;
+
 
 class EventsController extends Controller
 {
@@ -28,8 +30,9 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents()
-{
+    public function showEvents(){
+        $tags = Tag::all();
+
     // Get all public events
     $publicEvents = Event::where('ispublic', true)->get()->toArray();
 
@@ -53,7 +56,7 @@ class EventsController extends Controller
         $event['inWishlist'] = in_array($event['id'], $wishlist);
     }
 
-    return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
+    return view('begin', ['events' => $events, 'wishlist' => $wishlist, 'tags' => $tags]);
 }
 
 
@@ -280,8 +283,23 @@ public function removeAttendee($eventId, $userId)
         }
     }
 
+    public function filterByTag(Request $request)
+    {
+        $tags = Tag::all();
+        $tagId = $request->query('tag');
 
+        if ($tagId) {
+            // Retrieve events associated with the specified tag
+            $events = Event::where('tag_id', $tagId)->get();
+        } else {
+            // If no tag is specified, retrieve all events
+            $events = Event::all();
+        }
 
+        // ... pass $events and other necessary data to the view ...
+
+        return view('events.filtered', compact('events'), ['tags' => $tags]);
+    }
 
 }
 

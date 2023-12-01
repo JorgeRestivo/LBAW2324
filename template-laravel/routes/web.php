@@ -66,6 +66,7 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/wishlist', [EventsController::class, 'showWishlist'])->name('events.wishlist');
     Route::put('/event/changeDecision/{id}', [EventsController::class, 'changeDecision'])->name('event.changeDecision');
     Route::get('/event/{eventId}/remove-attendee/{userId}', [EventsController::class, 'removeAttendee'])->name('remove.attendee');
+    Route::get('/events/filterByTag', [EventsController::class, 'filterByTag'])->name('events.filterByTag');
     
 
 
