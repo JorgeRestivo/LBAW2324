@@ -44,10 +44,7 @@
     @endif
 
     <script>
-        function filterByTag(tagId) {
-            // Redirect or handle filtering logic
-            window.location.href = "{{ route('events.filterByTag') }}?tag=" + tagId;
-        }
-
+    const filterByTagRoute = "{{ route('events.filterByTag') }}";
     </script>
+    <script src="{{ asset('js/filterEvents.js') }}"></script>
 @endsection
