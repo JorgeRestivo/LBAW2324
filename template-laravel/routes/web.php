@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,12 +68,11 @@ Route::controller(EventsController::class)->group(function () {
     Route::put('/event/changeDecision/{id}', [EventsController::class, 'changeDecision'])->name('event.changeDecision');
     Route::get('/event/{eventId}/remove-attendee/{userId}', [EventsController::class, 'removeAttendee'])->name('remove.attendee');
     Route::get('/events/filterByTag', [EventsController::class, 'filterByTag'])->name('events.filterByTag');
-    
-
 
     // teste por causa do css
 
 });
+
 
 //Comments
 Route::controller(CommentsController::class)->group(function () {
@@ -88,3 +88,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit-photo', [ProfileController::class, 'editProfilePhotoForm'])->name('profile.editPhotoForm');
     Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.updatePhoto');
 });
+
+// Route::get('/about', 'AboutController@index')->name('about');
+// Route::resource('about', 'AboutController')->only(['index']);
+Route::get('/about', [AboutController::class, 'index'])->name('about');
