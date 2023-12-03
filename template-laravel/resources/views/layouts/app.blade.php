@@ -58,7 +58,9 @@
                 <a href="{{ route('events.wishlist') }}">My Wishlist</a>
 
                 <a href="{{ route('about') }}">About</a>
-                
+
+                <a href="{{ route('faq') }}">FAQs</a>
+
                 @endif
 
             </header>

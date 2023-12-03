@@ -9,6 +9,7 @@ use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\AboutController;
+use APP\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,9 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('/about', 'AboutController@index')->name('about');
 // Route::resource('about', 'AboutController')->only(['index']);
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+// Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
+// Route::get('/faq', 'FaqController@index')->name('faq');
+
+Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
