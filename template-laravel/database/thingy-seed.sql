@@ -48,7 +48,8 @@ CREATE TABLE users (
   email VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
   userStatus user_status_types NOT NULL DEFAULT 'Active',
-  profile_photo VARCHAR(255) DEFAULT 'default-profile-photo.jpg'
+  profile_photo VARCHAR(255) DEFAULT 'default-profile-photo.jpg',
+  isAdmin BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE tag (
@@ -123,18 +124,18 @@ CREATE TABLE notification (
 --
 
 
-INSERT INTO users (username, name, email, password, userStatus) 
+INSERT INTO users (username, name, email, password, userStatus, isAdmin) 
 VALUES 
-  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active'), -- password 1234
-  ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active'),
-  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active'),
-  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active'),
-  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended'),
-  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active'),
-  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active'),
-  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active'),
-  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active'),
-  ('jason_jones', 'Jason Jones', 'jason@example.com', 'jasonpass', 'Active');
+  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE), -- password 1234
+  ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active', FALSE),
+  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE),
+  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active', FALSE),
+  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended',FALSE),
+  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active', FALSE),
+  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active', FALSE),
+  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active', FALSE),
+  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active', FALSE),
+  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE);
 
 
 INSERT INTO tag (name) VALUES 

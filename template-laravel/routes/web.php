@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +71,12 @@ Route::controller(EventsController::class)->group(function () {
 
     // teste por causa do css
 
+});
+
+//Admin
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin','showAdmin')->name('admin');
+    Route::get('/admin/non-admin-users', 'showNonAdminUsers')->name('admin.nonAdminUsers');
 });
 
 //Comments
