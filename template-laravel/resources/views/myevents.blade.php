@@ -23,8 +23,26 @@
 
                             <!-- Link to Invite Someone -->
                             <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">Invite someone</a>
+
+                            <br>
                         </div>
                     </div>
+
+                    <!-- Display "Going" Attendees -->
+                    <h3>Going Attendees:</h3>
+                    @if(count($event->attendances) > 0)
+                        <ul>
+                            @foreach($event->attendances->where('participation', 'Going') as $attendance)
+                                <li>
+                                    {{ $attendance->user->name }} - {{ $attendance->participation }}
+                                    <!-- Add a delete button/link here -->
+                                    <a href="{{ route('remove.attendee', ['eventId' => $event->id, 'userId' => $attendance->user->id]) }}">Remove</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @else
+                        <p>No "Going" attendees yet.</p>
+                    @endif
                 @endforeach
             </ul>
         @else

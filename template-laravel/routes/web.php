@@ -8,7 +8,12 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
+<<<<<<< HEAD
 use App\Http\Controllers\AdminController;
+=======
+use App\Http\Controllers\AboutController;
+use APP\Http\Controllers\FaqController;
+>>>>>>> 5d70899737e6f0fccb126745358faef43e2d05c9
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +71,8 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/going', [EventsController::class, 'showEventsImGoing'])->name('events.going');
     Route::get('/events/wishlist', [EventsController::class, 'showWishlist'])->name('events.wishlist');
     Route::put('/event/changeDecision/{id}', [EventsController::class, 'changeDecision'])->name('event.changeDecision');
-    
-
+    Route::get('/event/{eventId}/remove-attendee/{userId}', [EventsController::class, 'removeAttendee'])->name('remove.attendee');
+    Route::get('/events/filterByTag', [EventsController::class, 'filterByTag'])->name('events.filterByTag');
 
     // teste por causa do css
 
@@ -93,3 +98,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile/edit-photo', [ProfileController::class, 'editProfilePhotoForm'])->name('profile.editPhotoForm');
     Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.updatePhoto');
 });
+
+// Route::get('/about', 'AboutController@index')->name('about');
+// Route::resource('about', 'AboutController')->only(['index']);
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+// Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
+// Route::get('/faq', 'FaqController@index')->name('faq');
+
+Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');

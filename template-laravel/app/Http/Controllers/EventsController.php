@@ -13,7 +13,9 @@ use App\Models\Invitation;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\User;
-use App\Models\Attendance; 
+use App\Models\Attendance;
+use App\Models\Tag;
+
 
 class EventsController extends Controller
 {
@@ -28,17 +30,34 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents() {
-        $events = DB::table('events')->get()->toArray();
-        $wishlist = $this->checkWishlist();
-    
-        // Add an 'inWishlist' property to each event
-        foreach ($events as $event) {
-            $event->inWishlist = in_array($event->id, $wishlist);
+    public function showEvents(){
+        $tags = Tag::all();
+
+    // Get all public events
+    $publicEvents = Event::where('ispublic', true)->get()->toArray();
+
+    // Get private events user was invited to
+    $userId = auth()->id();
+    $privateEvents = Event::whereIn(
+        'id',
+        function ($query) use ($userId) {
+            $query->select('event_id')
+                ->from('eventinvitation') // Adjust the case here
+                ->where('user_invited_id', $userId);
         }
-    
-        return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
+    )->where('ispublic', false)->get()->toArray();
+
+    // Merge public and private events
+    $events = array_merge($publicEvents, $privateEvents);
+
+    // Add an 'inWishlist' property to each event
+    $wishlist = $this->checkWishlist();
+    foreach ($events as &$event) {
+        $event['inWishlist'] = in_array($event['id'], $wishlist);
     }
+
+    return view('begin', ['events' => $events, 'wishlist' => $wishlist, 'tags' => $tags]);
+}
 
 
     public function createEvent(Request $request) {
@@ -106,13 +125,16 @@ class EventsController extends Controller
         return view('events.show', ['event' => $event, 'comments' => $comments]);
     }
 
-    public function showMyEvents(){
-        $ownerId = auth()->id();
+    public function showMyEvents()
+{
+    $ownerId = auth()->id();
 
-        $myEvents = Event::where('owner_id', $ownerId)->get();
+    $myEvents = Event::where('owner_id', $ownerId)->with('attendances.user')->get();
 
-        return view('myevents', ['myEvents' => $myEvents]);
-    }
+    return view('myevents', ['myEvents' => $myEvents]);
+}
+
+
 
     public function sendInvitation(Request $request, $eventId)
     {
@@ -246,9 +268,38 @@ public function changeDecision(Request $request, $id)
     }
 }
 
+public function removeAttendee($eventId, $userId)
+    {
+        try {
+            // Find the attendance record and update the participation status to 'Not Going'
+            Attendance::where('event_id', $eventId)
+                ->where('user_id', $userId)
+                ->update(['participation' => 'Not Going']);
 
+            return redirect()->back()->with('success', 'Attendee removed successfully.');
+        } catch (\Exception $e) {
+            // Handle the exception (e.g., return an error response)
+            return redirect()->back()->with('error', 'Error removing attendee.');
+        }
+    }
 
+    public function filterByTag(Request $request)
+    {
+        $tags = Tag::all();
+        $tagId = $request->query('tag');
 
+        if ($tagId) {
+            // Retrieve events associated with the specified tag
+            $events = Event::where('tag_id', $tagId)->get();
+        } else {
+            // If no tag is specified, retrieve all events
+            $events = Event::all();
+        }
+
+        // ... pass $events and other necessary data to the view ...
+
+        return view('events.filtered', compact('events'), ['tags' => $tags]);
+    }
 
 }
 
