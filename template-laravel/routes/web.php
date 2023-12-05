@@ -79,6 +79,8 @@ Route::controller(EventsController::class)->group(function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin','showAdmin')->name('admin');
     Route::get('/admin/non-admin-users', 'showNonAdminUsers')->name('admin.nonAdminUsers');
+    Route::put('/admin/suspend-user/{id}', 'suspendUser')->name('admin.suspendUser');
+    Route::get('/admin/view-user-info/{id}',  'viewUserInfo')->name('admin.viewUserInfo');
 });
 
 //Comments
