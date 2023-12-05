@@ -126,7 +126,6 @@ CREATE TABLE notification (
 
 INSERT INTO users (username, name, email, password, userStatus, isAdmin) 
 VALUES 
-<<<<<<< HEAD
   ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE), -- password 1234
   ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active', FALSE),
   ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE),
@@ -136,24 +135,24 @@ VALUES
   ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active', FALSE),
   ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active', FALSE),
   ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active', FALSE),
-  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE);
-  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active'),
-  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active'),
-  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active'),
-  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active'),
-  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active'),
-  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active'),
-  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active'),
-  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active'),
-  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active'),
-  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active'),
-  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Active'),
-  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Active'),
-  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active'),
-  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active'),
-  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active'),
-  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active');
->>>>>>> 5d70899737e6f0fccb126745358faef43e2d05c9
+  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE),
+  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active', FALSE),
+  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active', FALSE),
+  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active', FALSE),
+  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active', FALSE),
+  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active', FALSE),
+  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active', FALSE),
+  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active', FALSE),
+  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active', FALSE),
+  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active', FALSE),
+  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active', FALSE),
+  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Active', FALSE),
+  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Active', FALSE),
+  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active', FALSE),
+  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active', FALSE),
+  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active', FALSE),
+  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active', FALSE);
+
 
 
 INSERT INTO tag (name) VALUES 

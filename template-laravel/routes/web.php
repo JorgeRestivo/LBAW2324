@@ -8,12 +8,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
-<<<<<<< HEAD
 use App\Http\Controllers\AdminController;
-=======
 use App\Http\Controllers\AboutController;
 use APP\Http\Controllers\FaqController;
->>>>>>> 5d70899737e6f0fccb126745358faef43e2d05c9
 
 /*
 |--------------------------------------------------------------------------

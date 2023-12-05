@@ -51,15 +51,12 @@
                 <!-- My Wishlist Button -->
                 <a href="{{ route('events.wishlist') }}">My Wishlist</a>
 
-<<<<<<< HEAD
                 @if( Auth::user()->isadmin == 'true')
                     <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>
-=======
                 <a href="{{ route('about') }}">About</a>
 
                 <a href="{{ route('faq') }}">FAQs</a>
 
->>>>>>> 5d70899737e6f0fccb126745358faef43e2d05c9
                 @endif
 
             @endif
