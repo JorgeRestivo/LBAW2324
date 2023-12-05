@@ -11,8 +11,8 @@ class FaqController extends Controller
         // Perguntas frequentes relacionadas ao GetTogether
         $faqs = [
             [
-                'pergunta' => 'Como posso criar um evento?',
-                'resposta' => 'Para criar um evento, clique no botão "Create Event" no header e siga as instruções.'
+                'pergunta' => 'How can I create an event?',
+                'resposta' => 'To create an event, click the "Create Event" button in the header and follow the instructions.'
             ],
             // Adicione mais perguntas conforme necessário
         ];
