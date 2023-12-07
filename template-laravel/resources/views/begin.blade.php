@@ -22,7 +22,6 @@
                 </a>
                 
                 <div class="wishlist">
-                        <button type="submit">
                             @if($event['inWishlist'])
                             <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
                             @csrf
@@ -39,7 +38,6 @@
                             </form>
 
                             @endif
-                        </button>
                     
                 </div>
             </div>
