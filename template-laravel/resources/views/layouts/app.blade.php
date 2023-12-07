@@ -53,12 +53,11 @@
 
                 @if( Auth::user()->isadmin == 'true')
                     <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>
+                @endif
+                
                 <a href="{{ route('about') }}">About</a>
 
                 <a href="{{ route('faq') }}">FAQs</a>
-
-                @endif
-
             @endif
         </header>
         <section id="content">
