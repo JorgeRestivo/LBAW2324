@@ -250,6 +250,29 @@ public function addToWishlist($eventId)
     return redirect()->back()->with('success', 'Event added to wishlist successfully.');
 }
 
+public function removeFromWishlist($eventId)
+{
+    $userId = auth()->id();
+
+    // Check if the user has attended the event
+    $attended = DB::table('attendance')
+        ->where('user_id', $userId)
+        ->where('event_id', $eventId)
+        ->exists();
+
+    // Remove the event from the wishlist if the user has attended it
+    if ($attended) {
+        DB::table('attendance')
+            ->where('user_id', $userId)
+            ->where('event_id', $eventId)
+            ->update(['wishlist' => false]);
+
+        return redirect()->back()->with('success', 'Event removed from wishlist successfully.');
+    } else {
+        // Handle the case where the user has not attended the event
+        return redirect()->back()->with('error', 'You cannot remove an event from the wishlist if you have not attended it.');
+    }
+}
 
 
 
