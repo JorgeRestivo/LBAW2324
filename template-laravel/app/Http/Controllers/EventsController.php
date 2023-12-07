@@ -231,6 +231,27 @@ class EventsController extends Controller
     return $wishlistEvents;
 }
 
+public function addToWishlist($eventId)
+{
+    $userId = auth()->id();
+
+    // Check if the user has attended the event
+    $attended = DB::table('attendance')
+        ->where('user_id', $userId)
+        ->where('event_id', $eventId)
+        ->exists();
+
+    // Add the event to the wishlist, regardless of attendance
+    DB::table('attendance')->updateOrInsert(
+        ['user_id' => $userId, 'event_id' => $eventId],
+        ['wishlist' => true]
+    );
+
+    return redirect()->back()->with('success', 'Event added to wishlist successfully.');
+}
+
+
+
 public function changeDecision(Request $request, $id)
 {
     // Add a debug statement for entering the method

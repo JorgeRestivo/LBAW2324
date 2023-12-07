@@ -71,6 +71,10 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/event/{eventId}/remove-attendee/{userId}', [EventsController::class, 'removeAttendee'])->name('remove.attendee');
     Route::get('/events/filterByTag', [EventsController::class, 'filterByTag'])->name('events.filterByTag');
 
+    Route::post('/events/add-to-wishlist/{eventId}', [EventsController::class, 'addToWishlist'])->name('events.addToWishlist');
+    
+
+
     // teste por causa do css
 
 });
