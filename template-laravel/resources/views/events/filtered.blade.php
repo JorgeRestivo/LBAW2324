@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="tag-buttons">
+    <a href="{{ route('events.begin') }}"><button>All events</button></a>
         @foreach ($tags as $tag)
             <button onclick="filterByTag({{ $tag->id }})">{{ $tag->name }}</button>
         @endforeach
