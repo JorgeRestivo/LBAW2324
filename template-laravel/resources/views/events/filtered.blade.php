@@ -3,6 +3,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- Search Bar -->
+<form action="{{ route('events.search') }}" method="GET">
+    <input type="text" name="query" placeholder="Search Events">
+    <button type="submit">Search</button>
+</form>
+
 <div class="tag-buttons">
     <a href="{{ route('events.begin') }}"><button>All events</button></a>
         @foreach ($tags as $tag)

@@ -34,6 +34,12 @@
 
                 <!-- Navigation Links -->
                 <nav>
+                    <!-- Home Button -->
+                    <a href="{{ url('/events-begin') }}">
+                        <img src="{{ asset('icons/icons8-casa-24.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            Home
+                    </a>
+
                     <!-- Create Event Button -->
                     <a href="{{ route('events.create') }}">Create Event</a>
 
