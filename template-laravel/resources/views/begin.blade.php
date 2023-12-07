@@ -22,16 +22,25 @@
                 </a>
                 
                 <div class="wishlist">
-                    <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
-                        @csrf
                         <button type="submit">
                             @if($event['inWishlist'])
+                            <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                            @csrf
+                            <button type="submit">
                                 <img src="{{ asset('photos/yellowstar.png') }}" alt="Event on Wishlist">
+                            </button>
+                            </form>
                             @else
+                            <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                            @csrf
+                            <button type="submit">
                                 <img src="{{ asset('photos/whitestar.png') }}" alt="Add to Wishlist">
+                            </button>
+                            </form>
+
                             @endif
                         </button>
-                    </form>
+                    
                 </div>
             </div>
         @endforeach

@@ -72,6 +72,7 @@ Route::controller(EventsController::class)->group(function () {
     Route::get('/events/filterByTag', [EventsController::class, 'filterByTag'])->name('events.filterByTag');
 
     Route::post('/events/add-to-wishlist/{eventId}', [EventsController::class, 'addToWishlist'])->name('events.addToWishlist');
+    Route::post('/events/removeFromWishlist/{eventId}', [EventsController::class, 'removeFromWishlist'])->name('events.removeFromWishlist');
     
 
 
