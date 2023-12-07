@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -38,6 +39,23 @@ public function viewUserInfo($id)
     }
 
     return view('viewUserInfo', ['user' => $user]);
+}
+public function manageEvents()
+{
+    // Fetch events ordered by end time
+    $events = Event::orderBy('enddatetime', 'asc')->get();
+
+    return view('manageEvents', ['events' => $events]);
+}
+
+// Add the method for deleting an event if you haven't already
+public function deleteEvent($id)
+{
+    // Logic to delete the event with the given ID
+    // ...
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Event deleted successfully.');
 }
 
 }

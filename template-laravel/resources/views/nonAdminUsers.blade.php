@@ -20,15 +20,18 @@
 
                         @if(count($nonAdminUsers) > 0)
                             <ul>
+                            <a href="{{ route('admin.manageEvents') }}" class="btn btn-primary btn-sm">Manage Events</a>
                                 @foreach($nonAdminUsers as $user)
                                     <li>
                                         {{ $user->name }} ({{ $user->email }})
-                                        <form method="POST" action="{{ route('admin.suspendUser', ['id' => $user->id]) }}" style="display: inline;">
+                                        <form method="POST" action="{{ route('admin.suspendUser', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to suspend this user?');">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit" class="btn btn-danger btn-sm">Suspend User</button>
                                         </form>
                                         <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View User Info</a>
+                                        
+                                        <!-- Button to go to Event Management Page -->
                                     </li>
                                 @endforeach
                             </ul>
@@ -40,4 +43,16 @@
             </div>
         </div>
     </div>
+
+    <!-- JavaScript Timer for Flash Message -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var successMessage = document.getElementById('success-message');    
+                if (successMessage) {
+                    successMessage.style.display = 'none';
+                }
+            }, 5000); // Set the duration in milliseconds (e.g., 5000ms for 5 seconds)
+        });
+    </script>
 @endsection
