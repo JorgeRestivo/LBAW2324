@@ -22,7 +22,12 @@
 <body>
     <main>
         <header>
-            <h1><a href="{{ url('/events-begin') }}">GetTogether</a></h1>
+            <h1>
+                <a href="{{ url('/events-begin') }}">
+                <img src="{{ asset('photos/GetTogether.png') }}" alt="GetTogether Logo" style="width: 170px; height: auto;">
+                </a>
+            </h1>
+
             @if (Auth::check())
                 <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
                 <a class="button" href="{{ url('/logout') }}">Logout</a>
