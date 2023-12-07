@@ -24,7 +24,7 @@
         <header>
             <h1>
                 <a href="{{ url('/events-begin') }}">
-                <img src="{{ asset('photos/GetTogether.png') }}" alt="GetTogether Logo" style="width: 170px; height: auto;">
+                    <img src="{{ asset('photos/GetTogether.png') }}" alt="GetTogether Logo" style="width: 170px; height: auto;">
                 </a>
             </h1>
 
@@ -38,31 +38,34 @@
                     <button type="submit">Search</button>
                 </form>
 
-                <!-- Create Event Button -->
-                <a href="{{ route('events.create') }}">Create Event</a>
+                <!-- Navigation Links -->
+                <nav>
+                    <!-- Create Event Button -->
+                    <a href="{{ route('events.create') }}">Create Event</a>
 
-                <!-- Create MyEvents Button -->
-                <a href="{{ route('events.myevents') }}">My Events</a>
+                    <!-- Create MyEvents Button -->
+                    <a href="{{ route('events.myevents') }}">My Events</a>
 
-                <!-- Sent Invitations Button -->
-                <a href="{{ route('sent_invitations.index') }}">Sent Invitations</a>
+                    <!-- Sent Invitations Button -->
+                    <a href="{{ route('sent_invitations.index') }}">Sent Invitations</a>
 
-                <!-- Received Invitations Button -->
-                <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
+                    <!-- Received Invitations Button -->
+                    <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
 
-                <!-- My schedule Button -->
-                <a href="{{ route('events.going') }}">My Schedule</a>
+                    <!-- My schedule Button -->
+                    <a href="{{ route('events.going') }}">My Schedule</a>
 
-                <!-- My Wishlist Button -->
-                <a href="{{ route('events.wishlist') }}">My Wishlist</a>
+                    <!-- My Wishlist Button -->
+                    <a href="{{ route('events.wishlist') }}">My Wishlist</a>
 
-                @if( Auth::user()->isadmin == 'true')
-                    <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>
-                @endif
-                
-                <a href="{{ route('about') }}">About</a>
+                    @if( Auth::user()->isadmin == 'true')
+                        <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>
+                    @endif
+                    
+                    <a href="{{ route('about') }}">About</a>
 
-                <a href="{{ route('faq') }}">FAQs</a>
+                    <a href="{{ route('faq') }}">FAQs</a>
+                </nav>
             @endif
         </header>
         <section id="content">
