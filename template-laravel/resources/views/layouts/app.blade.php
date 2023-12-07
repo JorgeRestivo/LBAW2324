@@ -30,13 +30,7 @@
 
             @if (Auth::check())
                 <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
-                <a class="button" href="{{ url('/logout') }}">Logout</a>
-
-                <!-- Search Bar -->
-                <form action="{{ route('events.search') }}" method="GET">
-                    <input type="text" name="query" placeholder="Search Events">
-                    <button type="submit">Search</button>
-                </form>
+                
 
                 <!-- Navigation Links -->
                 <nav>
@@ -65,7 +59,9 @@
                     <a href="{{ route('about') }}">About</a>
 
                     <a href="{{ route('faq') }}">FAQs</a>
+
                 </nav>
+                <a class="button" href="{{ url('/logout') }}">Logout</a>
             @endif
         </header>
         <section id="content">

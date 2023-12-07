@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Search Bar -->
+<form action="{{ route('events.search') }}" method="GET">
+    <input type="text" name="query" placeholder="Search Events">
+    <button type="submit">Search</button>
+</form>
+
 <div class="tag-buttons">
     @foreach ($tags as $tag)
         <button onclick="filterByTag({{ $tag->id }})">{{ $tag->name }}</button>
