@@ -40,9 +40,6 @@
                             Home
                     </a>
 
-                    <!-- Create Event Button -->
-                    <a href="{{ route('events.create') }}">Create Event</a>
-
                     <!-- Create MyEvents Button -->
                     <a href="{{ route('events.myevents') }}">My Events</a>
 
@@ -57,6 +54,9 @@
 
                     <!-- My Wishlist Button -->
                     <a href="{{ route('events.wishlist') }}">My Wishlist</a>
+
+                    <!-- Create Event Button -->
+                    <a href="{{ route('events.create') }}" class="create-event-button">Create Event</a>
 
                     @if( Auth::user()->isadmin == 'true')
                         <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>

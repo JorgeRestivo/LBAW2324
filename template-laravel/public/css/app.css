@@ -179,3 +179,18 @@ input[type=password]:focus {
     border-bottom: 1px solid rgba(96, 108, 118, 0.4);
   }
 }
+
+.create-event-button {
+  background-color: #f0ba4b; /* Yellow background color */
+  color: #FFF; /* Black text color */
+  border-radius: 25px; /* Rounded borders */
+  padding: 10px 30px; /* Adjust padding as needed */
+  font-weight: bold;
+  display: inline-block; /* Make it a block element with inline characteristics */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Hover effect for the Create Event button */
+.create-event-button:hover {
+  background-color: #ffc107; /* Darker yellow on hover */
+}
