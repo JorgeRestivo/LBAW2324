@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Search Bar -->
-<form action="{{ route('events.search') }}" method="GET">
+<form action="{{ route('events.search') }}" method="GET" class="rounded-search-bar">
     <input type="text" name="query" placeholder="Search Events">
     <button type="submit">Search</button>
 </form>

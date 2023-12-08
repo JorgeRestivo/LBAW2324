@@ -194,3 +194,29 @@ input[type=password]:focus {
 .create-event-button:hover {
   background-color: #ffc107; /* Darker yellow on hover */
 }
+
+.rounded-search-bar {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Adjust the border-radius to your preference */
+  overflow: hidden;
+}
+
+/* Adjust the width and height as needed */
+.rounded-search-bar input {
+  border: none;
+  padding: 10px;
+  width: 800px; /* Set your desired width */
+  height: 20px; /* Set your desired height */
+  box-sizing: border-box;
+}
+
+/* You can also adjust the button size */
+.rounded-search-bar button {
+  border: none;
+  padding: 10px;
+  background-color: #9b4dca; /* Your desired button color */
+  color: #fff; /* Text color for the button */
+  border-radius: 0 20px 20px 0; /* Adjust the border-radius to match the search bar */
+  cursor: pointer;
+}
