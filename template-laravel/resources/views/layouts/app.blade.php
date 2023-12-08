@@ -34,10 +34,15 @@
 
                 <!-- Navigation Links -->
                 <nav>
+
                     <!-- Home Button -->
                     <a href="{{ url('/events-begin') }}">
+                        @if(Request::is('events-begin'))
                         <img src="{{ asset('icons/icons8-casa-24.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                            Home
+                        @else
+                        <img src="{{ asset('icons/icons8-casa-24-2.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                        @endif
+                        Home
                     </a>
 
                     <!-- Create MyEvents Button -->
@@ -53,7 +58,14 @@
                     <a href="{{ route('events.going') }}">My Schedule</a>
 
                     <!-- My Wishlist Button -->
-                    <a href="{{ route('events.wishlist') }}">My Wishlist</a>
+                    <a href="{{ route('events.wishlist') }}">
+                        @if(Request::is('events/wishlist'))
+                        <img src="{{ asset('icons/bookmark.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                        @else
+                        <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                        @endif
+                        Wishlist
+                    </a>
 
                     <!-- Create Event Button -->
                     <a href="{{ route('events.create') }}" class="create-event-button">Create Event</a>
