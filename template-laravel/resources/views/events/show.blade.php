@@ -32,6 +32,13 @@
             @else
                 <p>No comments found.</p>
             @endif
+
+            <!-- Formulário para adicionar um novo comentário -->
+            <form method="post" action="{{ route('comment.store', ['eventId' => $event->id]) }}">
+                @csrf
+                <textarea name="content" placeholder="Add a comment..." required></textarea>
+                <button type="submit">Add Comment</button>
+            </form>
         </div>
     </div>
 @endsection

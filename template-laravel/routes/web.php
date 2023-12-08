@@ -114,3 +114,5 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 // Route::get('/faq', 'FaqController@index')->name('faq');
 
 Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
+
+Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->name('comment.store');
