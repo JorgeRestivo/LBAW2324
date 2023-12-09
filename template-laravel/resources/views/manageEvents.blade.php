@@ -24,7 +24,7 @@
                                         </form>
 
                                         <!-- Button to view event information -->
-                                        <a href="{{ route('viewEventInfo', ['id' => $event->id]) }}" class="btn btn-info btn-sm">View Event Info</a>
+                                        <a href="{{ route('admin.viewEventInfo', ['id' => $event->id]) }}" class="btn btn-info btn-sm">View Event Info</a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -88,6 +88,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/view-user-info/{id}',  'viewUserInfo')->name('admin.viewUserInfo');
     Route::get('/admin/manage-events', 'manageEvents')->name('admin.manageEvents');
     Route::put('/admin/delete-event/{id}', 'deleteEvent')->name('admin.deleteEvent');
+    Route::get('/admin/view-event-info/{id}', 'viewEventInfo')->name('admin.viewEventInfo');
 });
 
 //Comments

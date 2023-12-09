@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -25,7 +26,10 @@ public function suspendUser($id)
     }
 
     // Update the user's status to "Suspended"
-    $user->update(['userStatus' => 'Suspended']);
+    DB::table('users')->updateOrInsert(
+        ['id' => $user->id],
+        ['userstatus' => 'Suspended']
+    );
 
     return redirect()->route('admin.nonAdminUsers');
 }
