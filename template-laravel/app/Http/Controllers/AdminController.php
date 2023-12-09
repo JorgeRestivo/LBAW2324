@@ -36,6 +36,7 @@ public function viewUserInfo($id)
     if (!$user) {
         // Handle the case where the user is not found.
         abort(404);
+        // ERROR
     }
 
     return view('viewUserInfo', ['user' => $user]);
