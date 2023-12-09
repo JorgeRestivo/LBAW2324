@@ -44,10 +44,21 @@ public function viewUserInfo($id)
 public function manageEvents()
 {
     // Fetch events ordered by end time
-    $events = Event::orderBy('enddatetime', 'asc')->get();
+    $events = Event::orderBy('startdatetime', 'asc')->get();
 
     return view('manageEvents', ['events' => $events]);
 }
+
+public function viewEventInfo($id)
+    {
+        $event = Event::find($id);
+
+        if (!$event) {
+            abort(404); // Handle the case where the event with the given ID is not found.
+        }
+
+        return view('viewEventInfo', ['event' => $event]);
+    }
 
 // Add the method for deleting an event if you haven't already
 public function deleteEvent($id)
