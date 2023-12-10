@@ -10,10 +10,10 @@ class Comment extends Model
         'content',
         'owner_id',
         'event_id',
-        'dateTime',
+        'datetime',
     ];
 
-    protected $dates = ['dateTime'];
+    protected $dates = ['datetime'];
 
 
     // Define the owner relationship
@@ -29,7 +29,7 @@ class Comment extends Model
     }
 
     // Explicitamente define os nomes das colunas de timestamp
-    const CREATED_AT = 'dateTime';
-    const UPDATED_AT = 'dateTime';
+    const CREATED_AT = 'datetime';
+    const UPDATED_AT = 'datetime';
     
 }

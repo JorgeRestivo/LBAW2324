@@ -23,7 +23,7 @@ class CommentsController extends Controller
             'content' => $request->input('content'),
             'owner_id' => auth()->id(),
             'event_id' => $eventId,
-            'dateTime' => now(), // ou utilize Carbon para uma data/hora mais precisa
+            'datetime' => now(), // ou utilize Carbon para uma data/hora mais precisa
         ]);
 
         // Salve o comentário no banco de dados
