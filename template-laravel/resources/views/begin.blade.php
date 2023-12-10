@@ -55,7 +55,6 @@
     @if(isset($newEvent))
         <div class="alert alert-success">
             New Event Created: {{ $newEvent['eventname'] }}
-            <!-- Display other information about the new event as needed -->
         </div>
     @endif
 </div>

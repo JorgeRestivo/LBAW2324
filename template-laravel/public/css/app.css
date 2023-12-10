@@ -49,25 +49,27 @@ nav a {
 
 /* Event gallery styles */
 .event-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  display: flex;
+  flex-direction: column
 }
 
 .event-box {
   background-color: white;
-  border: 2px solid black;
+  border: 1px solid #787878;
   border-radius: 8px;
   overflow: hidden;
   margin: 10px;
-  width: 200px;
-  text-align: center;
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  width: 76%;
+  height: 5%;
+  position: relative; /* Set position to enable z-index */
 }
 
 .event-photo {
-  height: 150px;
-  border-bottom: 2px solid black;
+  width: 100px;
   overflow: hidden;
+  z-index: 1; /* Set a higher z-index for the image */
 }
 
 .event-photo img {
@@ -76,8 +78,19 @@ nav a {
 }
 
 .event-details {
+  /* Add padding and use the remaining available space */
   padding: 10px;
+  flex: 1;
+  z-index: 2; /* Set a lower z-index for the details */
 }
+
+/* Add this to center the content vertically in each box */
+.event-details h2,
+.event-details p {
+  margin: 0;
+}
+
+
 
 /* Profile container styles */
 .profile-container {
