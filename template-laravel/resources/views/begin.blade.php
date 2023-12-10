@@ -21,31 +21,38 @@
                         <img src="{{ asset('photos/' . $event['photo']) }}" alt="Event Photo">
                     </div>
                     <div class="event-details">
-                        <h2>{{ $event['eventname'] }}</h2>
-                        <p>Start Date: {{ $event['startdatetime'] }}</p>
-                        <p>End Date: {{ $event['enddatetime'] }}</p>
+                        <p style="font-size: 17px; color: #ef9db2;">Start Date: {{ $event['startdatetime'] }}</p>
+                        <h2 style="font-size: 25px; font-weight: bold; color: #7a7a7a;">{{ $event['eventname'] }}</h2>
+                        <p2 style="font-size: 17px; color: #d3d3d3;">{{ $event['description'] }}</p2>
                     </div>
                 </a>
                 
                 <div class="wishlist">
-                            @if($event['inWishlist'])
-                            <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                    @if($event['inWishlist'])
+                        <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
                             @csrf
-                            <button type="submit">
-                                <img src="{{ asset('photos/yellowstar.png') }}" alt="Event on Wishlist">
+                            <button type="submit" style="display: none;">
+                                <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 50px; height: 50px;">
                             </button>
-                            </form>
-                            @else
-                            <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                        </form>
+                    @else
+                        <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
                             @csrf
-                            <button type="submit">
-                                <img src="{{ asset('photos/whitestar.png') }}" alt="Add to Wishlist">
+                            <button type="submit" style="display: none;">
+                                <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 50px; height: 50px;">
                             </button>
-                            </form>
-
-                            @endif
-                    
+                        </form>
+                    @endif
+                    <a href="#" onclick="event.preventDefault(); this.previousElementSibling.submit();">
+                        @if($event['inWishlist'])
+                            <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 20px; height: 20px;">
+                        @else
+                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 20px; height: 20px;">
+                        @endif
+                    </a>
                 </div>
+
+
             </div>
         @endforeach
     @else

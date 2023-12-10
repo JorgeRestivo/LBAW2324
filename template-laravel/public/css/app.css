@@ -47,49 +47,41 @@ nav a {
   max-width: calc(100% - 10cm); /* Set maximum width to allow responsiveness */
 }
 
-/* Event gallery styles */
 .event-gallery {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .event-box {
   background-color: white;
-  border: 1px solid #787878;
+  border: 1px solid #f8f8f8;
   border-radius: 8px;
   overflow: hidden;
   margin: 10px;
   display: flex;
-  align-items: center; /* Align items vertically in the center */
-  width: 76%;
-  height: 5%;
-  position: relative; /* Set position to enable z-index */
-}
-
-.event-photo {
-  width: 100px;
-  overflow: hidden;
-  z-index: 1; /* Set a higher z-index for the image */
+  width: 70%;
+  height: 70%; /* Set the height as a percentage */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .event-photo img {
-  max-width: 100%;
+  width: 30%;
+  border-radius: 18px;
+  float: left;
   height: auto;
+  margin-left: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }
+
 
 .event-details {
-  /* Add padding and use the remaining available space */
+  float: right;
   padding: 10px;
   flex: 1;
-  z-index: 2; /* Set a lower z-index for the details */
+  font-size: 10px;
 }
-
-/* Add this to center the content vertically in each box */
-.event-details h2,
-.event-details p {
-  margin: 0;
-}
-
 
 
 /* Profile container styles */
