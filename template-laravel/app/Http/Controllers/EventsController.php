@@ -108,7 +108,8 @@ class EventsController extends Controller
 
 
     public function showCreateForm() {
-        return view('formsevent');
+        $tags = Tag::all();
+        return view('formsevent', ['tags' => $tags]);
     }
 
 

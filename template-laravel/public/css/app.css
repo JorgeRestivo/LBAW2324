@@ -211,6 +211,43 @@ input[type=password]:focus {
   box-sizing: border-box;
 }
 
+.username {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10%;
+  margin-left: 1%;/* Adjust as needed */
+  font-weight: bold;
+  display: flex;
+  align-items: center;/* Optionally make the username bold */
+}
+
+.profile-icon {
+  width: 57px;
+  height: auto;
+  margin-right: 1px; /* Adjust margin as needed */
+}
+
+.home_button:hover {
+  background-color: #efefef;
+  border-radius: 20px 20px 20px 20px;/* Optionally make the username bold */
+}
+
+.home_button.active {
+  background-color: #efefef;
+  border-radius: 20px 20px 20px 20px; /* Set your desired background color */
+}
+
+.wishlist_button:hover {
+  background-color: #efefef;
+  border-radius: 20px 20px 20px 20px;/* Optionally make the username bold */
+}
+
+.wishlist_button.active {
+  background-color: #efefef;
+  border-radius: 20px 20px 20px 20px; /* Set your desired background color */
+}
+
+
 /* You can also adjust the button size */
 .rounded-search-bar button {
   border: none;

@@ -29,13 +29,14 @@
             </h1>
 
             @if (Auth::check())
-                <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
+
                 
 
                 <!-- Navigation Links -->
                 <nav>
 
-                    <!-- Home Button -->
+                <!-- Home Button -->
+                <span class="home_button @if(Request::is('events-begin')) active @endif">
                     <a href="{{ url('/events-begin') }}">
                         @if(Request::is('events-begin'))
                         <img src="{{ asset('icons/icons8-casa-24.png') }}" alt="Ícone" style="width: 20px; height: auto;">
@@ -44,6 +45,7 @@
                         @endif
                         Home
                     </a>
+                </span>
 
                     <!-- Create MyEvents Button -->
                     <a href="{{ route('events.myevents') }}">My Events</a>
@@ -57,15 +59,18 @@
                     <!-- My schedule Button -->
                     <a href="{{ route('events.going') }}">My Schedule</a>
 
-                    <!-- My Wishlist Button -->
-                    <a href="{{ route('events.wishlist') }}">
-                        @if(Request::is('events/wishlist'))
-                        <img src="{{ asset('icons/bookmark.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                        @else
-                        <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                        @endif
-                        Wishlist
-                    </a>
+                    <!-- Wishlist Button -->
+                    <span class="wishlist_button @if(Request::is('events/wishlist')) active @endif">
+                        <a href="{{ route('events.wishlist') }}">
+                            @if(Request::is('events/wishlist'))
+                            <img src="{{ asset('icons/bookmark.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @else
+                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @endif
+                            Wishlist
+                        </a>
+                    </span>
+
 
                     <!-- Create Event Button -->
                     <a href="{{ route('events.create') }}" class="create-event-button">Create Event</a>
@@ -80,6 +85,12 @@
 
                 </nav>
                 <a class="button" href="{{ url('/logout') }}">Logout</a>
+
+
+                <span class="username">
+                <img src = "{{asset('profile_photos/user_profile.png')}}" alt="Ícone" class="profile-icon">
+                <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
+                </span>
             @endif
         </header>
         <section id="content">
