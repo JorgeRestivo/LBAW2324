@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -25,7 +26,10 @@ public function suspendUser($id)
     }
 
     // Update the user's status to "Suspended"
-    $user->update(['userStatus' => 'Suspended']);
+    DB::table('users')->updateOrInsert(
+        ['id' => $user->id],
+        ['userstatus' => 'Suspended']
+    );
 
     return redirect()->route('admin.nonAdminUsers');
 }
@@ -44,10 +48,21 @@ public function viewUserInfo($id)
 public function manageEvents()
 {
     // Fetch events ordered by end time
-    $events = Event::orderBy('enddatetime', 'asc')->get();
+    $events = Event::orderBy('startdatetime', 'asc')->get();
 
     return view('manageEvents', ['events' => $events]);
 }
+
+public function viewEventInfo($id)
+    {
+        $event = Event::find($id);
+
+        if (!$event) {
+            abort(404); // Handle the case where the event with the given ID is not found.
+        }
+
+        return view('viewEventInfo', ['event' => $event]);
+    }
 
 // Add the method for deleting an event if you haven't already
 public function deleteEvent($id)
