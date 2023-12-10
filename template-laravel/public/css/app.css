@@ -56,7 +56,7 @@ nav a {
 .event-box {
   background-color: white;
   border: 1px solid #f8f8f8;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   margin: 10px;
   display: 1;
@@ -66,7 +66,7 @@ nav a {
 }
 
 .event-photo img {
-  width: auto;
+  width: 300px;
   border-radius: 18px;
   float: left;
   height: 200px;
@@ -80,7 +80,14 @@ nav a {
   float: left;
   padding: 10px;
   flex: 1;
+  margin-top: 2%;
+  margin-left: 3%;
   font-size: 10px;
+}
+
+.wishlist {
+  float: right;
+  margin-right: 2%;
 }
 
 

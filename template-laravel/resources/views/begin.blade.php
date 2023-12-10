@@ -32,22 +32,22 @@
                         <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
                             @csrf
                             <button type="submit" style="display: none;">
-                                <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 50px; height: 50px;">
+                                <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
                             </button>
                         </form>
                     @else
                         <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
                             @csrf
                             <button type="submit" style="display: none;">
-                                <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 50px; height: 50px;">
+                                <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
                             </button>
                         </form>
                     @endif
                     <a href="#" onclick="event.preventDefault(); this.previousElementSibling.submit();">
                         @if($event['inWishlist'])
-                            <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 20px; height: 20px;">
+                            <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
                         @else
-                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 20px; height: 20px;">
+                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
                         @endif
                     </a>
                 </div>
