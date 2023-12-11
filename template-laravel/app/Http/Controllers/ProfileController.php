@@ -44,4 +44,26 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')->with('success', 'Profile photo updated successfully.');
     }
+    public function editProfileForm()
+    {
+        return view('profile.edit');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'username' => $request->input('username'),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ]);
+
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+    }
 }

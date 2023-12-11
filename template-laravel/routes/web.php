@@ -103,6 +103,7 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit-photo', [ProfileController::class, 'editProfilePhotoForm'])->name('profile.editPhotoForm');
+    Route::patch('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::post('/profile/update-photo', [ProfileController::class, 'updateProfilePhoto'])->name('profile.updatePhoto');
 });
 
@@ -117,3 +118,4 @@ Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
 
 Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->name('comment.store');
+
