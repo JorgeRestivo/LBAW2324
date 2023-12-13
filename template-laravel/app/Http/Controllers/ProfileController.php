@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 
 class ProfileController extends Controller
@@ -55,6 +56,7 @@ class ProfileController extends Controller
             'username' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = Auth::user();
@@ -62,7 +64,23 @@ class ProfileController extends Controller
             'username' => $request->input('username'),
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Se desejar permitir apenas imagens
         ]);
+
+        // Se uma nova foto de perfil for enviada, faça o upload e atualize o caminho no banco de dados
+        if ($request->hasFile('profile_photo')) {
+            // Salvar a nova foto
+            $image = $request->file('profile_photo');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('profile_photos'), $imageName);
+
+            // Atualizar o caminho da foto no banco de dados
+            $user->profile_photo = $imageName;
+            $user->save();
+        }
+
+        // Salve as alterações no banco de dados
+        $user->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
     }

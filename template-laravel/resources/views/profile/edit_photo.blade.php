@@ -11,7 +11,7 @@
         </div>
     @endif
 
-    <form action="{{ route('profile.updatePhoto') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('profile.update') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="profile_photo">Escolher Nova Foto do Perfil:</label>
