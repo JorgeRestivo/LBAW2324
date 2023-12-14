@@ -10,6 +10,9 @@
                     <div class="card-header">Event Management</div>
 
                     <div class="card-body">
+
+                        <a href="{{ route('admin.nonAdminUsers') }}" class="btn btn-primary btn-sm">Manage Users</a>
+
                         <h2>All Events</h2>
 
                         @if(count($events) > 0)

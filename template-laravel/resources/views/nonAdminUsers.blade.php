@@ -16,11 +16,12 @@
                             </div>
                         @endif
 
+                        <a href="{{ route('admin.manageEvents') }}" class="btn btn-primary btn-sm">Manage Events</a>
+
                         <p>List of Non-Admin Users:</p>
 
                         @if(count($nonAdminUsers) > 0)
                             <ul>
-                            <a href="{{ route('admin.manageEvents') }}" class="btn btn-primary btn-sm">Manage Events</a>
                                 @foreach($nonAdminUsers as $user)
                                     <li>
                                         {{ $user->name }} ({{ $user->email }})
