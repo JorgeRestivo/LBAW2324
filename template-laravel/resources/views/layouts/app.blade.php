@@ -4,12 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Styles -->
     <link href="{{ url('css/milligram.min.css') }}" rel="stylesheet">
     <link href="{{ url('css/app.css') }}" rel="stylesheet">
@@ -18,6 +15,23 @@
         // See: http://stackoverflow.com/questions/18943276/html-5-autofocus-messes-up-css-loading/18945951#18945951
     </script>
     <script type="text/javascript" src="{{ url('js/app.js') }}" defer></script>
+    <style>
+        .logout-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            right: 0;
+        }
+
+        .logout-dropdown a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <main>
@@ -29,23 +43,19 @@
             </h1>
 
             @if (Auth::check())
-
-                
-
                 <!-- Navigation Links -->
                 <nav>
-
-                <!-- Home Button -->
-                <span class="home_button @if(Request::is('events-begin')) active @endif">
-                    <a href="{{ url('/events-begin') }}">
-                        @if(Request::is('events-begin'))
-                        <img src="{{ asset('icons/icons8-casa-24.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                        @else
-                        <img src="{{ asset('icons/icons8-casa-24-2.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                        @endif
-                        Home
-                    </a>
-                </span>
+                    <!-- Home Button -->
+                    <span class="home_button @if(Request::is('events-begin')) active @endif">
+                        <a href="{{ url('/events-begin') }}">
+                            @if(Request::is('events-begin'))
+                            <img src="{{ asset('icons/icons8-casa-24.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @else
+                            <img src="{{ asset('icons/icons8-casa-24-2.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @endif
+                            Home
+                        </a>
+                    </span>
 
                     <!-- Create MyEvents Button -->
                     <a href="{{ route('events.myevents') }}">My Events</a>
@@ -83,19 +93,38 @@
 
                     <a href="{{ route('faq') }}">FAQs</a>
 
+                    <!-- User Profile Section with Dots -->
+                    <span class="username">
+                        <img src="{{ asset('profile_photos/user_profile.png') }}" alt="Ícone" class="profile-icon">
+                        <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
+                        <img src="{{ asset('icons/3dots.png') }}" alt="3 Dots" class="dots" style="margin-left: 10px; margin-right: 10px;">
+                        <div class="logout-dropdown">
+                            <a href="{{ url('/logout') }}">Logout</a>
+                        </div>
+                    </span>
                 </nav>
-                <a class="button" href="{{ url('/logout') }}">Logout</a>
 
-
-                <span class="username">
-                <img src = "{{asset('profile_photos/user_profile.png')}}" alt="Ícone" class="profile-icon">
-                <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
-                </span>
             @endif
         </header>
         <section id="content">
             @yield('content')
         </section>
     </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dots = document.querySelector(".dots");
+            const logoutDropdown = document.querySelector(".logout-dropdown");
+
+            dots.addEventListener("click", function () {
+                logoutDropdown.style.display = (logoutDropdown.style.display === "block") ? "none" : "block";
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!event.target.matches('.dots')) {
+                    logoutDropdown.style.display = "none";
+                }
+            });
+        });
+    </script>
 </body>
 </html>
