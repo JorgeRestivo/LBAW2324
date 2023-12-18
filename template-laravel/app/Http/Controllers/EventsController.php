@@ -379,6 +379,8 @@ public function removeAttendee($eventId, $userId)
     }
 
 
+
+
 }
 
 
