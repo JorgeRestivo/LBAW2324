@@ -25,10 +25,12 @@
                                 @foreach($nonAdminUsers as $user)
                                     <li>
                                         {{ $user->name }} ({{ $user->email }})
-                                        <form method="POST" action="{{ route('admin.suspendUser', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to suspend this user?');">
+                                        <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to toggle the status of this user?');">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-danger btn-sm">Suspend User</button>
+                                            <button type="submit" class="btn btn-{{ $user->is_suspended ? 'success' : 'danger' }} btn-sm">
+                                                {{ $user->is_suspended ? 'Unsuspend User' : 'Suspend User' }}
+                                            </button>
                                         </form>
                                         <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View User Info</a>
                                         
