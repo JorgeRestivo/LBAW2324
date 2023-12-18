@@ -122,3 +122,7 @@ Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->n
 
 // No seu arquivo de rotas (web.php)
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
+// Rotas web.php
+Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
