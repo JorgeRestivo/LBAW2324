@@ -292,3 +292,14 @@ input[type=password]:focus {
   border-radius:25px;
 }
 
+.notification-dropdown {
+  border: 2px solid red; /* Red border for the container */
+  background-color: white; /* Optional: Change the background color if needed */
+  padding: 10px; /* Add some padding for better layout */
+  border-radius: 5px; /* Optional: Round corners for better aesthetics */
+  display: none; /* Initially hidden */
+}
+
+.notification-dropdown.show {
+  display: block; /* Show the dropdown when the 'show' class is added */
+}

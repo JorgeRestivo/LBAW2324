@@ -5,6 +5,12 @@
 <form action="{{ route('events.search') }}" method="GET" class="rounded-search-bar">
     <input type="text" name="query" placeholder="Search Events">
     <button type="submit">Search</button>
+    <div class="notification-container">
+        <img src="{{ asset('icons/notifications.png') }}" alt="Notifications" class="notification-bell">
+        <div class="notification-dropdown">
+            <!-- Notification items will be appended here dynamically using JavaScript -->
+        </div>
+    </div>
 </form>
 
 <div class="tag-buttons">
@@ -67,7 +73,51 @@
 </div>
 
 <script>
-    const filterByTagRoute = "{{ route('events.filterByTag') }}";
+    document.addEventListener("DOMContentLoaded", function () {
+    const bellIcon = document.querySelector(".notification-bell");
+    const notificationDropdown = document.querySelector(".notification-dropdown");
+    let isDropdownVisible = false;
+
+    bellIcon.addEventListener("click", function (event) {
+        isDropdownVisible = !isDropdownVisible;
+        notificationDropdown.classList.toggle("show", isDropdownVisible);
+
+        if (isDropdownVisible) {
+            // Load and display notifications only when opening the dropdown
+            const placeholderNotifications = [
+                { message: 'Notification 1' },
+                { message: 'Notification 2' },
+                { message: 'Notification 3' },
+            ];
+            updateNotificationDropdown(placeholderNotifications);
+        }
+
+        event.stopPropagation();
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    document.addEventListener("click", function () {
+        if (isDropdownVisible) {
+            notificationDropdown.classList.remove("show");
+            isDropdownVisible = false;
+        }
+    });
+
+    function updateNotificationDropdown(notifications) {
+        notificationDropdown.innerHTML = '';
+        notifications.forEach(notification => {
+            const notificationItem = document.createElement('div');
+            notificationItem.textContent = notification.message;
+            notificationDropdown.appendChild(notificationItem);
+        });
+    }
+});
+
+
+
 </script>
+
+
+
 <script src="{{ asset('js/filterEvents.js') }}"></script>
 @endsection

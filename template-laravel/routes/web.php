@@ -96,6 +96,15 @@ Route::controller(CommentsController::class)->group(function () {
     Route::get('/comments', [CommentsController::class, 'index'])->name('comments.index');
 });
 
+
+
+//Notifications
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/user-notifications', [NotificationController::class, 'getUserNotifications'])->name('user.notifications');
+
+});
+
+
 // profile page
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
