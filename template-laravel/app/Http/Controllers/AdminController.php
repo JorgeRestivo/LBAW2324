@@ -6,6 +6,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -73,5 +74,20 @@ public function deleteEvent($id)
     // Redirect back with a success message
     return redirect()->back()->with('success', 'Event deleted successfully.');
 }
+
+    public function toggleUserStatus($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        // Set the user's status to "Suspended"
+        $user->userstatus = 'Suspended';    
+        $user->save();
+
+        return redirect()->back()->with('success', 'User suspended successfully.');
+    }
 
 }

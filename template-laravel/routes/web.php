@@ -90,6 +90,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/manage-events', 'manageEvents')->name('admin.manageEvents');
     Route::put('/admin/delete-event/{id}', 'deleteEvent')->name('admin.deleteEvent');
     Route::get('/admin/view-event-info/{id}', 'viewEventInfo')->name('admin.viewEventInfo');
+    Route::put('/admin/toggleUserStatus/{id}', 'toggleUserStatus')->name('admin.toggleUserStatus');
 });
 
 //Comments
@@ -132,3 +133,7 @@ Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->n
 
 // No seu arquivo de rotas (web.php)
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
+// Rotas web.php
+Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
+Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
