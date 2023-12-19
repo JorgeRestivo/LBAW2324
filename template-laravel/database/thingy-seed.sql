@@ -187,7 +187,7 @@ VALUES
   ('VIP Art Preview', '2024-02-15 18:00:00', '2024-02-15 21:00:00', '2024-02-10 23:59:59', 'Private Gallery', 'Exclusive preview for VIP guests', 25, false, 'Active', 8, 6, 'vipartpreview.webp'),
   ('Leadership Seminar', '2024-03-20 09:30:00', '2024-03-20 16:30:00', '2024-03-15 23:59:59', 'Conference Center', 'Development for organizational leaders', 50, false, 'Active', 9, 7, 'leadershipseminar.jpeg'),
   ('Private Concert', '2024-04-10 20:00:00', '2024-04-10 22:30:00', '2024-04-05 23:59:59', 'Exclusive Venue', 'Intimate concert experience', 15, false, 'Active', 10, 8, 'privateconcert.webp'),
-  ('Corporate Wellness Retreat', '2024-05-28 08:00:00', '2024-05-30 17:00:00', '2024-05-23 23:59:59', 'Wellness Resort', 'Promoting employee well-being', 20, false, 'Active', 1, 9, 'wellnessretreat.jpeg'),
+  ('Corporate Wellness Retreat', '2024-05-28 08:00:00', '2024-05-30 17:00:00', '2024-05-23 23:59:59', 'Wellness Resort', 'Promoting employee well-being', 20, false, 'Active', 1, 9, 'corporatewellness.jpg'),
   ('Exclusive Product Demo', '2024-06-15 14:00:00', '2024-06-15 16:30:00', '2024-06-10 23:59:59', 'Product Showroom', 'Invite-only product demonstration', 30, false, 'Active', 2, 2, 'productdemo.webp');
 
 

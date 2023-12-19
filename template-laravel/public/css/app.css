@@ -249,42 +249,42 @@ input[type=password]:focus {
   position: absolute;
   bottom: 0;
   margin-bottom: 10%;
-  margin-left: 0.5%;/* Adjust as needed */
+  margin-left: 0.5%;
   font-weight: bold;
   display: flex;
-  align-items: center;/* Optionally make the username bold */
+  align-items: center;
 }
 
 .dots {
   transform: rotate(90deg);
-  width: 15px; /* Adjust the width as needed */
-  height: 15px; /* Adjust the height as needed */
+  width: 15px;
+  height: 15px;
 }
 
 .profile-icon {
   width: 57px;
   height: auto;
-  margin-right: 1px; /* Adjust margin as needed */
+  margin-right: 1px;
 }
 
 .home_button:hover {
   background-color: #efefef;
-  border-radius: 20px 20px 20px 20px;/* Optionally make the username bold */
+  border-radius: 20px 20px 20px 20px;
 }
 
 .home_button.active {
   background-color: #efefef;
-  border-radius: 20px 20px 20px 20px; /* Set your desired background color */
+  border-radius: 20px 20px 20px 20px;
 }
 
 .wishlist_button:hover {
   background-color: #efefef;
-  border-radius: 20px 20px 20px 20px;/* Optionally make the username bold */
+  border-radius: 20px 20px 20px 20px;
 }
 
 .wishlist_button.active {
   background-color: #efefef;
-  border-radius: 20px 20px 20px 20px; /* Set your desired background color */
+  border-radius: 20px 20px 20px 20px;
 }
 
 .tag-buttons {
@@ -302,4 +302,33 @@ input[type=password]:focus {
 
 .notification-dropdown.show {
   display: block; /* Show the dropdown when the 'show' class is added */
+}
+
+.share {
+  float: right;
+  margin-right: 2%;
+  margin-top: 1%;
+}
+
+.see_more {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #dadada;
+  border-radius: 20px;
+  width: 110px;
+  height: 30px;
+}
+
+.see-more-text {
+  margin-top: 6px;
+  margin-left: 1%;
+}
+
+.see-more-icon {
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background-color: #dadada;
 }

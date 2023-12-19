@@ -12,20 +12,29 @@
                             <img src="{{ asset('photos/' . $event->photo) }}" alt="Event Photo">
                         </div>
                         <div class="event-details">
-                            <h2>{{ $event->eventname }}</h2>
-                            <p>Start Date: {{ $event->startdatetime }}</p>
-                            <p>End Date: {{ $event->enddatetime }}</p>
+                            <p style="font-size: 17px; color: #ef9db2;">Start Date: {{ $event['startdatetime'] }}</p>
+                            <h2 style="font-size: 25px; font-weight: bold; color: #7a7a7a;">{{ $event['eventname'] }}</h2>
 
-                            <!-- Link to Event Details -->
-                            <a href="{{ route('event.show', ['id' => $event->id]) }}">View Details</a>
-
-                            <br>
-
-                            <!-- Link to Invite Someone -->
-                            <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">Invite someone</a>
+                            <div class="see_more">
+                                <a href="{{ route('event.show', ['id' => $event->id]) }}">
+                                    <span style="font-size: 12px" class = "see-more-text">See more</span>
+                                    <div class="see-more-icon">
+                                        <img src="{{ asset('icons/seemore.png') }}" alt="See More" class="icon" style="width: 20px; height: 20px;">
+                                    </div>
+                                </a>
+                            </div>
 
                             <br>
                         </div>
+
+                        <div class="share">
+                            <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">
+                            <img src="{{ asset('icons/share.png') }}" alt="Share Icon" style="width: 40px; height: 40px;">
+                            </a>
+                        </div>
+
+                        <br>
+                        
                     </div>
 
                     <!-- Display "Going" Attendees -->
