@@ -9,10 +9,13 @@ class Notification extends Model
 {
     use HasFactory;
 
+    protected $table = 'notification';
+
     protected $fillable = [
         'dateTime',
         'notified_user',
         'type',
+        'description',
     ];
 
 }

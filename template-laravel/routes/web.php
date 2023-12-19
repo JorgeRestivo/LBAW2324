@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AboutController;
 use APP\Http\Controllers\FaqController;
@@ -100,7 +101,8 @@ Route::controller(CommentsController::class)->group(function () {
 
 //Notifications
 Route::controller(NotificationController::class)->group(function () {
-    Route::get('/user-notifications', [NotificationController::class, 'getUserNotifications'])->name('user.notifications');
+    Route::get('/notifications', [NotificationController::class, 'getNotifications']);
+
 
 });
 

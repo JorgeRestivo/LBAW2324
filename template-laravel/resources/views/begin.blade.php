@@ -83,14 +83,11 @@
         notificationDropdown.classList.toggle("show", isDropdownVisible);
 
         if (isDropdownVisible) {
-            // Load and display notifications only when opening the dropdown
-            const placeholderNotifications = [
-                { message: 'Notification 1' },
-                { message: 'Notification 2' },
-                { message: 'Notification 3' },
-            ];
-            updateNotificationDropdown(placeholderNotifications);
-        }
+        fetch('/notifications') // This is the route you defined
+            .then(response => response.json())
+            .then(data => updateNotificationDropdown(data))
+            .catch(error => console.error('Error:', error));
+    }
 
         event.stopPropagation();
     });
@@ -106,10 +103,10 @@
     function updateNotificationDropdown(notifications) {
         notificationDropdown.innerHTML = '';
         notifications.forEach(notification => {
-            const notificationItem = document.createElement('div');
-            notificationItem.textContent = notification.message;
-            notificationDropdown.appendChild(notificationItem);
-        });
+        const notificationItem = document.createElement('div');
+        notificationItem.textContent = notification.description || 'No description'; // Show description or a default message
+        notificationDropdown.appendChild(notificationItem);
+    });
     }
 });
 

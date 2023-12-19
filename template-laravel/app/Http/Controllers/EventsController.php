@@ -8,7 +8,6 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\Invitation;
 use App\Models\Comment;
 use App\Models\Event;
