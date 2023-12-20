@@ -14,6 +14,8 @@ use App\Models\Event;
 use App\Models\User;
 use App\Models\Attendance;
 use App\Models\Tag;
+use App\Notifications\EventInvitationNotification;
+
 
 
 class EventsController extends Controller
@@ -135,21 +137,24 @@ class EventsController extends Controller
 }
 
 
+public function sendInvitation(Request $request, $eventId)
+{
+    $request->validate([
+        'inviteeId' => 'required|exists:users,id',
+    ]);
 
-    public function sendInvitation(Request $request, $eventId)
-    {
+    $event = Event::find($eventId);
+    $user = User::find($request->input('inviteeId'));
 
-        $request->validate([
-            'inviteeId' => 'required|exists:users,id',
-        ]);
+    $invitation = Invitation::createInvitation($event, $user);
+    $user->notify(new EventInvitationNotification($invitation));
 
-        $event = Event::find($eventId);
 
-        // usar para as notificações
-        //$event->invitedUsers()->attach($request->input('inviteeId'));
+    // Redirect or perform any other actions
+    return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
+}
 
-        return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
-    }
+
 
     public function showInviteForm($eventId)
     {
@@ -372,10 +377,12 @@ public function removeAttendee($eventId, $userId)
             $events = $publicEvents->merge($privateEvents);
         }
 
-        // ... pass $events and other necessary data to the view ...
+
 
         return view('events.filtered', compact('events'), ['tags' => $tags]);
     }
+
+
 
 
 

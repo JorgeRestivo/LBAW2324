@@ -29,7 +29,7 @@
 
                         <div class="share">
                             <a href="{{ route('event.invite', ['eventId' => $event->id]) }}">
-                            <img src="{{ asset('icons/share.png') }}" alt="Share Icon" style="width: 40px; height: 40px;">
+                            <img src="{{ asset('icons/share.png') }}" alt="Share Icon" style="width: 30px; height: 30px;">
                             </a>
                         </div>
 

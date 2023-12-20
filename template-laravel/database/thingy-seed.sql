@@ -32,7 +32,7 @@ DROP TYPE IF EXISTS notification_type;
 
 CREATE TYPE user_status_types AS ENUM ('Active', 'Suspended', 'Banned');
 CREATE TYPE event_status_types AS ENUM ('Active', 'Suspended', 'Banned');
-CREATE TYPE participation_type AS ENUM ('Going','Maybe','Not Going');
+CREATE TYPE participation_type AS ENUM ('Going','Maybe','Not Going','Pending');
 CREATE TYPE tag_type AS ENUM ('Outdoor','Indoor','Music','Tech','Fitness','Education','Art','Science','Food','Travel','Gaming','Fashion');
 CREATE TYPE notification_type AS ENUM ('event_notification','comment_notification');
 
@@ -126,7 +126,7 @@ CREATE TABLE notification (
 INSERT INTO users (username, name, email, password, userStatus, isAdmin) 
 VALUES 
   ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE), -- password 1234
-  ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active', FALSE),
+  ('bob_marley', 'Bob Marley', 'bob@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE),
   ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE),
   ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active', FALSE),
   ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended',FALSE),

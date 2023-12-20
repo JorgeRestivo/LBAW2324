@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Invitation;
+
 
 // Added to define Eloquent relationships.
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +38,11 @@ class Event extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function invitations()
+{
+    return $this->hasMany(Invitation::class);
+}
 
     public function attendances()
 {
