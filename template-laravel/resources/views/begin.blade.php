@@ -4,7 +4,6 @@
 <!-- Search Bar -->
 <form action="{{ route('events.search') }}" method="GET" class="rounded-search-bar">
     <input type="text" name="query" placeholder="Search Events">
-    <button type="submit">Search</button>
     <div class="notification-container">
         <img src="{{ asset('icons/notifications.png') }}" alt="Notifications" class="notification-bell" style="width: 35px; height: 35px;">
         <div class="notification-dropdown">
@@ -12,6 +11,7 @@
         </div>
     </div>
 </form>
+
 
 <div class="filter-by-dropdown">
     <label for="tag-filter">Filter by:</label>

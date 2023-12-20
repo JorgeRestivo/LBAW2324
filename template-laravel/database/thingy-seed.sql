@@ -48,8 +48,8 @@ CREATE TABLE users (
   email VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
   userStatus user_status_types NOT NULL DEFAULT 'Active',
-  profile_photo VARCHAR(255) DEFAULT 'default-profile-photo.jpg',
-  isAdmin BOOLEAN DEFAULT FALSE
+  isAdmin BOOLEAN DEFAULT FALSE,
+  profile_photo VARCHAR(255) DEFAULT 'user_profile.png'
 );
 
 CREATE TABLE tag (
@@ -123,34 +123,34 @@ CREATE TABLE notification (
 --
 
 
-INSERT INTO users (username, name, email, password, userStatus, isAdmin) 
+INSERT INTO users (username, name, email, password, userStatus, isAdmin, profile_photo) 
 VALUES 
-  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE), -- password 1234
-  ('bob_marley', 'Bob Marley', 'bob@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE),
-  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE),
-  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active', FALSE),
-  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended',FALSE),
-  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active', FALSE),
-  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active', FALSE),
-  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active', FALSE),
-  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active', FALSE),
-  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE),
-  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active', FALSE),
-  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active', FALSE),
-  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active', FALSE),
-  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active', FALSE),
-  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active', FALSE),
-  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active', FALSE),
-  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active', FALSE),
-  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active', FALSE),
-  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active', FALSE),
-  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active', FALSE),
-  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Suspended', FALSE),
-  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Suspended', FALSE),
-  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active', FALSE),
-  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active', FALSE),
-  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active', FALSE),
-  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active', FALSE);
+  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE, 'profile_photos/user_profile.png'), -- password 1234
+  ('bob_marley', 'Bob Marley', 'bob@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended',FALSE, 'profile_photos/user_profile.png'),
+  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE, 'profile_photos/user_profile.png'),
+  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Suspended', FALSE, 'profile_photos/user_profile.png'),
+  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Suspended', FALSE, 'profile_photos/user_profile.png'),
+  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active', FALSE, 'profile_photos/user_profile.png');
 
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Illuminate\Support\Facades\Log;
+
 
 class ProfileController extends Controller
 {
@@ -24,27 +26,6 @@ class ProfileController extends Controller
         return view('profile.edit_photo');
     }
 
-    public function updateProfilePhoto(Request $request)
-    {
-        $request->validate([
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // ajuste os tipos de imagem conforme necessário
-        ]);
-
-        $user = Auth::user();
-
-        if ($request->hasFile('profile_photo')) {
-            // Salvar a nova foto
-            $image = $request->file('profile_photo');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('profile_photos'), $imageName);
-
-            // Atualizar o caminho da foto no banco de dados
-            $user->profile_photo = $imageName;
-            $user->save();
-        }
-
-        return redirect()->route('profile.show')->with('success', 'Profile photo updated successfully.');
-    }
     public function editProfileForm()
     {
         return view('profile.edit');
@@ -60,26 +41,28 @@ class ProfileController extends Controller
         ]);
 
         $user = Auth::user();
+        Log::info('Profile photo path: ' . $user->profile_photo);
         $user->update([
             'username' => $request->input('username'),
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Se desejar permitir apenas imagens
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Se uma nova foto de perfil for enviada, faça o upload e atualize o caminho no banco de dados
+
         if ($request->hasFile('profile_photo')) {
-            // Salvar a nova foto
+
             $image = $request->file('profile_photo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('profile_photos'), $imageName);
 
-            // Atualizar o caminho da foto no banco de dados
-            $user->profile_photo = $imageName;
+            $profilePhotoPath = 'profile_photos/' . $imageName;
+
+            $user->profile_photo = $profilePhotoPath;
             $user->save();
+
         }
 
-        // Salve as alterações no banco de dados
         $user->save();
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');

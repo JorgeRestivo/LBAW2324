@@ -95,9 +95,9 @@
 
                     <!-- User Profile Section with Dots -->
                     <span class="username">
-                        <img src="{{ asset('profile_photos/user_profile.png') }}" alt="Ícone" class="profile-icon">
+                        <img src="{{ asset(Auth::user()->profile_photo ?: 'profile_photos/user_profile.png') }}" alt="Profile Icon" class="profile-icon" style="width: 40px; height: 40px;border-radius: 50%; margin-right: 10px">
                         <a href="{{ route('profile.show') }}">{{ Auth::user()->name }}</a>
-                        <img src="{{ asset('icons/3dots.png') }}" alt="3 Dots" class="dots" style="margin-left: 10px; margin-right: 10px;">
+                        <img src="{{ asset('icons/3dots.png') }}" alt="3 Dots" class="dots" style="margin-left: 25px">
                         <div class="logout-dropdown">
                             <a href="{{ url('/logout') }}">Logout</a>
                         </div>

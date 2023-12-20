@@ -2,7 +2,7 @@
 body {
   margin: 0;
   background-color: #ffffff;
-  color: #4dca7d;
+  color: #787878;
 }
 
 /* Header styles */
@@ -220,31 +220,6 @@ input[type=password]:focus {
   border-radius: 25px;
 }
 
-.rounded-search-bar button {
-  align-items: center;
-  padding: 10px; /* Adjust the padding as needed */
-  border-radius: 20px; /* Adjust the border radius as needed */
-  margin-left: 5px; /* Adjust the margin as needed */
-}
-
-#searchTooltip {
-  display: none;
-  position: absolute;
-  background-color: #ff0000;
-  color: #ffffff;
-  width: 60%;
-  height: 40%;
-  border-radius: 5px;
-  margin-top: 25%;
-}
-
-#searchTooltip button {
-  display: inline-block;
-  margin-right: 5px;
-  margin-bottom: 5px;
-}
-
-
 .username {
   position: absolute;
   bottom: 0;
@@ -354,4 +329,19 @@ input[type=password]:focus {
 .tag-dropdown option {
   padding: 4px; /* Ajuste o padding das opções para alinhar com o dropdown */
   text-align: left;
+}
+
+.filter-by-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.filter-by-dropdown label {
+  margin-right: 10px; /* Adjust as needed for spacing */
+}
+
+.rounded-profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
 }
