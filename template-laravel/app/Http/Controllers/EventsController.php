@@ -377,10 +377,11 @@ public function removeAttendee($eventId, $userId)
             $events = $publicEvents->merge($privateEvents);
         }
 
-        // ... pass $events and other necessary data to the view ...
+
 
         return view('events.filtered', compact('events'), ['tags' => $tags]);
     }
+
 
 
 

@@ -114,7 +114,9 @@
 
 </script>
 
-
-
+<script>
+    const filterByTagRoute = "{{ route('events.filterByTag') }}";
+</script>
 <script src="{{ asset('js/filterEvents.js') }}"></script>
+
 @endsection
