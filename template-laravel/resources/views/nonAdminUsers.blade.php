@@ -22,19 +22,35 @@
 
                         @if(count($nonAdminUsers) > 0)
                             <ul>
-                                @foreach($nonAdminUsers as $user)
+                                @foreach($nonAdminUsers->sortBy('username') as $user)
                                     <li>
-                                        {{ $user->name }} ({{ $user->email }})
-                                        <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to toggle the status of this user?');">
+                                        {{ $user->username }} ({{ $user->email }})
+                                        <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to change the status of this user?');">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-{{ $user->is_suspended ? 'success' : 'danger' }} btn-sm">
-                                                {{ $user->is_suspended ? 'Unsuspend User' : 'Suspend User' }}
+                                            <button type="submit" class="btn btn-{{ $user->userstatus == 'Suspended' ? 'success' : 'danger' }} btn-sm">
+                                            {{ $user->userstatus == 'Suspended' ? 'Unsuspend User' : 'Suspend User' }}
                                             </button>
                                         </form>
-                                        <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View User Info</a>
                                         
-                                        <!-- Button to go to Event Management Page -->
+                                        @if($user->userstatus == 'Banned')
+                                            <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to ban this user?');">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    Unban User
+                                                </button>
+                                            </form> 
+                                        @else
+                                            <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to toggle the ban status of this user?');">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-warning btn-sm">
+                                                    Ban User
+                                                </button>
+                                            </form>
+                                        @endif
+                                        <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View User Info</a>
                                     </li>
                                 @endforeach
                             </ul>

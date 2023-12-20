@@ -74,20 +74,19 @@ public function deleteEvent($id)
     // Redirect back with a success message
     return redirect()->back()->with('success', 'Event deleted successfully.');
 }
+public function toggleUserStatus($id)
+{
+    $user = User::find($id);
 
-    public function toggleUserStatus($id)
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return redirect()->back()->with('error', 'User not found.');
-        }
-
-        // Set the user's status to "Suspended"
-        $user->userstatus = 'Suspended';    
-        $user->save();
-
-        return redirect()->back()->with('success', 'User suspended successfully.');
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
     }
+
+    // Toggle the user's status between "Suspended" and "Active"
+    $user->userstatus = $user->userstatus == 'Suspended' ? 'Active' : 'Suspended';
+    $user->save();
+
+    return redirect()->back()->with('success', 'User status updated successfully.');
+}
 
 }
