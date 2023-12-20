@@ -334,24 +334,24 @@ input[type=password]:focus {
 }
 
 .tag-dropdown {
-  padding: 10px;
+  padding: 6px 35px; /* Reduz o padding para diminuir o tamanho total do dropdown */
   border-radius: 20px;
   background-color: #fafafa;
-  font-size: 12px;
+  font-size: 12px; /* Certifique-se de que o tamanho da fonte não seja grande demais */
   margin: 5px;
   cursor: pointer;
+  width: fit-content; /* Ajusta a largura ao conteúdo, mas não menor do que o conteúdo */
+  max-width: 100%; /* Previne que o dropdown seja maior que o contêiner */
+  display: inline-block;
+  text-align: left;
 }
 
 .tag-dropdown:hover {
   background-color: #f2f2f2;
 }
 
-/* Adjust the look of the dropdown arrow */
-.tag-dropdown::-ms-expand {
-  display: none;
-}
-
 /* Style for the options */
 .tag-dropdown option {
-  padding: 10px;
+  padding: 4px; /* Ajuste o padding das opções para alinhar com o dropdown */
+  text-align: left;
 }
