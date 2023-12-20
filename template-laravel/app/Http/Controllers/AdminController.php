@@ -74,20 +74,45 @@ public function deleteEvent($id)
     // Redirect back with a success message
     return redirect()->back()->with('success', 'Event deleted successfully.');
 }
+public function toggleUserStatus($id)
+{
+    $user = User::find($id);
 
-    public function toggleUserStatus($id)
-    {
-        $user = User::find($id);
-
-        if (!$user) {
-            return redirect()->back()->with('error', 'User not found.');
-        }
-
-        // Set the user's status to "Suspended"
-        $user->userstatus = 'Suspended';    
-        $user->save();
-
-        return redirect()->back()->with('success', 'User suspended successfully.');
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
     }
+
+    // Toggle the user's status between "Suspended" and "Active"
+    $user->userstatus = $user->userstatus == 'Suspended' ? 'Active' : 'Suspended';
+    $user->save();
+
+    return redirect()->back()->with('success', 'User status updated successfully.');
+}
+public function updateUserStatus($id, Request $request)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
+    }
+
+    // Validate the request
+    $request->validate([
+        'userstatus' => 'required|in:Active,Suspended,Banned',
+        'token' => 'required', // Add validation for the token
+    ]);
+
+    // Verify the token
+    $token = $request->input('token');
+    // You may want to add further validation or verification logic for the token
+    // For example, you can store the token in the session and compare it here
+
+    // Update the user's status
+    $user->userstatus = $request->userstatus;
+    $user->save();
+
+    return redirect()->back()->with('success', 'User status updated successfully.');
+}
+
 
 }
