@@ -18,4 +18,10 @@ class Notification extends Model
         'description',
     ];
 
+    public function event()
+{
+    return $this->belongsTo(Event::class);
+}
+
+
 }

@@ -104,6 +104,7 @@ Route::controller(CommentsController::class)->group(function () {
 //Notifications
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
+    Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notifications');
 
 
 });

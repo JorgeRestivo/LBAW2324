@@ -6,17 +6,21 @@
     <input type="text" name="query" placeholder="Search Events">
     <button type="submit">Search</button>
     <div class="notification-container">
-        <img src="{{ asset('icons/notifications.png') }}" alt="Notifications" class="notification-bell">
+        <img src="{{ asset('icons/notifications.png') }}" alt="Notifications" class="notification-bell" style="width: 35px; height: 35px;">
         <div class="notification-dropdown">
             <!-- Notification items will be appended here dynamically using JavaScript -->
         </div>
     </div>
 </form>
 
-<div class="tag-buttons">
-    @foreach ($tags as $tag)
-        <button onclick="filterByTag({{ $tag->id }})">{{ $tag->name }}</button>
-    @endforeach
+<div class="filter-by-dropdown">
+    <label for="tag-filter">Filter by:</label>
+    <select id="tag-filter" class="tag-dropdown" onchange="filterByTag(this.value)">
+        <option value="all">All Events</option>
+        @foreach ($tags as $tag)
+            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+        @endforeach
+    </select>
 </div>
 <div class="event-gallery">
     @if(isset($events) && count($events) > 0)
@@ -100,14 +104,25 @@
         }
     });
 
-    function updateNotificationDropdown(notifications) {
-        notificationDropdown.innerHTML = '';
-        notifications.forEach(notification => {
+    function updateNotificationDropdown(data) {
+    notificationDropdown.innerHTML = '';
+
+    // Handle notifications
+    data.notifications.forEach(notification => {
         const notificationItem = document.createElement('div');
-        notificationItem.textContent = notification.description || 'No description'; // Show description or a default message
+        notificationItem.textContent = notification.description || 'No description';
         notificationDropdown.appendChild(notificationItem);
     });
-    }
+
+    // Handle invitations
+    data.invitations.forEach(invitation => {
+        const invitationItem = document.createElement('div');
+        invitationItem.textContent = invitation.message; // Using 'message' from the backend
+        notificationDropdown.appendChild(invitationItem);
+    });
+}
+
+
 });
 
 

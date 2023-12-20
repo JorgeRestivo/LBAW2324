@@ -332,3 +332,26 @@ input[type=password]:focus {
   border-radius: 50%;
   background-color: #dadada;
 }
+
+.tag-dropdown {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #fafafa;
+  font-size: 12px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.tag-dropdown:hover {
+  background-color: #f2f2f2;
+}
+
+/* Adjust the look of the dropdown arrow */
+.tag-dropdown::-ms-expand {
+  display: none;
+}
+
+/* Style for the options */
+.tag-dropdown option {
+  padding: 10px;
+}

@@ -10,12 +10,17 @@
     <button type="submit">Search</button>
 </form>
 
-<div class="tag-buttons">
-    <a href="{{ route('events.begin') }}"><button>All events</button></a>
+<div class="filter-by-dropdown">
+    <label for="tag-filter">Filter by:</label>
+    <select id="tag-filter" class="tag-dropdown" onchange="filterByTag(this.value)">
+        <option value="all">All Events</option>
         @foreach ($tags as $tag)
-            <button onclick="filterByTag({{ $tag->id }})">{{ $tag->name }}</button>
+            <option value="{{ $tag->id }}">{{ $tag->name }}</option>
         @endforeach
-    </div>
+    </select>
+</div>
+
+
     <div class="event-gallery">
         @if(isset($events) && count($events) > 0)
             @foreach ($events as $event)

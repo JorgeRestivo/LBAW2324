@@ -22,15 +22,35 @@ use App\Models\Notification;
 class NotificationController extends Controller{
 
     public function getNotifications()
-    {
-        $userId = auth()->id(); // Get the logged-in user's ID
+{
+    $userId = Auth::id();
+
+    // Fetch notifications
+    $notifications = Notification::where('notified_user', $userId)
+                                  ->get(['datetime', 'type', 'description']);
+
+    // Fetch received invitations and include event name
+    $receivedInvitations = Invitation::where('user_invited_id', $userId)
+                                     ->with('event') // assuming you have an 'event' relationship in your Invitation model
+                                     ->get();
+
+    // Format invitations
+    $formattedInvitations = $receivedInvitations->map(function ($invitation) {
+        return [
+            'message' => 'You have been invited to ' . ($invitation->event->eventname ?? 'Event'), // use a fallback in case event name is not available
+            'event_id' => $invitation->event_id
+        ];
+    });
+
+    $combinedData = [
+        'notifications' => $notifications,
+        'invitations' => $formattedInvitations
+    ];
+
+    return response()->json($combinedData);
+}
+
     
-        // Fetch notifications with description
-        $notification = Notification::where('notified_user', $userId)
-                                      ->get(['datetime', 'type', 'description']);
-    
-        return response()->json($notification);
-    }
     
 
 
