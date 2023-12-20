@@ -91,6 +91,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::put('/admin/delete-event/{id}', 'deleteEvent')->name('admin.deleteEvent');
     Route::get('/admin/view-event-info/{id}', 'viewEventInfo')->name('admin.viewEventInfo');
     Route::put('/admin/toggleUserStatus/{id}', 'toggleUserStatus')->name('admin.toggleUserStatus');
+    Route::put('/admin/users/{id}/update-status', 'updateUserStatus')->name('admin.updateUserStatus');
 });
 
 //Comments

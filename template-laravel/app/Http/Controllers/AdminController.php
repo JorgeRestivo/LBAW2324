@@ -88,5 +88,31 @@ public function toggleUserStatus($id)
 
     return redirect()->back()->with('success', 'User status updated successfully.');
 }
+public function updateUserStatus($id, Request $request)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'User not found.');
+    }
+
+    // Validate the request
+    $request->validate([
+        'userstatus' => 'required|in:Active,Suspended,Banned',
+        'token' => 'required', // Add validation for the token
+    ]);
+
+    // Verify the token
+    $token = $request->input('token');
+    // You may want to add further validation or verification logic for the token
+    // For example, you can store the token in the session and compare it here
+
+    // Update the user's status
+    $user->userstatus = $request->userstatus;
+    $user->save();
+
+    return redirect()->back()->with('success', 'User status updated successfully.');
+}
+
 
 }

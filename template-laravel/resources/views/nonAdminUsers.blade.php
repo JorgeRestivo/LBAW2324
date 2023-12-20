@@ -22,34 +22,25 @@
 
                         @if(count($nonAdminUsers) > 0)
                             <ul>
-                                @foreach($nonAdminUsers->sortBy('username') as $user)
+                                @foreach($nonAdminUsers->sortBy('name') as $user)
                                     <li>
-                                        {{ $user->username }} ({{ $user->email }})
-                                        <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to change the status of this user?');">
+                                        {{ $user->name }} ({{ $user->email }})
+
+                                        <form method="POST" action="{{ route('admin.updateUserStatus', ['id' => $user->id]) }}" style="display: inline;">
                                             @csrf
                                             @method('PUT')
-                                            <button type="submit" class="btn btn-{{ $user->userstatus == 'Suspended' ? 'success' : 'danger' }} btn-sm">
-                                            {{ $user->userstatus == 'Suspended' ? 'Unsuspend User' : 'Suspend User' }}
-                                            </button>
+                                            
+                                            <input type="hidden" name="token" value="{{ uniqid() }}">
+                                            
+                                            <select name="userstatus">
+                                                <option value="Active" {{ $user->userstatus == 'Active' ? 'selected' : '' }}>Active</option>
+                                                <option value="Suspended" {{ $user->userstatus == 'Suspended' ? 'selected' : '' }}>Suspended</option>
+                                                <option value="Banned" {{ $user->userstatus == 'Banned' ? 'selected' : '' }}>Banned</option>
+                                            </select>
+
+                                            <button type="submit" class="btn btn-primary btn-sm">Update Status</button>
                                         </form>
-                                        
-                                        @if($user->userstatus == 'Banned')
-                                            <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to ban this user?');">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    Unban User
-                                                </button>
-                                            </form> 
-                                        @else
-                                            <form method="POST" action="{{ route('admin.toggleUserStatus', ['id' => $user->id]) }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to toggle the ban status of this user?');">
-                                                @csrf
-                                                @method('PUT')
-                                                <button type="submit" class="btn btn-warning btn-sm">
-                                                    Ban User
-                                                </button>
-                                            </form>
-                                        @endif
+
                                         <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View User Info</a>
                                     </li>
                                 @endforeach
@@ -67,7 +58,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
-                var successMessage = document.getElementById('success-message');    
+                var successMessage = document.getElementById('success-message');
                 if (successMessage) {
                     successMessage.style.display = 'none';
                 }
