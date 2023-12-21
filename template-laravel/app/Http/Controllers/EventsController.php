@@ -205,6 +205,7 @@ public function sendInvitation(Request $request, $eventId)
             ->select('events.*')
             ->get();
 
+            
         return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents, 'maybegoingEvents' => $maybegoingEvents]);
     }
 

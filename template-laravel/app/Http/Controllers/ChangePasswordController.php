@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/ChangePasswordController.php
 
 namespace App\Http\Controllers;
 

@@ -21,16 +21,16 @@
 
                                 <!-- Form to change "my decision" for events I'm going -->
                                 <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
-
                                     @csrf
                                     @method('PUT')
 
                                     <label for="decision">My Decision:</label>
                                     <select name="decision" id="decision">
-                                        <option value="Going" {{ $attendance->participation === 'Going' ? 'selected' : '' }}>Going</option>
-                                        <option value="Maybe" {{ $attendance->participation === 'Maybe' ? 'selected' : '' }}>Maybe</option>
-                                        <option value="Not Going" {{ $attendance->participation === 'Not Going' ? 'selected' : '' }}>Not Going</option>
+                                        <option value="Going" {{ optional($attendance)->participation === 'Going' ? 'selected' : '' }}>Going</option>
+                                        <option value="Maybe" {{ optional($attendance)->participation === 'Maybe' ? 'selected' : '' }}>Maybe</option>
+                                        <option value="Not Going" {{ optional($attendance)->participation === 'Not Going' ? 'selected' : '' }}>Not Going</option>
                                     </select>
+
 
                                     <button type="submit">Update Decision</button>
                                 </form>
@@ -58,7 +58,20 @@
                                 <p>Start Date: {{ $attendance->startdatetime }}</p>
                                 <p>End Date: {{ $attendance->enddatetime }}</p>
 
-                                
+                                <!-- Form to change "my decision" for events I'm not going -->
+                                <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <label for="decision">My Decision:</label>
+                                    <select name="decision" id="decision">
+                                        <option value="Not Going" {{ optional($attendance)->participation === 'Not Going' ? 'selected' : '' }}>Not Going</option>
+                                        <option value="Going" {{ optional($attendance)->participation === 'Going' ? 'selected' : '' }}>Going</option>
+                                        <option value="Maybe" {{ optional($attendance)->participation === 'Maybe' ? 'selected' : '' }}>Maybe</option>
+                                    </select>
+
+                                    <button type="submit">Update Decision</button>
+                                </form>
                             </div>
                         </a>
                     </div>
@@ -83,6 +96,21 @@
                                 <p>Start Date: {{ $attendance->startdatetime }}</p>
                                 <p>End Date: {{ $attendance->enddatetime }}</p>
 
+                                <!-- Form to change "my decision" for events I may be going -->
+                                <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <label for="decision">My Decision:</label>
+                                    <select name="decision" id="decision">
+                                        <option value="Maybe" {{ optional($attendance)->participation === 'Maybe' ? 'selected' : '' }}>Maybe</option>
+                                        <option value="Going" {{ optional($attendance)->participation === 'Going' ? 'selected' : '' }}>Going</option>
+                                        <option value="Not Going" {{ optional($attendance)->participation === 'Not Going' ? 'selected' : '' }}>Not Going</option>
+                                    </select>
+
+
+                                    <button type="submit">Update Decision</button>
+                                </form>
                             </div>
                         </a>
                     </div>
