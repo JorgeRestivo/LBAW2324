@@ -12,6 +12,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AboutController;
 use APP\Http\Controllers\FaqController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,9 +77,6 @@ Route::controller(EventsController::class)->group(function () {
     Route::post('/events/removeFromWishlist/{eventId}', [EventsController::class, 'removeFromWishlist'])->name('events.removeFromWishlist');
     
 
-
-    // teste por causa do css
-
 });
 
 //Admin
@@ -139,8 +137,7 @@ Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->n
 // No seu arquivo de rotas (web.php)
 Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
-// Rotas web.php
-Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
-Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
-
 Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destroy'])->name('comment.destroy');
+
+Route::get('auth/google',[GoogleController::class, 'googlepage']);
+Route::get('auth/google/callback',[GoogleController::class, 'googlecallback']);

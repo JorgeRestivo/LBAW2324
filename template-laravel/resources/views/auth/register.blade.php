@@ -64,11 +64,7 @@
             <input id="password-confirm" class="custom-input" type="password" name="password_confirmation" required>
         </div>
 
-        <div class="login-button-container">
-        <button type="submit">
-            Register
-        </button>
-        </div>
+
 
         <div class="login-button-container">
           <button type="submit" class="login-button">
@@ -78,6 +74,13 @@
 
         
     </form>
+
+    
+    @if (session('message'))
+    <div class="alert alert-info">
+        {{ session('message') }}
+    </div>
+@endif
 
 
 @endsection
