@@ -66,49 +66,19 @@
 
     <p style="color: #000; font-size: 15px; font-family: 'Gill Sans', sans-serif;">--- Or sign in with ---</p>
 
-    <!-- Botão de Login do Google -->
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <p id='msg'></p>
-    <!-- Adicione uma função JavaScript para lidar com o sucesso do login do Google -->
-    <script>
-    function onSignIn(googleUser) {
-        // Aqui você pode implementar a lógica para lidar com o login bem-sucedido
-        // Por exemplo, enviar dados para o servidor ou redirecionar o usuário.
-        var profile = googleUser.getBasicProfile();
-        var userID = profile.getId();
-        var userName = profile.getName();
-        var userPicture = profile.getImageUrl();
-        var userEmail = profile.getEmail();
-        var userToken = googleUser.getAuthResponse().id_token;
-
-        document.getElementById('msg').innerHTML = userName;
-        if(userEmail !== '') {
-            var dados = {
-                userID:userID,
-                userName:userName,
-                userPicture:userPicture,
-                userEmail:userEmail,
-                userToken:userToken
-            };
-            $.post('valida.blade.php',dados, function(retorna)) {
-                if(retorna === '"error"') {
-                    var msg = "User not found with this email";
-                    document.getElementById('msg').innerHTML = retorna;
-                } else {
-                    window.location.href = retorna;
-                }
-            };
-        } else {
-            var msg = "User not found";
-            document.getElementById('msg').innerHTML = msg;
-        }
-        /*console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());*/
-    }
-</script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <div>
+        <a style="background-color: skyblue; "href="{{url('auth/google')}}">
+        Login using Google
+        </a>
+    </div>
 </div>
+
+@if (session('message'))
+    <div class="alert alert-info">
+        {{ session('message') }}
+    </div>
+@endif
+
+
 
 @endsection
