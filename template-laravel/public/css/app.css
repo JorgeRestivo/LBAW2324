@@ -456,3 +456,29 @@ h2 {
   font-size: 30px;
   color: #f0ba4b;
 }
+
+.wishlist-and-going {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.wishlist-and-going form {
+  margin-left: 10px; 
+}
+
+.wishlist-and-going button {
+  border: 2px solid #f0ba4b; 
+  border-radius: 20px; 
+  padding: 8px 15px;
+  margin-top:6px;
+  background-color: #f0ba4b; 
+  color: #fff;
+  cursor: pointer;
+}
+
+.wishlist-and-going button.not-going {
+  background-color: #f00;
+  border-color: #f00; 
+  color: #fff;
+}

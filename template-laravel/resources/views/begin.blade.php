@@ -37,40 +37,44 @@
                     </div>
                 </a>
                 
-                <div class="wishlist">
-                    @if($event['inWishlist'])
-                        <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
-                            @csrf
-                            <button type="submit" style="display: none;">
-                                <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
-                            </button>
-                        </form>
-                    @else
-                        <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
-                            @csrf
-                            <button type="submit" style="display: none;">
-                                <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
-                            </button>
-                        </form>
-                    @endif
-                    <a href="#" onclick="event.preventDefault(); this.previousElementSibling.submit();">
-                        @if($event['inWishlist'])
-                            <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
-                        @else
-                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
-                        @endif
-                    </a>
-                </div>
-                <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => $event['isGoing'] ? 'Not Going' : 'Going']) }}">
+                <div class="wishlist-and-going">
+        <div class="wishlist">
+            @if($event['inWishlist'])
+                <form action="{{ route('events.removeFromWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                    @csrf
+                    <button type="submit" style="display: none;">
+                        <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
+                    </button>
+                </form>
+            @else
+                <form action="{{ route('events.addToWishlist', ['eventId' => $event['id']]) }}" method="POST">
+                    @csrf
+                    <button type="submit" style="display: none;">
+                        <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
+                    </button>
+                </form>
+            @endif
+            <a href="#" onclick="event.preventDefault(); this.previousElementSibling.submit();">
+                @if($event['inWishlist'])
+                    <img src="{{ asset('icons/bookmark.png') }}" alt="Event on Wishlist" style="width: 40px; height: 40px;">
+                @else
+                    <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Add to Wishlist" style="width: 40px; height: 40px;">
+                @endif
+            </a>
+        </div>
+
+        <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => $event['isGoing'] ? 'Not Going' : 'Going']) }}">
     @csrf
-    <button type="submit">
+    <button type="submit" class="{{ $event['isGoing'] ? 'going' : 'not-going' }}">
         @if($event['isGoing'])
-            Not Going
+            I am going
         @else
-            I'm Going
+            I am not going
         @endif
     </button>
 </form>
+
+    </div>
 
 
 
