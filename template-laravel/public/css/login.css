@@ -93,3 +93,17 @@ label {
     cursor: pointer;
     margin-top:20px;
 }
+
+.message-container {
+    margin-left:31%;
+    position: relative;
+    padding: 20px;
+    width: 40%;
+    border-radius: 20px;
+    background-color: #e78484;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.alert-info {
+    font-family: 'Gill Sans';
+}

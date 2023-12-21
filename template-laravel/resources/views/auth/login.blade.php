@@ -15,6 +15,14 @@
     </p>
 @endif
 
+@if (session('message'))
+    <div class="message-container">
+        <div class="alert alert-info">
+            {{ session('message') }}
+        </div>
+    </div>
+@endif
+
 
 <div class="container">
     <!-- Adicione o script da API do Google -->
@@ -64,20 +72,9 @@
         
     </form>
 
-    <p style="color: #000; font-size: 15px; font-family: 'Gill Sans', sans-serif;">--- Or sign in with ---</p>
 
-    <div>
-        <a style="background-color: skyblue; "href="{{url('auth/google')}}">
-        Login using Google
-        </a>
-    </div>
+
 </div>
-
-@if (session('message'))
-    <div class="alert alert-info">
-        {{ session('message') }}
-    </div>
-@endif
 
 
 

@@ -49,7 +49,8 @@ CREATE TABLE users (
   password VARCHAR(256) NOT NULL,
   userStatus user_status_types NOT NULL DEFAULT 'Active',
   isAdmin BOOLEAN DEFAULT FALSE,
-  profile_photo VARCHAR(255) DEFAULT 'user_profile.png'
+  profile_photo VARCHAR(255) DEFAULT 'user_profile.png',
+  remember_token VARCHAR(100) NULL
 );
 
 CREATE TABLE tag (

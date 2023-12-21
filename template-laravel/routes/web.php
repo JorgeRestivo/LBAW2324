@@ -139,5 +139,18 @@ Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->nam
 
 Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destroy'])->name('comment.destroy');
 
-Route::get('auth/google',[GoogleController::class, 'googlepage']);
-Route::get('auth/google/callback',[GoogleController::class, 'googlecallback']);
+
+//TEST
+// Google OAuth Routes
+Route::get('login/google', [LoginController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback/login', [LoginController::class, 'handleGoogleCallback']);
+
+Route::get('register/google', [RegisterController::class, 'redirectToGoogle'])->name('google.register');
+Route::get('/auth/google/callback', [RegisterController::class, 'handleGoogleCallback']);
+
+
+Route::get('register/username', function () {
+    return view('auth.username');
+})->name('register.username');
+
+Route::post('register/finish', [RegisterController::class, 'completeRegistration'])->name('register.finish');

@@ -9,6 +9,14 @@
     <a class="button button-outline" style="color: #000; font-size: 17px; font-family: 'Gill Sans', sans-serif; margin-right:2%;" href="{{ route('login') }}">Sign In</a>
 </div>
 
+@if (session('message'))
+    <div class="message-container">
+        <div class="alert alert-info">
+            {{ session('message') }}
+        </div>
+    </div>
+@endif
+
 <div class="container">
     <p style="color: #f0ba4b; font-size: 35px; font-weight: bold; font-family: 'Gill Sans', sans-serif;">Sign Up</p>
     <div class="custom-message-container">
@@ -65,22 +73,22 @@
         </div>
 
 
-
         <div class="login-button-container">
           <button type="submit" class="login-button">
-            Register
+            Sign Up
           </button>
         </div>
 
         
     </form>
 
-    
-    @if (session('message'))
-    <div class="alert alert-info">
-        {{ session('message') }}
+    <p style="color: #000; font-size: 15px; font-family: 'Gill Sans', sans-serif;">--- Or sign up with Google ---</p>
+    <div>
+        <a href="{{ route('google.register') }}">Sign up using Google</a>
     </div>
-@endif
+
+
+
 
 
 @endsection
