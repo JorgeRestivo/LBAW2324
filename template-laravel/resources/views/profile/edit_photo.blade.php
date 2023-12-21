@@ -3,7 +3,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Editar Foto do Perfil</h2>
+
+<a href="{{ route('profile.show', ['id' => Auth::id()]) }}" class="back-to-profile-link">
+        <img src="{{ asset('icons/arrow_back.png') }}" alt="Back to Profile" style="transform: rotate(180deg) scale(0.7); margin-left: 10px;">
+    </a>
+    <h2 style="display: inline-block;">Edit Profile</h2>
 
     @if(session('success'))
         <div class="alert alert-success">
