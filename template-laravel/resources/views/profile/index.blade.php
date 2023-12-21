@@ -28,7 +28,13 @@
 </div>
 
 <div class="wishlist-container">
-    <h3>Wishlist Events</h3>
+    <div style="overflow: hidden;"> <!-- Container for clearfix -->
+        <h3 style="float: left; margin-right: 10px;">Wishlist Events</h3>
+        <div class="view-all-link" style="float: right; margin-right: 10px; maring-top:4px;">
+            <a href="{{ route('events.wishlist') }}" style="color: #f0ba4b;">View All</a>
+        </div>
+    </div>
+
     <div class="event-box-wishlist">
         @php $counter = 0 @endphp
         @foreach($wishlist as $event)
