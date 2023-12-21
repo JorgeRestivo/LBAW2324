@@ -4,23 +4,33 @@
 
 <link rel="icon" href="{{ asset('icons/shaking_hands.png') }}" type="image/png">
 
+<div class="header-container">
+    <img src="{{ asset('photos/GetTogether.png') }}" alt="Logo" class="logo">
+    <a class="button button-outline" style="color: #000; font-size: 17px; font-family: 'Gill Sans', sans-serif; margin-right:2%;" href="{{ route('register') }}">Register</a>
+</div>
+
+@if (session('success'))
+    <p class="success">
+        {{ session('success') }}
+    </p>
+@endif
+
+
 <div class="container">
     <!-- Adicione o script da API do Google -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <meta name="google-signin-client_id" content="gettogether@praxis-water-408115.iam.gserviceaccount.com">
 
-    <p style="color: #f0ba4b; font-size: 35px; font-weight: bold; font-family: 'Gill Sans', sans-serif;">Log In</p>
+    <p style="color: #f0ba4b; font-size: 35px; font-weight: bold; font-family: 'Gill Sans', sans-serif;">Sign In</p>
     <div class="custom-message-container">
     <p style="color: #000; font-size: 17px; font-family: 'Gill Sans', sans-serif; margin-bottom:30px;">Hello! Enter your details to get sign in to your account.</p>
 </div>
 
-
-
-    <form id="login-form"  method="POST" action="{{ route('login') }}">
+<form id="login-form"  method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
 
-        <div class="custom-input-container">
+ <div class="custom-input-container">
     <label for="email">E-mail</label>
     <input id="email" class="custom-input" type="text" name="email" value="{{ old('email') }}" required autofocus>
     @if ($errors->has('email'))
@@ -51,12 +61,7 @@
         Sign In
     </button>
 </div>
-        <a class="button button-outline" href="{{ route('register') }}">Register</a>
-        @if (session('success'))
-            <p class="success">
-                {{ session('success') }}
-            </p>
-        @endif
+        
     </form>
 
     <p style="color: #000; font-size: 15px; font-family: 'Gill Sans', sans-serif;">--- Or sign in with ---</p>
