@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-    <a href="{{ route('profile', ['id' => Auth::id()]) }}" class="back-to-profile-link">
+    <a href="{{ route('profile.show', ['id' => Auth::id()]) }}" class="back-to-profile-link">
         <img src="{{ asset('icons/arrow_back.png') }}" alt="Back to Profile" style="transform: rotate(180deg) scale(0.7); margin-left: 10px;">
     </a>
     <h2 style="display: inline-block;">My Wishlist</h2>
