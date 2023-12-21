@@ -61,10 +61,19 @@
                         @endif
                     </a>
                 </div>
-                <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => 'Going']) }}">
+                <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => $event['isGoing'] ? 'Not Going' : 'Going']) }}">
     @csrf
-    <button type="submit">I'm Going</button>
+    <button type="submit">
+        @if($event['isGoing'])
+            Not Going
+        @else
+            I'm Going
+        @endif
+    </button>
 </form>
+
+
+
 
             </div>
         @endforeach

@@ -31,12 +31,11 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents(){
-        $tags = Tag::all();
-
+    public function showEvents()
+{
+    $tags = Tag::all();
 
     $publicEvents = Event::where('ispublic', true)->get()->toArray();
-
 
     $userId = auth()->id();
     $privateEvents = Event::whereIn(
@@ -48,17 +47,30 @@ class EventsController extends Controller
         }
     )->where('ispublic', false)->get()->toArray();
 
-
     $events = array_merge($publicEvents, $privateEvents);
 
-
     $wishlist = $this->checkWishlist();
+    
+    // Check attendance status for each event
     foreach ($events as &$event) {
         $event['inWishlist'] = in_array($event['id'], $wishlist);
+        $event['isGoing'] = $this->checkAttendanceStatus($event['id'], $userId, 'Going');
     }
 
     return view('begin', ['events' => $events, 'wishlist' => $wishlist, 'tags' => $tags]);
 }
+
+private function checkAttendanceStatus($eventId, $userId, $participation)
+{
+    $attendance = DB::table('attendance')
+        ->where('event_id', $eventId)
+        ->where('user_id', $userId)
+        ->where('participation', $participation)
+        ->exists();
+
+    return $attendance;
+}
+
 
 
     public function createEvent(Request $request) {
@@ -211,34 +223,20 @@ public function sendInvitation(Request $request, $eventId)
         return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents, 'maybegoingEvents' => $maybegoingEvents]);
     }
 
-    public function toggleAttendance($eventId, $participation)
+public function toggleAttendance(Request $request, $eventId, $participation)
 {
-    $userId = Auth::id();
+    $userId = auth()->id();
 
-    // Find or create the attendance record for the user and event
-    $attendance = DB::table('attendance')
-        ->where('user_id', $userId)
-        ->where('event_id', $eventId)
-        ->first();
+    // Update or create attendance record
+    DB::table('attendance')->updateOrInsert(
+        ['event_id' => $eventId, 'user_id' => $userId],
+        ['participation' => $participation]
+    );
 
-    if (!$attendance) {
-        $attendance = DB::table('attendance')->insert([
-            'user_id' => $userId,
-            'event_id' => $eventId,
-            'participation' => $participation,
-            'wishlist' => false, // Set wishlist status as needed
-        ]);
-    } else {
-        // Update the participation status
-        DB::table('attendance')
-            ->where('user_id', $userId)
-            ->where('event_id', $eventId)
-            ->update(['participation' => $participation]);
-    }
-
-    // Redirect back to the events page or wherever you want
     return redirect()->back()->with('success', 'Attendance status updated.');
 }
+
+
 
     public function showWishlist()
     {
