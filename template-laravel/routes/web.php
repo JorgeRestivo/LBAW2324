@@ -114,6 +114,8 @@ Route::controller(NotificationController::class)->group(function () {
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/showWishlist', [ProfileController::class, 'showWishlist'])->name('profile.showWishlist');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
