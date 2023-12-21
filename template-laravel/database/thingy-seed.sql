@@ -286,16 +286,3 @@ VALUES
   (19, 9, 'Going', false),
   (24, 1, 'Not Going', false);
 
-
-INSERT INTO notification (dateTime, notified_user, type, description) 
-VALUES 
-  ('2023-09-05 08:30:00', 1, 'event_notification', 'ola'),
-  ('2023-10-10 11:45:00', 2, 'comment_notification', 'ola'),
-  ('2023-11-15 14:20:00', 3, 'event_notification', 'ola'),
-  ('2023-10-20 09:00:00', 4, 'comment_notification', 'ola'),
-  ('2022-01-25 12:00:00', 5, 'event_notification', 'ola'),
-  ('2022-02-27 17:30:00', 6, 'comment_notification', 'ola'),
-  ('2022-04-05 14:45:00', 7, 'event_notification', 'ola'),
-  ('2023-05-10 18:20:00', 8, 'comment_notification', 'ola'),
-  ('2021-06-15 11:15:00', 9, 'event_notification', 'ola'),
-  ('2021-07-01 10:00:00', 10, 'comment_notification', 'ola');

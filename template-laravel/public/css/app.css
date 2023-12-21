@@ -122,9 +122,10 @@ nav a {
 /* Comment box styles */
 .comment-box {
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 10px;
   margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Override milligram colors */
@@ -481,4 +482,15 @@ h2 {
   background-color: #f00;
   border-color: #f00; 
   color: #fff;
+}
+
+.delete-comment-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+}
+
+.delete-comment-btn:hover {
+  color: darkred;
 }

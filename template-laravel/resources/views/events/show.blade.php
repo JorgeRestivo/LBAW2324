@@ -25,7 +25,7 @@
         </div>
 
         <div class="comments-container">
-            <h3>Comments</h3>
+            <h3 style="color:#f0ba4b;">Comments</h3>
             
             @if(count($comments) > 0)
                 @foreach($comments as $comment)
@@ -49,8 +49,8 @@
             <!-- Formulário para adicionar um novo comentário -->
             <form method="post" action="{{ route('comment.store', ['eventId' => $event->id]) }}">
                 @csrf
-                <textarea name="content" placeholder="Add a comment..." required></textarea>
-                <button type="submit">Add Comment</button>
+                <textarea name="content" style="border-radius: 15px;" placeholder="Add a comment..." required></textarea>
+                <button type="submit" style="border-radius: 20px; background-color:#f0ba4b;border: 2px solid #f0ba4b; ">Add Comment</button>
             </form>
         </div>
     </div>
