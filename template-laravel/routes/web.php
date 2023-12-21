@@ -58,6 +58,9 @@ Route::controller(EventsController::class)->group(function () {
 
     Route::post('/events/add-to-wishlist/{eventId}', [EventsController::class, 'addToWishlist'])->name('events.addToWishlist');
     Route::post('/events/removeFromWishlist/{eventId}', [EventsController::class, 'removeFromWishlist'])->name('events.removeFromWishlist');
+    Route::post('/events/attendance/{eventId}/{participation}', [EventsController::class, 'toggleAttendance'])->name('events.toggleAttendance');
+
+
     
 
 });

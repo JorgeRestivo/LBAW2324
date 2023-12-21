@@ -61,7 +61,10 @@
                         @endif
                     </a>
                 </div>
-
+                <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => 'Going']) }}">
+    @csrf
+    <button type="submit">I'm Going</button>
+</form>
 
             </div>
         @endforeach

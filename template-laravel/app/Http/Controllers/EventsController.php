@@ -63,7 +63,6 @@ class EventsController extends Controller
 
     public function createEvent(Request $request) {
         try {
-            Log::info('createEvent method called');
     
             $request->validate([
                 'eventname' => 'required|string|max:256',
@@ -82,29 +81,32 @@ class EventsController extends Controller
     
             $ownerId = auth()->id();
 
-            $eventData = $request->all();
-            $eventData['owner_id'] = $ownerId;
+        $eventData = $request->all();
+        $eventData['owner_id'] = $ownerId;
 
-            $eventData['isPublic'] = $request->has('isPublic') ? $request->input('isPublic') : true;
-            $eventData['status'] = $request->input('status', 'Active');
-    
-            if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('event_photos', 'public');
-                $eventData['photo'] = $photoPath;
-            }
-    
-            $event = Event::create($eventData);
-    
+        $eventData['isPublic'] = $request->has('isPublic') ? $request->input('isPublic') : true;
+        $eventData['status'] = $request->input('status', 'Active');
 
-            $events = Event::all();
-
-            return view('begin', ['events' => $events]);
-
-        } catch (\Exception $e) {
-            Log::error('Error creating event: ' . $e->getMessage());
-    
-            return redirect()->back()->with('error', 'Error creating event. Please try again.');
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('event_photos', 'public');
+            $eventData['photo'] = $photoPath;
         }
+
+        $event = Event::create($eventData);
+
+        // Fetch tags to pass to the view
+        $tags = Tag::all();
+
+        $events = Event::all();
+
+        // Pass tags to the 'begin' view
+        return view('begin', ['events' => $events, 'tags' => $tags]);
+
+    } catch (\Exception $e) {
+        Log::error('Error creating event: ' . $e->getMessage());
+
+        return redirect()->back()->with('error', 'Error creating event. Please try again.');
+    }
     }
 
 
@@ -209,6 +211,34 @@ public function sendInvitation(Request $request, $eventId)
         return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents, 'maybegoingEvents' => $maybegoingEvents]);
     }
 
+    public function toggleAttendance($eventId, $participation)
+{
+    $userId = Auth::id();
+
+    // Find or create the attendance record for the user and event
+    $attendance = DB::table('attendance')
+        ->where('user_id', $userId)
+        ->where('event_id', $eventId)
+        ->first();
+
+    if (!$attendance) {
+        $attendance = DB::table('attendance')->insert([
+            'user_id' => $userId,
+            'event_id' => $eventId,
+            'participation' => $participation,
+            'wishlist' => false, // Set wishlist status as needed
+        ]);
+    } else {
+        // Update the participation status
+        DB::table('attendance')
+            ->where('user_id', $userId)
+            ->where('event_id', $eventId)
+            ->update(['participation' => $participation]);
+    }
+
+    // Redirect back to the events page or wherever you want
+    return redirect()->back()->with('success', 'Attendance status updated.');
+}
 
     public function showWishlist()
     {
