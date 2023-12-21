@@ -130,12 +130,19 @@
         notificationDropdown.appendChild(notificationItem);
     });
 
+    
+
     // Handle invitations
     data.invitations.forEach(invitation => {
         const invitationItem = document.createElement('div');
         invitationItem.textContent = invitation.message; // Using 'message' from the backend
         notificationDropdown.appendChild(invitationItem);
     });
+
+    const receivedInvitationsLink = document.createElement('a');
+        receivedInvitationsLink.href = "{{ route('received_invitations.index') }}";
+        receivedInvitationsLink.textContent = "See all received invitations here";
+        notificationDropdown.appendChild(receivedInvitationsLink);
 }
 
 

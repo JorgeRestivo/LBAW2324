@@ -269,15 +269,18 @@ input[type=password]:focus {
 }
 
 .notification-dropdown {
-  border: 2px solid red; /* Red border for the container */
-  background-color: white; /* Optional: Change the background color if needed */
-  padding: 10px; /* Add some padding for better layout */
-  border-radius: 5px; /* Optional: Round corners for better aesthetics */
-  display: none; /* Initially hidden */
+  position: absolute;
+  border: 2px solid #f0ba4b; 
+  background-color: white; 
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; 
+  display: none;
+  z-index: 2;
 }
 
 .notification-dropdown.show {
-  display: block; /* Show the dropdown when the 'show' class is added */
+  display: block; 
 }
 
 .share {

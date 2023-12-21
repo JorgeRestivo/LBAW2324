@@ -59,13 +59,31 @@
                     </span>
 
                     <!-- Create MyEvents Button -->
-                    <a href="{{ route('events.myevents') }}">My Events</a>
+                    <span class="home_button @if(Request::is('events/myevents')) active @endif">
+                        <a href="{{ url('events/myevents') }}">
+                            @if(Request::is('events/myevents'))
+                            <img src="{{ asset('icons/shaking_yellow.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @else
+                            <img src="{{ asset('icons/shaking_grey.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @endif
+                            My Events
+                        </a>
+                    </span>
 
                     <!-- Sent Invitations Button -->
-                    <a href="{{ route('sent_invitations.index') }}">Sent Invitations</a>
+                    <span class="home_button @if(Request::is('sent-invitations')) active @endif">
+                        <a href="{{ url('sent-invitations') }}">
+                            @if(Request::is('sent-invitations'))
+                            <img src="{{ asset('icons/sent_yellow.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @else
+                            <img src="{{ asset('icons/sent_grey.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @endif
+                            Sent Invitations
+                        </a>
+                    </span>
 
-                    <!-- Received Invitations Button -->
-                    <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
+
+
 
                     <!-- My schedule Button -->
                     <span class="home_button @if(Request::is('events/going')) active @endif">
