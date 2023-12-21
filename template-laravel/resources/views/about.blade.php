@@ -1,4 +1,12 @@
-<!-- Dentro do arquivo resources/views/about.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+</head>
+<body>
+
 @extends('layouts.app')
 
 @section('content')
@@ -13,3 +21,6 @@
         <li>Group member 3: Lara Cunha, <a href="mailto:up202108876@edu.fe.up.pt">up202108876@edu.fe.up.pt</a></li>
     </ul>
 @endsection
+
+</body>
+</html>

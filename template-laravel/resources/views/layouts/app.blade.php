@@ -85,7 +85,7 @@
                     <a href="{{ route('events.create') }}" class="create-event-button">Create Event</a>
 
                     @if( Auth::user()->isadmin == 'true')
-                        <a href="{{ route('admin.nonAdminUsers') }}">Go to Admin Page</a>
+                        <a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                     @endif
                     
                     <a href="{{ route('about') }}">About</a>

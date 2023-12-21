@@ -13,22 +13,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AboutController;
 use APP\Http\Controllers\FaqController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\ChangePasswordController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|adkadkalkdalkda
-*/
 
-//Start
+
+
 Route::redirect('/', '/login');
 
-// Authentication
+
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'showLog')->name('login');
     Route::post('/login', 'authenticate');
@@ -40,17 +32,8 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/register', 'register');
 });
 
-// Home
-Route::controller(HomeController::class)->group(function () { 
-    Route::get('/home','showHome');
-});
 
-//User
-Route::controller(UserController::class)->group(function () {
-    Route::get('/user/{id}', 'showUser')->where('id','[0-9]+')->name('profile');
-});
 
-// Events
 Route::controller(EventsController::class)->group(function () {
 
     Route::get('/events-begin', [EventsController::class, 'showEvents'])->name('events.begin');
@@ -79,10 +62,10 @@ Route::controller(EventsController::class)->group(function () {
 
 });
 
-//Admin
+
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin','showAdmin')->name('admin');
-    Route::get('/admin/non-admin-users', 'showNonAdminUsers')->name('admin.nonAdminUsers');
+    Route::get('/admin/non-admin-users', 'showNonAdminUsers')->name('admin.nonAdminUsers'); 
+    Route::get('/admin/dashboard', 'showAdminDashboard')->name('admin.dashboard');
     Route::put('/admin/suspend-user/{id}', 'suspendUser')->name('admin.suspendUser');
     Route::get('/admin/view-user-info/{id}',  'viewUserInfo')->name('admin.viewUserInfo');
     Route::get('/admin/manage-events', 'manageEvents')->name('admin.manageEvents');
@@ -92,14 +75,14 @@ Route::controller(AdminController::class)->group(function () {
     Route::put('/admin/users/{id}/update-status', 'updateUserStatus')->name('admin.updateUserStatus');
 });
 
-//Comments
+
 Route::controller(CommentsController::class)->group(function () {
     Route::get('/comments', [CommentsController::class, 'index'])->name('comments.index');
 });
 
 
 
-//Notifications
+
 Route::controller(NotificationController::class)->group(function () {
     Route::get('/notifications', [NotificationController::class, 'getNotifications']);
     Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notifications');
@@ -108,7 +91,7 @@ Route::controller(NotificationController::class)->group(function () {
 });
 
 
-// profile page
+
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/showWishlist', [ProfileController::class, 'showWishlist'])->name('profile.showWishlist');
@@ -122,13 +105,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
 
-// Route::get('/about', 'AboutController@index')->name('about');
-// Route::resource('about', 'AboutController')->only(['index']);
+
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-// Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 
-// Route::get('/faq', 'FaqController@index')->name('faq');
 
 Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('faq');
 
