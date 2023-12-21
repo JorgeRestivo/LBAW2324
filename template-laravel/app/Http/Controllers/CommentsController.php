@@ -32,4 +32,20 @@ class CommentsController extends Controller
         // Redirecione de volta para a página do evento
         return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Comment added successfully.');
     }
+
+    public function destroy($commentId)
+    {
+        $comment = Comment::findOrFail($commentId);
+
+        // Verificar se o usuário atual é o proprietário do comentário
+        if (auth()->id() == $comment->owner_id) {
+            $comment->delete();
+
+            return redirect()->back()->with('success', 'Comment deleted successfully.');
+        }
+
+        // Se o usuário não for o proprietário, redirecione com uma mensagem de erro
+        return redirect()->back()->with('error', 'Permission denied. You are not the owner of the comment.');
+    }
+
 }
