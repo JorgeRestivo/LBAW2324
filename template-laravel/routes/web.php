@@ -142,3 +142,5 @@ Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->nam
 // Rotas web.php
 Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
+
+Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destroy'])->name('comment.destroy');
