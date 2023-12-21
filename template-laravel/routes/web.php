@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AboutController;
 use APP\Http\Controllers\FaqController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,3 +142,9 @@ Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destro
 
 Route::get('auth/google',[GoogleController::class, 'googlepage']);
 Route::get('auth/google/callback',[GoogleController::class, 'googlecallback']);
+
+
+// Password Recover
+
+Route::get('/password/reset', [ChangePasswordController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/password/reset', [ChangePasswordController::class, 'resetPassword']);
