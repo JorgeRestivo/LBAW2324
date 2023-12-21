@@ -68,7 +68,17 @@
                     <a href="{{ route('received_invitations.index') }}">Received Invitations</a>
 
                     <!-- My schedule Button -->
-                    <a href="{{ route('events.going') }}">My Schedule</a>
+                    <span class="home_button @if(Request::is('events/going')) active @endif">
+                        <a href="{{ url('/events/going') }}">
+                            @if(Request::is('events/going'))
+                            <img src="{{ asset('icons/schedule_yellow.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @else
+                            <img src="{{ asset('icons/schedule_grey.png') }}" alt="Ícone" style="width: 20px; height: auto;">
+                            @endif
+                            My Schedule
+                        </a>
+                    </span>
+
 
 
                     <!-- Create Event Button -->
