@@ -51,11 +51,7 @@
             @endif
         </div>
 
-        <div class="remember-container">
-            <label class="remember-label">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-            </label>
-        </div>
+        
 
         <div class="login-button-container">
             <button type="submit" class="login-button">
