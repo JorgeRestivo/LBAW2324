@@ -336,52 +336,52 @@ public function removeAttendee($eventId, $userId)
     }
 
     public function filterByTag(Request $request)
-    {
-        $tags = Tag::all();
-        $tagId = $request->query('tag');
+{
+    $tags = Tag::all();
+    $tagId = $request->query('tag');
 
-        $userId = auth()->id();
+    $userId = auth()->id();
 
-        if ($tagId) {
-            // Retrieve public events associated with the specified tag
-            $publicEvents = Event::where('tag_id', $tagId)
-                ->where('ispublic', true)
-                ->get();
+    if ($tagId && $tagId !== 'all') {
+        // Retrieve public events associated with the specified tag
+        $publicEvents = Event::where('tag_id', $tagId)
+            ->where('ispublic', true)
+            ->get();
 
-            // Retrieve private events for which the user was invited associated with the specified tag
-            $privateEvents = Event::whereIn(
-                'id',
-                function ($query) use ($userId, $tagId) {
-                    $query->select('events.id')
-                        ->from('events')
-                        ->join('eventinvitation', 'events.id', '=', 'eventinvitation.event_id')
-                        ->where('eventinvitation.user_invited_id', $userId)
-                        ->where('events.ispublic', false)
-                        ->where('events.tag_id', $tagId);
-                }
-            )->get();
+        // Retrieve private events for which the user was invited associated with the specified tag
+        $privateEvents = Event::whereIn(
+            'id',
+            function ($query) use ($userId, $tagId) {
+                $query->select('events.id')
+                    ->from('events')
+                    ->join('eventinvitation', 'events.id', '=', 'eventinvitation.event_id')
+                    ->where('eventinvitation.user_invited_id', $userId)
+                    ->where('events.ispublic', false)
+                    ->where('events.tag_id', $tagId);
+            }
+        )->get();
 
-            $events = $publicEvents->merge($privateEvents);
-        } else {
-            // If no tag is specified, retrieve all public events and private events for which the user was invited
-            $publicEvents = Event::where('ispublic', true)->get();
+        $events = $publicEvents->merge($privateEvents);
+    } else {
+        // If no tag is specified or "all" is selected, retrieve all public events and private events for which the user was invited
+        $publicEvents = Event::where('ispublic', true)->get();
 
-            $privateEvents = Event::whereIn(
-                'id',
-                function ($query) use ($userId) {
-                    $query->select('event_id')
-                        ->from('eventinvitation')
-                        ->where('user_invited_id', $userId);
-                }
-            )->where('ispublic', false)->get();
+        $privateEvents = Event::whereIn(
+            'id',
+            function ($query) use ($userId) {
+                $query->select('event_id')
+                    ->from('eventinvitation')
+                    ->where('user_invited_id', $userId);
+            }
+        )->where('ispublic', false)->get();
 
-            $events = $publicEvents->merge($privateEvents);
-        }
-
-        // ... pass $events and other necessary data to the view ...
-
-        return view('events.filtered', compact('events'), ['tags' => $tags]);
+        $events = $publicEvents->merge($privateEvents);
     }
+
+    // ... pass $events and other necessary data to the view ...
+
+    return view('events.filtered', compact('events', 'tags'));
+}
 
 
 
