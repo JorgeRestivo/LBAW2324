@@ -345,3 +345,68 @@ input[type=password]:focus {
   height: 150px;
   border-radius: 50%;
 }
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFF;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 80%;
+  width: 25%;
+  margin: 20px;
+  padding: 20px; /* Adiciona espaçamento interno dentro do contêiner */
+}
+
+.rounded-profile {
+  margin-bottom: 7%; /* Adiciona margem abaixo da foto de perfil */
+}
+
+.user-info{
+  background-color: #FFF;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 60%;
+  width: 50%;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15%;
+  margin-top: 2%;
+}
+
+.user-info p {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info strong {
+  color: #c6cbcf;
+  margin-left: 3%;
+}
+
+.user-info strong.info {
+  color: #858b8f;
+  margin-right: 3%;
+}
+
+.user-info h3{
+  margin-left: 3%;
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #787878;
+}
+
+.profile-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.edit-profile {
+  float:right;
+  margin-right: 65%;
+}
