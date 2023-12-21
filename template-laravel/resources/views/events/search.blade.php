@@ -1,5 +1,3 @@
-<!-- resources/views/events/search.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')

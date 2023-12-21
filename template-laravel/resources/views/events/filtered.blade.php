@@ -1,15 +1,12 @@
-<!-- resources/views/events/filtered.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
 
-<!-- Search Bar -->
-<form action="{{ route('events.search') }}" method="GET">
-    <input type="text" name="query" placeholder="Search Events">
-    <button type="submit">Search</button>
-</form>
 
+<form action="{{ route('events.search') }}" method="GET" class="rounded-search-bar">
+    <input type="text" name="query" placeholder="Search Events">
+</form>
 <div class="filter-by-dropdown">
         <label for="tag-filter">Filter by:</label>
         <select id="tag-filter" class="tag-dropdown" onchange="filterByTag(this.value)">
@@ -72,7 +69,6 @@
     @if(isset($newEvent))
         <div class="alert alert-success">
             New Event Created: {{ $newEvent->eventname }}
-            <!-- Display other information about the new event as needed -->
         </div>
     @endif
 
