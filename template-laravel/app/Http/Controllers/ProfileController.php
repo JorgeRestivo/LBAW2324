@@ -41,41 +41,40 @@ class ProfileController extends Controller
     }
 
     public function updateProfile(Request $request)
-    {
-        $request->validate([
-            'username' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    $request->validate([
+        'username' => 'required|string|max:255',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        $user = Auth::user();
-        Log::info('Profile photo path: ' . $user->profile_photo);
-        $user->update([
-            'username' => $request->input('username'),
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+    $user = Auth::user();
 
+    $dataToUpdate = [
+        'username' => $request->input('username'),
+        'name' => $request->input('name'),
+        'email' => $request->input('email'),
+    ];
 
-        if ($request->hasFile('profile_photo')) {
+    // Update only the fields that are provided in the request
+    $user->update(array_filter($dataToUpdate));
 
-            $image = $request->file('profile_photo');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('profile_photos'), $imageName);
+    if ($request->hasFile('profile_photo')) {
+        $image = $request->file('profile_photo');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('profile_photos'), $imageName);
 
-            $profilePhotoPath = 'profile_photos/' . $imageName;
+        $profilePhotoPath = 'profile_photos/' . $imageName;
 
-            $user->profile_photo = $profilePhotoPath;
-            $user->save();
-
-        }
-
+        // Update the profile photo path
+        $user->profile_photo = $profilePhotoPath;
         $user->save();
-
-        return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
     }
+
+    return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
+}
+
 
     public function showWishlist()
     {
