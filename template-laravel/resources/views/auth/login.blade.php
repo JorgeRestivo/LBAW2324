@@ -24,7 +24,7 @@
 
     <p style="color: #f0ba4b; font-size: 35px; font-weight: bold; font-family: 'Gill Sans', sans-serif;">Sign In</p>
     <div class="custom-message-container">
-    <p style="color: #000; font-size: 17px; font-family: 'Gill Sans', sans-serif; margin-bottom:30px;">Hello! Enter your details to get sign in to your account.</p>
+    <p style="color: #000; font-size: 17px; font-family: 'Gill Sans', sans-serif; margin-bottom:30px;">Hello! Enter your details to get sign into your account.</p>
 </div>
 
 <form id="login-form"  method="POST" action="{{ route('login') }}">
