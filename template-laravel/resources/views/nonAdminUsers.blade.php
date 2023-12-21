@@ -1,5 +1,3 @@
-<!-- resources/views/admin/nonAdminUsers.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -8,7 +6,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Non-Admin Users</div>
                     <div class="card-body">
                         @if(session('success'))
                             <div id="success-message" class="alert alert-success" role="alert">
@@ -16,11 +13,7 @@
                             </div>
                         @endif
 
-                        <a href="{{ route('admin.manageEvents') }}" class="btn btn-primary btn-sm">Manage Events</a>
-
-                        <p>List of Non-Admin Users:</p>
-
-                        <!-- ... (previous code) ... -->
+                        <h2>List of Non-Admin Users</h2>
 
                         <table>
                             <thead>
@@ -28,11 +21,11 @@
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>User Status</th>
-                                    <th>Actions</th>
+                                    <th>User Profile</th>
                                 </tr>
                             </thead>
                             <tbody> 
-                                @foreach($nonAdminUsers->sortBy('username') as $user)
+                                @forelse($nonAdminUsers->sortBy('username') as $user)
                                     <tr>
                                         <td>{{ htmlspecialchars($user->username) }}</td>
                                         <td>{{ htmlspecialchars($user->email) }}</td>
@@ -53,33 +46,31 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View Info</a>
+                                            <a href="{{ route('admin.viewUserInfo', ['id' => $user->id]) }}" class="btn btn-info btn-sm">View Profile</a>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="4">No non-admin users found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
 
-                        <!-- ... (remaining code) ... -->
-
-                        @if(count($nonAdminUsers) == 0)
-                            <p>No non-admin users found.</p>
-                        @endif
+                        <!-- JavaScript Timer for Flash Message --> 
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                setTimeout(function () {
+                                    var successMessage = document.getElementById('success-message');
+                                    if (successMessage) {
+                                        successMessage.style.display = 'none';
+                                    }
+                                }, 5000); // Set the duration in milliseconds (e.g., 5000ms for 5 seconds)
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- JavaScript Timer for Flash Message --> 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                var successMessage = document.getElementById('success-message');
-                if (successMessage) {
-                    successMessage.style.display = 'none';
-                }
-            }, 5000); // Set the duration in milliseconds (e.g., 5000ms for 5 seconds)
-        });
-    </script>
 @endsection
