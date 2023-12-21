@@ -15,9 +15,9 @@
                                 <img src="{{ asset('photos/' . $attendance->photo) }}" alt="Event Photo">
                             </div>
                             <div class="event-details">
-                                <h2>{{ $attendance->eventname }}</h2>
-                                <p>Start Date: {{ $attendance->startdatetime }}</p>
-                                <p>End Date: {{ $attendance->enddatetime }}</p>
+                            <p style="font-size: 17px; color: #ef9db2;">Start Date: {{ $attendance->startdatetime }}</p>
+                            <h2 style="font-size: 25px; font-weight: bold; color: #7a7a7a;">{{ $attendance->eventname }}</h2>
+                            <p2 style="font-size: 17px; color: #d3d3d3;">{{ $attendance->description }}</p2>
 
                                 <!-- Form to change "my decision" for events I'm going -->
                                 <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
@@ -54,9 +54,9 @@
                                 <img src="{{ asset('photos/' . $attendance->photo) }}" alt="Event Photo">
                             </div>
                             <div class="event-details">
-                                <h2>{{ $attendance->eventname }}</h2>
-                                <p>Start Date: {{ $attendance->startdatetime }}</p>
-                                <p>End Date: {{ $attendance->enddatetime }}</p>
+                            <p style="font-size: 17px; color: #ef9db2;">Start Date: {{ $attendance->startdatetime }}</p>
+                            <h2 style="font-size: 25px; font-weight: bold; color: #7a7a7a;">{{ $attendance->eventname }}</h2>
+                            <p2 style="font-size: 17px; color: #d3d3d3;">{{ $attendance->description }}</p2>
 
                                 <!-- Form to change "my decision" for events I'm not going -->
                                 <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
@@ -92,9 +92,9 @@
                                 <img src="{{ asset('photos/' . $attendance->photo) }}" alt="Event Photo">
                             </div>
                             <div class="event-details">
-                                <h2>{{ $attendance->eventname }}</h2>
-                                <p>Start Date: {{ $attendance->startdatetime }}</p>
-                                <p>End Date: {{ $attendance->enddatetime }}</p>
+                            <p style="font-size: 17px; color: #ef9db2;">Start Date: {{ $attendance->startdatetime }}</p>
+                            <h2 style="font-size: 25px; font-weight: bold; color: #7a7a7a;">{{ $attendance->eventname }}</h2>
+                            <p2 style="font-size: 17px; color: #d3d3d3;">{{ $attendance->description }}</p2>
 
                                 <!-- Form to change "my decision" for events I may be going -->
                                 <form action="{{ route('event.changeDecision', ['id' => $attendance->id]) }}" method="POST">
