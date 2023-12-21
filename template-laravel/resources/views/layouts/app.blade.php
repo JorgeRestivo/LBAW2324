@@ -69,18 +69,6 @@
                     <!-- My schedule Button -->
                     <a href="{{ route('events.going') }}">My Schedule</a>
 
-                    <!-- Wishlist Button -->
-                    <span class="wishlist_button @if(Request::is('events/wishlist')) active @endif">
-                        <a href="{{ route('events.wishlist') }}">
-                            @if(Request::is('events/wishlist'))
-                            <img src="{{ asset('icons/bookmark.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                            @else
-                            <img src="{{ asset('icons/bookmark_cinzento.png') }}" alt="Ícone" style="width: 20px; height: auto;">
-                            @endif
-                            Wishlist
-                        </a>
-                    </span>
-
 
                     <!-- Create Event Button -->
                     <a href="{{ route('events.create') }}" class="create-event-button">Create Event</a>

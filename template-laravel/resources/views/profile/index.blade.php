@@ -27,6 +27,30 @@
 
 </div>
 
+<div class="wishlist-container">
+    <h3>Wishlist Events</h3>
+    <div class="event-box-wishlist">
+        @php $counter = 0 @endphp
+        @foreach($wishlist as $event)
+            @if($counter < 3)
+                <div class="container-events-wishlist">
+                    <a href="{{ route('event.show', ['id' => $event->id]) }}">
+                        <div class="event-details-wishlist">
+                            <div class="event-photo-wishlist">
+                                <img src="{{ asset('photos/' . $event->photo) }}" alt="Event Photo">
+                            </div>
+                            <div class="event-info">
+                                <h2 style="font-size: 17px; font-weight: bold; color: #7a7a7a;">{{ $event->eventname }}</h2>
+                                <p2 style="font-size: 14px; color: #d3d3d3;">{{ $event->description }}</p2>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @php $counter++ @endphp
+            @endif
+        @endforeach
+    </div>
+</div>
 
 
     

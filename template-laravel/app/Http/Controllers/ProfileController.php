@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -18,7 +18,17 @@ class ProfileController extends Controller
 
     public function show()
     {
-        return view('profile.index');
+        $userId = Auth::id();
+        
+        $wishlist = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.wishlist', '=', true)
+            ->select('events.*')
+            ->get();
+
+        
+        return view('profile.index', ['wishlist' => $wishlist]);
     }
 
     public function editProfilePhotoForm()
@@ -67,4 +77,19 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
     }
+
+    public function showWishlist()
+    {
+        $userId = Auth::id();
+
+        $wishlist = DB::table('attendance')
+            ->join('events', 'attendance.event_id', '=', 'events.id')
+            ->where('attendance.user_id', '=', $userId)
+            ->where('attendance.wishlist', '=', true)
+            ->select('events.*')
+            ->get();
+
+        return view('profile.index', ['wishlist' => $wishlist]);
+    }
+
 }

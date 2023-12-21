@@ -410,3 +410,49 @@ input[type=password]:focus {
   float:right;
   margin-right: 65%;
 }
+
+.wishlist-container {
+  margin-top: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+}
+
+.container-events-wishlist {
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+  margin-right: 7%;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 25%; /* Set a fixed width for the red container */
+  height: 190px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.event-details-wishlist {
+  display: flex;
+  text-align: center;
+}
+
+.event-photo-wishlist img {
+  height: auto;
+  border-radius: 8px;
+  float:left;
+  width: 200px;
+  height: 150px; /* Set width for the image */
+}
+
+.event-info {
+  float:right;
+  margin-left: 10px; /* Add padding for spacing between image and details */
+}
+
+h2 {
+  margin-top: 10px;
+  font-size: 30px;
+  color: #f0ba4b;
+}

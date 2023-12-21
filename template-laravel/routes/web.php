@@ -113,6 +113,7 @@ Route::controller(NotificationController::class)->group(function () {
 // profile page
 
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/showWishlist', [ProfileController::class, 'showWishlist'])->name('profile.showWishlist');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -139,5 +140,3 @@ Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->nam
 // Rotas web.php
 Route::get('/auth/google', 'Auth\GoogleController@redirectToGoogle');
 Route::get('/auth/google/callback', 'Auth\GoogleController@handleGoogleCallback');
-
-Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destroy'])->name('comment.destroy');
