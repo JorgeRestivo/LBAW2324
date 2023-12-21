@@ -2,6 +2,10 @@
 
 @extends('layouts.app')
 
+<!-- No cabeçalho do seu layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
 @section('content')
     <div class="event-details-container">
         <div class="event-box">
@@ -27,6 +31,15 @@
                 @foreach($comments as $comment)
                     <div class="comment-box">
                         <p>{{ $comment->owner->name }} : {{ $comment->content }}</p>
+                        @if(auth()->id() == $comment->owner_id)
+                            <form method="post" action="{{ route('comment.destroy', ['commentId' => $comment->id]) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="delete-comment-btn">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícone do caixote do lixo -->
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 @endforeach
             @else
