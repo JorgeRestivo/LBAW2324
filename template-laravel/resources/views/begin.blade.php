@@ -65,11 +65,11 @@
 
         <form method="post" action="{{ route('events.toggleAttendance', ['eventId' => $event['id'], 'participation' => $event['isGoing'] ? 'Not Going' : 'Going']) }}">
     @csrf
-    <button type="submit" class="{{ $event['isGoing'] ? 'going' : 'not-going' }}">
+    <button type="submit" class="{{ $event['isGoing'] ? 'going' : 'not-going' }}" style="width: 100px; float:right;">
         @if($event['isGoing'])
-            I am going
+            Going
         @else
-            I am not going
+            Not going
         @endif
     </button>
 </form>
@@ -103,7 +103,7 @@
         notificationDropdown.classList.toggle("show", isDropdownVisible);
 
         if (isDropdownVisible) {
-        fetch('/notifications') // This is the route you defined
+        fetch('/notifications')
             .then(response => response.json())
             .then(data => updateNotificationDropdown(data))
             .catch(error => console.error('Error:', error));
@@ -112,7 +112,6 @@
         event.stopPropagation();
     });
 
-    // Close the dropdown if the user clicks outside of it
     document.addEventListener("click", function () {
         if (isDropdownVisible) {
             notificationDropdown.classList.remove("show");

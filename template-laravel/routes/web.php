@@ -117,8 +117,6 @@ Route::get('/faq', [App\Http\Controllers\FaqController::class, 'index'])->name('
 
 Route::post('/comment/store/{eventId}', [CommentsController::class, 'store'])->name('comment.store');
 
-// No seu arquivo de rotas (web.php)
-Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
 Route::delete('/comment/delete/{commentId}', [CommentsController::class, 'destroy'])->name('comment.destroy');
 
