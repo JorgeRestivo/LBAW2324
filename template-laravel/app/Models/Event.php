@@ -41,6 +41,5 @@ class Event extends Model
 {
     return $this->hasMany(Attendance::class);
 }
-
 }
 
