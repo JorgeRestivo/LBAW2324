@@ -2,6 +2,10 @@
 
 @extends('layouts.app')
 
+<!-- No cabeçalho do seu layout -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
 @section('content')
     <div class="event-details-container">
         <div class="event-box">
@@ -21,29 +25,32 @@
         </div>
 
         <div class="comments-container">
-            <h3>Comments</h3>
+            <h3 style="color:#f0ba4b;">Comments</h3>
             
             @if(count($comments) > 0)
                 @foreach($comments as $comment)
                     <div class="comment-box">
                         <p>{{ $comment->owner->name }} : {{ $comment->content }}</p>
+                        @if(auth()->id() == $comment->owner_id)
+                            <form method="post" action="{{ route('comment.destroy', ['commentId' => $comment->id]) }}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="delete-comment-btn">
+                                    <i class="fas fa-trash-alt"></i> <!-- Ícone do caixote do lixo -->
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 @endforeach
             @else
                 <p>No comments found.</p>
             @endif
 
-            <!-- New Comment Form -->
-            <form method="post" action="{{ route('comments.store') }}">
+            <!-- Formulário para adicionar um novo comentário -->
+            <form method="post" action="{{ route('comment.store', ['eventId' => $event->id]) }}">
                 @csrf
-                <input type="hidden" name="event_id" value="{{ $event->id }}">
-                
-                <div class="form-group">
-                    <label for="comment_content">Write a comment:</label>
-                    <textarea name="content" id="comment_content" class="form-control" required></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                <textarea name="content" style="border-radius: 15px;" placeholder="Add a comment..." required></textarea>
+                <button type="submit" style="border-radius: 20px; background-color:#f0ba4b;border: 2px solid #f0ba4b; ">Add Comment</button>
             </form>
         </div>
     </div>

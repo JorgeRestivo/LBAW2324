@@ -32,7 +32,7 @@ DROP TYPE IF EXISTS notification_type;
 
 CREATE TYPE user_status_types AS ENUM ('Active', 'Suspended', 'Banned');
 CREATE TYPE event_status_types AS ENUM ('Active', 'Suspended', 'Banned');
-CREATE TYPE participation_type AS ENUM ('Going','Maybe','Not Going');
+CREATE TYPE participation_type AS ENUM ('Going','Maybe','Not Going','Pending');
 CREATE TYPE tag_type AS ENUM ('Outdoor','Indoor','Music','Tech','Fitness','Education','Art','Science','Food','Travel','Gaming','Fashion');
 CREATE TYPE notification_type AS ENUM ('event_notification','comment_notification');
 
@@ -48,7 +48,9 @@ CREATE TABLE users (
   email VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL,
   userStatus user_status_types NOT NULL DEFAULT 'Active',
-  profile_photo VARCHAR(255) DEFAULT 'default-profile-photo.jpg'
+  isAdmin BOOLEAN DEFAULT FALSE,
+  profile_photo VARCHAR(255) DEFAULT 'user_profile.png',
+  remember_token VARCHAR(100) NULL
 );
 
 CREATE TABLE tag (
@@ -91,8 +93,7 @@ CREATE TABLE eventTicket (
 CREATE TABLE comments(
   id SERIAL PRIMARY KEY,
   content VARCHAR(512) NOT NULL,
-  owner_id INTEGER NOT NULL REFERENCES users
- (id) ON UPDATE CASCADE,
+  owner_id INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE,
   event_id INTEGER NOT NULL REFERENCES events (id) ON UPDATE CASCADE,
   dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now())
 );
@@ -112,9 +113,9 @@ CREATE TABLE attendance (
 CREATE TABLE notification (
   id SERIAL PRIMARY KEY,
   dateTime TIMESTAMP NOT NULL CHECK (dateTime<=now()),  
-  notified_user INTEGER NOT NULL REFERENCES users
- (id) ON UPDATE CASCADE,
-  type notification_type NOT NULL
+  notified_user INTEGER NOT NULL REFERENCES users(id) ON UPDATE CASCADE,
+  type notification_type NOT NULL,
+  description VARCHAR(512)
 );
 
 
@@ -123,18 +124,35 @@ CREATE TABLE notification (
 --
 
 
-INSERT INTO users (username, name, email, password, userStatus) 
+INSERT INTO users (username, name, email, password, userStatus, isAdmin, profile_photo) 
 VALUES 
-  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active'), -- password 1234
-  ('bob_marley', 'Bob Marley', 'bob@example.com', 'bobpass', 'Active'),
-  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active'),
-  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active'),
-  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended'),
-  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active'),
-  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active'),
-  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active'),
-  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active'),
-  ('jason_jones', 'Jason Jones', 'jason@example.com', 'jasonpass', 'Active');
+  ('alice_wonderland', 'Alice Wonderland', 'alice@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE, 'profile_photos/user_profile.png'), -- password 1234
+  ('bob_marley', 'Bob Marley', 'bob@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('charlie_chaplin', 'Charlie Chaplin', 'charlie@example.com', 'charliepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('david_copperfield', 'David Copperfield', 'david@example.com', 'davidpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('eve_gardner', 'Eve Gardner', 'eve@example.com', 'evepass', 'Suspended',FALSE, 'profile_photos/user_profile.png'),
+  ('frank_fisher', 'Frank Fisher', 'frank@example.com', 'frankpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('grace_gibson', 'Grace Gibson', 'grace@example.com', 'gracepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('hank_harrison', 'Hank Harrison', 'hank@example.com', 'hankpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('irene_ingram', 'Irene Ingram', 'irene@example.com', 'irenepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('jason_jones', 'Jason Jones', 'jason@example.com', '$2y$10$HfzIhGCCaxqyaIdGgjARSuOKAcm1Uy82YfLuNaajn6JrjLWy9Sj/W', 'Active', TRUE, 'profile_photos/user_profile.png'),
+  ('kate_kennedy', 'Kate Kennedy', 'kate@example.com', 'katepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('leonardo_lucas', 'Leonardo Lucas', 'leonardo@example.com', 'leonardopass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('megan_miller', 'Megan Miller', 'megan@example.com', 'meganpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('nathan_nelson', 'Nathan Nelson', 'nathan@example.com', 'nathanpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('olivia_owens', 'Olivia Owens', 'olivia@example.com', 'oliviapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('peter_perez', 'Peter Perez', 'peter@example.com', 'peterpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('quincy_queen', 'Quincy Queen', 'quincy@example.com', 'quincypass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('rachel_ross', 'Rachel Ross', 'rachel@example.com', 'rachelpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('samuel_smith', 'Samuel Smith', 'samuel@example.com', 'samuelpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('tina_taylor', 'Tina Taylor', 'tina@example.com', 'tinapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('ulysses_urban', 'Ulysses Urban', 'ulysses@example.com', 'ulyssespass', 'Suspended', FALSE, 'profile_photos/user_profile.png'),
+  ('victor_vargas', 'Victor Vargas', 'victor@example.com', 'victorpass', 'Suspended', FALSE, 'profile_photos/user_profile.png'),
+  ('wanda_white', 'Wanda White', 'wanda@example.com', 'wandapass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('xander_xiao', 'Xander Xiao', 'xander@example.com', 'xanderpass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('yvonne_york', 'Yvonne York', 'yvonne@example.com', 'yvonnepass', 'Active', FALSE, 'profile_photos/user_profile.png'),
+  ('zachary_zane', 'Zachary Zane', 'zachary@example.com', 'zacharypass', 'Active', FALSE, 'profile_photos/user_profile.png');
+
 
 
 INSERT INTO tag (name) VALUES 
@@ -161,7 +179,17 @@ VALUES
   ('Travel Talk', '2024-03-12 15:00:00', '2024-03-12 17:00:00', '2024-03-07 23:59:59', 'Community Center', 'Share travel stories and tips', 40, true, 'Active', 9, 8, 'traveltalk.jpeg'),
   ('Gaming Tournament', '2024-04-05 18:00:00', '2024-04-05 22:00:00', '2024-04-01 23:59:59', 'Gaming Arena', 'Compete in various gaming challenges', 60, true, 'Active', 10, 9, 'gamingtournament.webp'),
   ('Fashion Show', '2024-05-22 14:00:00', '2024-05-22 17:00:00', '2024-05-17 23:59:59', 'Fashion Mall', 'Showcasing the latest trends', 75, true, 'Active', 1, 10, 'fashionshow.jpeg'),
-  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4, 'communitycleanup.jpeg');
+  ('Community Cleanup', '2024-06-10 09:00:00', '2024-06-10 12:00:00', '2024-06-05 23:59:59', 'Community Park', 'Join hands for a cleaner community', 50, true, 'Active', 2, 4, 'communitycleanup.jpeg'),
+  ('Private Meeting', '2023-09-20 14:00:00', '2023-09-20 16:00:00', '2023-09-15 23:59:59', 'Corporate Office', 'Internal team discussions', 20, false, 'Active', 3, 10, 'privatemeeting.jpeg'),
+  ('VIP Networking Dinner', '2023-10-25 19:30:00', '2023-10-25 22:30:00', '2023-10-20 23:59:59', 'Exclusive Venue', 'Exclusive networking event', 30, false, 'Active', 4, 1, 'vipmeeting.jpeg'),
+  ('Executive Retreat', '2023-11-15 08:00:00', '2023-11-17 17:00:00', '2023-11-10 23:59:59', 'Luxury Resort', 'Strategic planning retreat', 15, false, 'Active', 5, 3, 'executiveretreat.jpeg'),
+  ('Confidential Product Launch', '2023-12-05 15:00:00', '2023-12-05 18:00:00', '2023-11-30 23:59:59', 'Top-Secret Location', 'Unveiling a groundbreaking product', 40, false, 'Active', 6, 4, 'productlaunch.png'),
+  ('Board of Directors Meeting', '2024-01-30 10:00:00', '2024-01-30 12:00:00', '2024-01-25 23:59:59', 'Corporate Headquarters', 'High-level strategic discussions', 10, false, 'Active', 7, 5, 'boardmeeting.jpeg'),
+  ('VIP Art Preview', '2024-02-15 18:00:00', '2024-02-15 21:00:00', '2024-02-10 23:59:59', 'Private Gallery', 'Exclusive preview for VIP guests', 25, false, 'Active', 8, 6, 'vipartpreview.webp'),
+  ('Leadership Seminar', '2024-03-20 09:30:00', '2024-03-20 16:30:00', '2024-03-15 23:59:59', 'Conference Center', 'Development for organizational leaders', 50, false, 'Active', 9, 7, 'leadershipseminar.jpeg'),
+  ('Private Concert', '2024-04-10 20:00:00', '2024-04-10 22:30:00', '2024-04-05 23:59:59', 'Exclusive Venue', 'Intimate concert experience', 15, false, 'Active', 10, 8, 'privateconcert.webp'),
+  ('Corporate Wellness Retreat', '2024-05-28 08:00:00', '2024-05-30 17:00:00', '2024-05-23 23:59:59', 'Wellness Resort', 'Promoting employee well-being', 20, false, 'Active', 1, 9, 'corporatewellness.jpg'),
+  ('Exclusive Product Demo', '2024-06-15 14:00:00', '2024-06-15 16:30:00', '2024-06-10 23:59:59', 'Product Showroom', 'Invite-only product demonstration', 30, false, 'Active', 2, 2, 'productdemo.webp');
 
 
 INSERT INTO eventInvitation (sentDate, event_id, user_invited_id, user_host_id, decision)
@@ -175,7 +203,9 @@ VALUES
   ('2023-03-01 13:10:00', 9, 10, 9, 'Not Going'),
   ('2023-04-01 17:45:00', 10, 9, 10, 'Going'),
   ('2023-05-01 12:30:00', 1, 2, 1, 'Going'),
-  ('2023-06-01 10:15:00', 2, 1, 2, 'Maybe');
+  ('2023-06-01 10:15:00', 2, 1, 2, 'Maybe'),
+  ('2023-05-01 12:30:00', 11, 1, 13, 'Going'),
+  ('2023-06-01 10:15:00', 12, 1, 19, 'Maybe');
 
 
 INSERT INTO eventTicket (price, event_id, eventTicketNumber) 
@@ -238,18 +268,21 @@ VALUES
   (7, 4, 'Maybe', false),
   (8, 3, 'Going', false),
   (9, 2, 'Going', false),
-  (10, 1, 'Not Going', false);
+  (11, 1, 'Not Going', false),
+  (14, 8, 'Going', false),
+  (20, 7, 'Maybe', true),
+  (19, 6, 'Going', false),
+  (15, 5, 'Not Going', false),
+  (23, 4, 'Going', false),
+  (12, 3, 'Maybe', false),
+  (17, 2, 'Not Going', true),
+  (18, 1, 'Going', false),
+  (19, 10, 'Going', false),
+  (20, 9, 'Maybe', false),
+  (21, 6, 'Not Going', true),
+  (22, 5, 'Going', false),
+  (13, 4, 'Maybe', false),
+  (16, 9, 'Going', false),
+  (19, 9, 'Going', false),
+  (24, 1, 'Not Going', false);
 
-
-INSERT INTO notification (dateTime, notified_user, type) 
-VALUES 
-  ('2023-09-05 08:30:00', 1, 'event_notification'),
-  ('2023-10-10 11:45:00', 2, 'comment_notification'),
-  ('2023-11-15 14:20:00', 3, 'event_notification'),
-  ('2023-10-20 09:00:00', 4, 'comment_notification'),
-  ('2022-01-25 12:00:00', 5, 'event_notification'),
-  ('2022-02-27 17:30:00', 6, 'comment_notification'),
-  ('2022-04-05 14:45:00', 7, 'event_notification'),
-  ('2023-05-10 18:20:00', 8, 'comment_notification'),
-  ('2021-06-15 11:15:00', 9, 'event_notification'),
-  ('2021-07-01 10:00:00', 10, 'comment_notification');

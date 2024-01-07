@@ -12,8 +12,11 @@ class Comment extends Model
         'content',
         'owner_id',
         'event_id',
-        'dateTime',
+        'datetime',
     ];
+
+    protected $dates = ['datetime'];
+
 
     // Define the owner relationship
     public function owner()
@@ -26,4 +29,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Event::class, 'event_id');
     }
+
+    // Explicitamente define os nomes das colunas de timestamp
+    const CREATED_AT = 'datetime';
+    const UPDATED_AT = 'datetime';
+    
 }

@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log; //debug
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\Invitation;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\User;
-use App\Models\Attendance; 
+use App\Models\Attendance;
+use App\Models\Tag;
+use App\Notifications\EventInvitationNotification;
+
+
 
 class EventsController extends Controller
 {
@@ -28,22 +31,50 @@ class EventsController extends Controller
     }
 
     
-    public function showEvents() {
-        $events = DB::table('events')->get()->toArray();
-        $wishlist = $this->checkWishlist();
-    
-        // Add an 'inWishlist' property to each event
-        foreach ($events as $event) {
-            $event->inWishlist = in_array($event->id, $wishlist);
+    public function showEvents()
+{
+    $tags = Tag::all();
+
+    $publicEvents = Event::where('ispublic', true)->get()->toArray();
+
+    $userId = auth()->id();
+    $privateEvents = Event::whereIn(
+        'id',
+        function ($query) use ($userId) {
+            $query->select('event_id')
+                ->from('eventinvitation')
+                ->where('user_invited_id', $userId);
         }
+    )->where('ispublic', false)->get()->toArray();
+
+    $events = array_merge($publicEvents, $privateEvents);
+
+    $wishlist = $this->checkWishlist();
     
-        return view('begin', ['events' => $events, 'wishlist' => $wishlist]);
+    // Check attendance status for each event
+    foreach ($events as &$event) {
+        $event['inWishlist'] = in_array($event['id'], $wishlist);
+        $event['isGoing'] = $this->checkAttendanceStatus($event['id'], $userId, 'Going');
     }
+
+    return view('begin', ['events' => $events, 'wishlist' => $wishlist, 'tags' => $tags]);
+}
+
+private function checkAttendanceStatus($eventId, $userId, $participation)
+{
+    $attendance = DB::table('attendance')
+        ->where('event_id', $eventId)
+        ->where('user_id', $userId)
+        ->where('participation', $participation)
+        ->exists();
+
+    return $attendance;
+}
+
 
 
     public function createEvent(Request $request) {
         try {
-            Log::info('createEvent method called');
     
             $request->validate([
                 'eventname' => 'required|string|max:256',
@@ -62,34 +93,38 @@ class EventsController extends Controller
     
             $ownerId = auth()->id();
 
-            $eventData = $request->all();
-            $eventData['owner_id'] = $ownerId;
+        $eventData = $request->all();
+        $eventData['owner_id'] = $ownerId;
 
-            $eventData['isPublic'] = $request->has('isPublic') ? $request->input('isPublic') : true;
-            $eventData['status'] = $request->input('status', 'Active');
-    
-            if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('event_photos', 'public');
-                $eventData['photo'] = $photoPath;
-            }
-    
-            $event = Event::create($eventData);
-    
+        $eventData['isPublic'] = $request->has('isPublic') ? $request->input('isPublic') : true;
+        $eventData['status'] = $request->input('status', 'Active');
 
-            $events = Event::all();
-
-            return view('begin', ['events' => $events]);
-
-        } catch (\Exception $e) {
-            Log::error('Error creating event: ' . $e->getMessage());
-    
-            return redirect()->back()->with('error', 'Error creating event. Please try again.');
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('event_photos', 'public');
+            $eventData['photo'] = $photoPath;
         }
+
+        $event = Event::create($eventData);
+
+        // Fetch tags to pass to the view
+        $tags = Tag::all();
+
+        $events = Event::all();
+
+        // Pass tags to the 'begin' view
+        return view('begin', ['events' => $events, 'tags' => $tags]);
+
+    } catch (\Exception $e) {
+        Log::error('Error creating event: ' . $e->getMessage());
+
+        return redirect()->back()->with('error', 'Error creating event. Please try again.');
+    }
     }
 
 
     public function showCreateForm() {
-        return view('formsevent');
+        $tags = Tag::all();
+        return view('formsevent', ['tags' => $tags]);
     }
 
 
@@ -97,7 +132,7 @@ class EventsController extends Controller
         $event = Event::find($id);
 
         if (!$event) {
-            // Handle the case where the event with the given ID is not found.
+
             abort(404);
         }
 
@@ -111,23 +146,28 @@ class EventsController extends Controller
 
         $myEvents = Event::where('owner_id', $ownerId)->get();
 
-        return view('myevents', ['myEvents' => $myEvents]);
-    }
+    return view('myevents', ['myEvents' => $myEvents]);
+}
 
-    public function sendInvitation(Request $request, $eventId)
-    {
 
-        $request->validate([
-            'inviteeId' => 'required|exists:users,id',
-        ]);
+public function sendInvitation(Request $request, $eventId)
+{
+    $request->validate([
+        'inviteeId' => 'required|exists:users,id',
+    ]);
 
-        $event = Event::find($eventId);
+    $event = Event::find($eventId);
+    $user = User::find($request->input('inviteeId'));
 
-        // usar para as notificações
-        //$event->invitedUsers()->attach($request->input('inviteeId'));
+    $invitation = Invitation::createInvitation($event, $user);
+    $user->notify(new EventInvitationNotification($invitation));
 
-        return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
-    }
+
+    // Redirect or perform any other actions
+    return redirect()->route('event.show', ['id' => $eventId])->with('success', 'Invitation sent successfully!');
+}
+
+
 
     public function showInviteForm($eventId)
     {
@@ -178,8 +218,23 @@ class EventsController extends Controller
             ->select('events.*')
             ->get();
 
+            
         return view('events.going', ['goingEvents' => $goingEvents, 'notgoingEvents' => $notgoingEvents, 'maybegoingEvents' => $maybegoingEvents]);
     }
+
+public function toggleAttendance(Request $request, $eventId, $participation)
+{
+    $userId = auth()->id();
+
+    // Update or create attendance record
+    DB::table('attendance')->updateOrInsert(
+        ['event_id' => $eventId, 'user_id' => $userId],
+        ['participation' => $participation]
+    );
+
+    return redirect()->back()->with('success', 'Attendance status updated.');
+}
+
 
 
     public function showWishlist()
@@ -209,44 +264,134 @@ class EventsController extends Controller
     return $wishlistEvents;
 }
 
+public function addToWishlist($eventId)
+{
+    $userId = auth()->id();
+
+
+    $attended = DB::table('attendance')
+        ->where('user_id', $userId)
+        ->where('event_id', $eventId)
+        ->exists();
+
+
+    DB::table('attendance')->updateOrInsert(
+        ['user_id' => $userId, 'event_id' => $eventId],
+        ['wishlist' => true]
+    );
+
+    return redirect()->back()->with('success', 'Event added to wishlist successfully.');
+}
+
+public function removeFromWishlist($eventId)
+{
+    $userId = auth()->id();
+
+
+    $attended = DB::table('attendance')
+        ->where('user_id', $userId)
+        ->where('event_id', $eventId)
+        ->exists();
+
+
+    if ($attended) {
+        DB::table('attendance')
+            ->where('user_id', $userId)
+            ->where('event_id', $eventId)
+            ->update(['wishlist' => false]);
+
+        return redirect()->back()->with('success', 'Event removed from wishlist successfully.');
+    } else {
+
+        return redirect()->back()->with('error', 'You cannot remove an event from the wishlist if you have not attended it.');
+    }
+}
+
+
+
+
 public function changeDecision(Request $request, $id)
 {
-    // Add a debug statement for entering the method
+
     Log::debug("Entering changeDecision method. Event ID: $id");
 
     try {
-        // Validate the form data
+
         $request->validate([
             'decision' => 'required|in:Going,Maybe,Not Going',
         ]);
 
-        // Find the Attendance record by event ID and user ID
         $userId = Auth::id();
 
-        // Update the decision
+
         Attendance::where('user_id', $userId)
             ->where('event_id', $id)
             ->update([
                 'participation' => $request->input('decision'),
             ]);
 
-        // Add a debug statement for successful update
         Log::debug("Decision updated successfully.");
 
         return redirect()->back()->with('success', 'Decision updated successfully.');
     } catch (\Exception $e) {
-        // Add a debug statement for catching exceptions
         Log::error("Error in changeDecision method: " . $e->getMessage());
 
-        // Handle the exception (e.g., return an error response)
         return redirect()->back()->with('error', 'Error updating decision.');
     } finally {
-        // Add a debug statement for exiting the method (whether successful or with an error)
         Log::debug("Exiting changeDecision method");
     }
 }
 
+public function removeAttendee($eventId, $userId)
+    {
+        try {
+            Attendance::where('event_id', $eventId)
+                ->where('user_id', $userId)
+                ->update(['participation' => 'Not Going']);
 
+            return redirect()->back()->with('success', 'Attendee removed successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error removing attendee.');
+        }
+    }
+
+    public function filterByTag(Request $request)
+{
+    $tags = Tag::all();
+    $tagId = $request->query('tag');
+
+    $userId = auth()->id();
+
+    if ($tagId && $tagId !== 'all') {
+        $publicEvents = Event::where('tag_id', $tagId)
+            ->where('ispublic', true)
+            ->get();
+
+        $privateEvents = Event::whereIn(
+            'id',
+            function ($query) use ($userId, $tagId) {
+                $query->select('events.id')
+                    ->from('events')
+                    ->join('eventinvitation', 'events.id', '=', 'eventinvitation.event_id')
+                    ->where('eventinvitation.user_invited_id', $userId)
+                    ->where('events.ispublic', false)
+                    ->where('events.tag_id', $tagId);
+            }
+        )->get();
+
+        $events = $publicEvents->merge($privateEvents);
+    } else {
+        return redirect()->route('events.begin');
+    }
+
+    $wishlist = $this->checkWishlist();
+
+    foreach ($events as &$event) {
+        $event['inWishlist'] = in_array($event['id'], $wishlist);
+    }
+
+    return view('events.filtered', compact('events', 'tags'));
+}
 
 
 

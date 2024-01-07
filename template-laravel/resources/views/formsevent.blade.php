@@ -48,6 +48,22 @@
             </div>
 
             <div class="form-group">
+                <label for="tag">Select a Tag:</label>
+                <select name="tag" class="form-control">
+                    <option value="" selected disabled>Select a Tag</option>
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="isPrivate">Is Private:</label>
+                <input type="checkbox" name="isPrivate" value="1">
+            </div>
+
+            <div class="form-group">
                 <label for="photo">Event Photo:</label>
                 <input type="file" name="photo" class="form-control-file">
             </div>
